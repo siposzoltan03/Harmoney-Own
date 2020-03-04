@@ -6,14 +6,24 @@ import SideNav, {
   NavText
 } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-import React from "react";
+import React, {useContext} from "react";
+import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
 
 export const Navbar = () => {
+  const { regModal } = useContext(ModalVisibilityContext);
+  const [registrationModalIsVisible, setRegistrationModalIsVisible] = regModal;
   return (
     <SideNav
       onSelect={selected => {
         // Eventkey value passed to the onSelect handler,
         // useful for identifying the selected navigation item.
+        switch(selected) {
+          case "user-registration":
+          setRegistrationModalIsVisible(true);
+            break;
+          default:
+            // code block
+        }
       }}
     >
       <Toggle />
@@ -23,6 +33,12 @@ export const Navbar = () => {
             <i className="fa fa-fw fa-home" style={{ fontSize: "1.75em" }} />
           </NavIcon>
           <NavText>Home</NavText>
+        </NavItem>
+        <NavItem eventKey="user-registration">
+          <NavIcon>
+            <i className="fas fa-user-plus" style={{ fontSize: "1.75em" }} />
+          </NavIcon>
+          <NavText>Registration</NavText>
         </NavItem>
         <NavItem eventKey="income">
           <NavIcon>
