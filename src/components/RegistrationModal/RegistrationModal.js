@@ -1,7 +1,9 @@
 import React, {
     useContext } from "react";
-import { Modal, Button} from "react-bootstrap";
-import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
+import { Modal, Button } from "react-bootstrap";
+import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
+import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
+import "./RegistrationModal.css";
 
 export function RegistrationModal(props) {
     const { regModal } = useContext(ModalVisibilityContext);
@@ -21,13 +23,13 @@ export function RegistrationModal(props) {
                     <Modal.Title id="contained-modal-title-vcenter">Registration</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
+                    <RegistrationForm/>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="outline-light" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="outline-dark" onClick={handleClose}>
                         Submit
                     </Button>
                 </Modal.Footer>
