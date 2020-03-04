@@ -10,8 +10,9 @@ import React, {useContext} from "react";
 import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
 
 export const Navbar = () => {
-  const { regModal } = useContext(ModalVisibilityContext);
+  const { regModal, logModal } = useContext(ModalVisibilityContext);
   const [registrationModalIsVisible, setRegistrationModalIsVisible] = regModal;
+  const [loginModalIsVisible, setLoginModalIsVisible] = logModal;
   return (
     <SideNav
       onSelect={selected => {
@@ -20,6 +21,9 @@ export const Navbar = () => {
         switch(selected) {
           case "user-registration":
           setRegistrationModalIsVisible(true);
+            break;
+          case "user-login":
+            setLoginModalIsVisible(true);
             break;
           default:
             // code block
@@ -39,6 +43,12 @@ export const Navbar = () => {
             <i className="fas fa-user-plus" style={{ fontSize: "1.75em" }} />
           </NavIcon>
           <NavText>Registration</NavText>
+        </NavItem>
+        <NavItem eventKey="user-login">
+          <NavIcon>
+            <i className="fas fa-user-check" style={{ fontSize: "1.75em" }} />
+          </NavIcon>
+          <NavText>Login</NavText>
         </NavItem>
         <NavItem eventKey="income">
           <NavIcon>
