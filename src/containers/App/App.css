@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 .App {
   text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.ml-64 {
+  margin-left: 64px;
 }
