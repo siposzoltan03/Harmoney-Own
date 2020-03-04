@@ -1,5 +1,4 @@
 import React from 'react';
-import {Statistic} from 'antd';
 import './Balance.css';
 import Card from "react-bootstrap/Card";
 import NumberFormater from '../../utils/NumberFormater'
