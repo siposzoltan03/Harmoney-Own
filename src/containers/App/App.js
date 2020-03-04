@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import TopBar from "react-bootstrap/Nav";
 import { ModalVisibilityContextProvider } from "../../contexts/ModalVisibilityContext";
 import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
+import LoginModal from "../../components/LoginModal/LoginModal";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           </Row>
         </Container>
         <RegistrationModal/>
+        <LoginModal/>
       </div>
     </ModalVisibilityContextProvider>
   );
