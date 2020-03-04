@@ -1,3 +1,22 @@
 .App {
   text-align: center;
 }
+
+.nav {
+  background: #db3d44;
+  height: 64px;
+
+}
+
+.ml-64 {
+  margin-left: 64px;
+}
+
+#topBar-title {
+  z-index: 1007;
+}
+
+.container {
+  margin: 64px 0 0 64px;
+  padding: 0;
+}
