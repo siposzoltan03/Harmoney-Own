@@ -11,7 +11,7 @@ function App() {
     return (
         <div className="App">
             <TopBar className="justify-content-center ml-32 navBar-shadow">
-                <h1 id="topBar-title">HarMoney</h1>
+                <h1 id="topBar-title">Harmoney</h1>
             </TopBar>
             <SideBar id="sideBar"/>
             <Container >
