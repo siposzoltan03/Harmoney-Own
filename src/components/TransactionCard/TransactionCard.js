@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, Statistic} from 'antd';
 import {ArrowDownOutlined, ArrowUpOutlined} from '@ant-design/icons';
+import "./TransactionCard.css"
 
 function TransactionCard(transaction) {
     return (
@@ -10,9 +11,12 @@ function TransactionCard(transaction) {
                 value={transaction.amount}
                 precision={2}
                 valueStyle={transaction.direction === "Income" ? {color: '#3f8600'} : {color: `#cf1322`}}
-                prefix={transaction.direction === "Income" ? <ArrowUpOutlined/> : <ArrowDownOutlined/>}
+                prefix={transaction.direction === "Income" ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
                 suffix="Ft"
             />
+            <div className="due-date">
+                {transaction.date}
+            </div>
         </Card>
     );
 }

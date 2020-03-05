@@ -6,8 +6,10 @@ const TransactionContext = React.createContext(undefined, undefined);
 
 const TransactionProvider = (props) => {
     let url = Globals.fetchUrl + "/api/transactions";
-    const [transactions, setTransactions] = useState([]), [loading, setLoading] = useState(false),
-        fetchTransactions = () => {
+    const [transactions, setTransactions] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const fetchTransactions = () => {
             try {
                 setLoading(true);
                 Axios.get(url)
