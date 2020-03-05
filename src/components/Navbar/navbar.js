@@ -6,6 +6,7 @@ import SideNav, {
   NavText
 } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
+import "./Navbar.css"
 
 import React, { useState, useContext } from "react";
 import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";

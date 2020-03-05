@@ -9,6 +9,7 @@ import {ModalVisibilityContextProvider} from "../../contexts/ModalVisibilityCont
 import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
 import LoginModal from "../../components/LoginModal/LoginModal";
 import Balance from "../../components/Balance/Balance";
+import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import Footer from "../../components/Footer/footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
 import DashboardChart from "../../components/Charts/DashboardChart";
@@ -50,6 +51,15 @@ function App() {
                         >
                             <DashboardChart/>
 
+                        </Col>
+                        <Col
+                            lg={colPosition}
+                            md={colPosition}
+                            sm={colPosition}
+                            xl={colPosition}
+                            xs={colPosition}
+                        >
+                            <TransactionsList />
                         </Col>
                     </Row>
                 </Container>

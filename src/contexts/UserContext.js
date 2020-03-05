@@ -34,7 +34,7 @@ export const UserProvider = (props) => {
     }
 
     return (
-        <UserContext.Provider value={{ user : [user, setUser ], registration: postRegistration, postLogin: postLogin }}>
+        <UserContext.Provider value={{ user : [user, setUser ], registration: postRegistration, login: postLogin }}>
             {props.children}
         </UserContext.Provider>
     )

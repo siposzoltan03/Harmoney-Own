@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap');
 
 root{
   background-color: #F3EED9;
@@ -7,7 +7,7 @@ root{
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
-  background-color: #F3EED9;
+  background-color: white;
 }
 
 h1{

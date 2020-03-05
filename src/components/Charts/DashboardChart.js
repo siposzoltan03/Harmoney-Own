@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import Card from "react-bootstrap/Card";
-import NumberFormater from "../../utils/NumberFormater";
 import {TransactionContext} from "../../contexts/TransactionContext";
 
 let Income = 0;
@@ -24,7 +23,7 @@ const DashboardChart = () => {
         datasets: [{
             data: [ Income  ,Expenditure],
             backgroundColor:[
-                '#BFA5A3',
+                '#004225',
                 '#600000'
             ],
             options: {

@@ -13,18 +13,15 @@ export default function TransactionModal(props) {
 
   const transactionContext = useContext(TransactionContext);
   const postTransaction = transactionContext.postTransaction;
-  const getTransactions = transactionContext.getTransactions;
 
   const saveChanges = () => {
     const jsonData = transactionToJson(title, date, amount, frequency, props.transactionType);
     postTransaction(jsonData);
     closeModal();
-  }
+  };
 
   const closeModal = () => {
     props.handleClose();
-    // this must be changed to refresh front page function
-    getTransactions();
     setTitle("");
     setDate(new Date());
     setAmount(0);
@@ -54,10 +51,10 @@ export default function TransactionModal(props) {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="outline-light" onClick={closeModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={saveChanges}>
+          <Button variant="outline-light" onClick={saveChanges}>
             Save Changes
           </Button>
         </Modal.Footer>

@@ -22,7 +22,8 @@
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
     "reactstrap": "^8.4.1",
-    "styled": "^1.0.0"
+    "styled": "^1.0.0",
+    "@ant-design/icons": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
