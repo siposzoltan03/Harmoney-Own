@@ -13,12 +13,14 @@ import TransactionsList from "../../components/TransactionsList/TransactionsList
 import Footer from "../../components/Footer/footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
 import DashboardChart from "../../components/Charts/DashboardChart";
+import { UserProvider } from "../../contexts/UserContext";
 
 const colPosition = {span: true, offset: 3};
 
 function App() {
     return (
         <TransactionProvider>
+        <UserProvider>
         <ModalVisibilityContextProvider>
             <div className="App">
                 <TopBar className="justify-content-center ml-32">
@@ -78,6 +80,7 @@ function App() {
                 </Footer>
             </div>
         </ModalVisibilityContextProvider>
+        </UserProvider>
         </TransactionProvider>
     );
 }
