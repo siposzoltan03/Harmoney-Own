@@ -36,9 +36,9 @@ export default function TransactionModal(props) {
       <Modal show={props.display} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {props.transactionType === "income" ?
-              "Add new income" :
-              "Add new expenditure"}
+            {props.transactionType === "Income" ?
+              "Add new Income" :
+              "Add new Expenditure"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
