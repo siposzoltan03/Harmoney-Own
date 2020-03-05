@@ -20,7 +20,7 @@ export default function TransactionModal(props) {
     postTransaction(jsonData);
     closeModal();
   }
-  
+
   const closeModal = () => {
     props.handleClose();
     // this must be changed to refresh front page function

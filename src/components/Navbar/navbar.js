@@ -8,7 +8,7 @@ import SideNav, {
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 
 import React, { useState, useContext } from "react";
-import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
+import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
 import TransactionModal from "../Modal/transaction-modal";
 
 export const Navbar = () => {
@@ -23,15 +23,15 @@ export const Navbar = () => {
       onSelect={selected => {
         // Eventkey value passed to the onSelect handler,
         // useful for identifying the selected navigation item.
-        switch(selected) {
+        switch (selected) {
           case "user-registration":
-          setRegistrationModalIsVisible(true);
+            setRegistrationModalIsVisible(true);
             break;
           case "user-login":
             setLoginModalIsVisible(true);
             break;
           default:
-            // code block
+          // code block
         }
       }}
     >
@@ -61,16 +61,16 @@ export const Navbar = () => {
         <NavItem
           eventKey="Income"
           onClick={() => {
-            setTransactionType("Income");  
+            setTransactionType("Income");
             setTransactionModalDisplay(true);
-        }}
+          }}
         >
           <NavIcon>
             <i className="fa fa-plus" style={{ fontSize: "1.75em" }} />
           </NavIcon>
           <NavText>Add Income</NavText>
         </NavItem>
-
+        
         <NavItem 
             eventKey="Expenditure"
             onClick={() => {
