@@ -13,7 +13,6 @@ export default function TransactionModal(props) {
 
   const transactionContext = useContext(TransactionContext);
   const postTransaction = transactionContext.postTransaction;
-  const getTransactions = transactionContext.getTransactions;
 
   const saveChanges = () => {
     const jsonData = transactionToJson(title, date, amount, frequency, props.transactionType);
@@ -23,8 +22,6 @@ export default function TransactionModal(props) {
 
   const closeModal = () => {
     props.handleClose();
-    // this must be changed to refresh front page function
-    getTransactions();
     setTitle("");
     setDate(new Date());
     setAmount(0);
