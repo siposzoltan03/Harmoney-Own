@@ -7,3 +7,12 @@ export function transactionToJson(title, dueDate, amount, frequency, direction) 
         direction: direction
     });
 }
+
+export function userToJson(firstName, lastName, email, password) {
+    return JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+    });
+}
