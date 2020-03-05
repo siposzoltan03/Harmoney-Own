@@ -8,7 +8,7 @@ import SideNav, {
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 
 import React, { useState, useContext } from "react";
-import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
+import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
 import TransactionModal from "../Modal/transaction-modal";
 
 export const Navbar = () => {
@@ -23,15 +23,15 @@ export const Navbar = () => {
       onSelect={selected => {
         // Eventkey value passed to the onSelect handler,
         // useful for identifying the selected navigation item.
-        switch(selected) {
+        switch (selected) {
           case "user-registration":
-          setRegistrationModalIsVisible(true);
+            setRegistrationModalIsVisible(true);
             break;
           case "user-login":
             setLoginModalIsVisible(true);
             break;
           default:
-            // code block
+          // code block
         }
       }}
     >
@@ -61,9 +61,9 @@ export const Navbar = () => {
         <NavItem
           eventKey="income"
           onClick={() => {
-            setTransactionType("income");  
+            setTransactionType("income");
             setTransactionModalDisplay(true);
-        }}
+          }}
         >
           <NavIcon>
             <i className="fa fa-plus" style={{ fontSize: "1.75em" }} />
@@ -71,12 +71,12 @@ export const Navbar = () => {
           <NavText>Add Income</NavText>
         </NavItem>
 
-        <NavItem 
-            eventKey="cost"
-            onClick={() => {
-                setTransactionType("cost");  
-                setTransactionModalDisplay(true);
-        }}
+        <NavItem
+          eventKey="cost"
+          onClick={() => {
+            setTransactionType("cost");
+            setTransactionModalDisplay(true);
+          }}
         >
           <NavIcon>
             <i className="fa fa-minus" style={{ fontSize: "1.75em" }} />

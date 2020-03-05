@@ -13,7 +13,7 @@ export default function TransactionModal(props) {
     console.log(title, date, amount, frequency)
     closeModal();
   }
-  
+
   const closeModal = () => {
     props.handleClose();
     setTitle("");
