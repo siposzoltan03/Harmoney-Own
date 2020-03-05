@@ -1,20 +1,39 @@
 import React, {
-    useContext } from "react";
+    useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { userToJson } from "../../utils/createjson";
+
 import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
+import { UserContext } from "../../contexts/UserContext";
 import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
 import "./RegistrationModal.css";
 
 export function RegistrationModal(props) {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     const { regModal } = useContext(ModalVisibilityContext);
     const [registrationModalIsVisible, setRegistrationModalIsVisible] = regModal;
 
-    const handleClose = () => setRegistrationModalIsVisible(false);
+    const userContext = useContext(UserContext);
+    const postRegistration = userContext.registration;
+
+    const closeModal = () => {
+        setRegistrationModalIsVisible(false);
+    }
+
+    const handleSubmit = () => {
+        const jsonData = userToJson(firstName, lastName, email, password)
+        postRegistration(jsonData);
+        setRegistrationModalIsVisible(false);
+    }
 
     return (
         <>
             <Modal show={registrationModalIsVisible}
-                   onHide={handleClose}
+                   onHide={closeModal}
                    {...props}
                    size="lg"
                    aria-labelledby="contained-modal-title-vcenter"
@@ -23,13 +42,22 @@ export function RegistrationModal(props) {
                     <Modal.Title id="contained-modal-title-vcenter">Registration</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <RegistrationForm/>
+                    <RegistrationForm
+                        firstName={firstName}
+                        setFirstName={(e) => setFirstName(e.target.value)}
+                        lastName={lastName}
+                        setLastName={(e) => setLastName(e.target.value)}
+                        email={email}
+                        setEmail={(e) => setEmail(e.target.value)}
+                        password={password}
+                        setPassword={(e) => setPassword(e.target.value)}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-light" onClick={handleClose}>
+                    <Button variant="outline-light" onClick={closeModal}>
                         Cancel
                     </Button>
-                    <Button variant="outline-dark" onClick={handleClose}>
+                    <Button variant="outline-dark" onClick={handleSubmit}>
                         Submit
                     </Button>
                 </Modal.Footer>
