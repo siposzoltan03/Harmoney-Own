@@ -15,7 +15,7 @@ export const Navbar = () => {
   const { regModal, logModal } = useContext(ModalVisibilityContext);
   const setRegistrationModalIsVisible = regModal[1];
   const setLoginModalIsVisible = logModal[1];
-  const [transactionmodalDisplay, setTransactionModalDisplay] = useState(false);
+  const [transactionModalDisplay, setTransactionModalDisplay] = useState(false);
   const [transactionType, setTransactionType] = useState();
 
   return (
@@ -59,9 +59,9 @@ export const Navbar = () => {
         </NavItem>
 
         <NavItem
-          eventKey="income"
+          eventKey="Income"
           onClick={() => {
-            setTransactionType("income");
+            setTransactionType("Income");
             setTransactionModalDisplay(true);
           }}
         >
@@ -70,22 +70,22 @@ export const Navbar = () => {
           </NavIcon>
           <NavText>Add Income</NavText>
         </NavItem>
-
-        <NavItem
-          eventKey="cost"
-          onClick={() => {
-            setTransactionType("cost");
-            setTransactionModalDisplay(true);
-          }}
+        
+        <NavItem 
+            eventKey="Expenditure"
+            onClick={() => {
+                setTransactionType("Expenditure");  
+                setTransactionModalDisplay(true);
+        }}
         >
           <NavIcon>
             <i className="fa fa-minus" style={{ fontSize: "1.75em" }} />
           </NavIcon>
-          <NavText>Add Cost</NavText>
+          <NavText>Add Expenditure</NavText>
         </NavItem>
       </Nav>
       <TransactionModal
-        display={transactionmodalDisplay}
+        display={transactionModalDisplay}
         handleClose={() => setTransactionModalDisplay(false)}
         transactionType={transactionType}
       />
