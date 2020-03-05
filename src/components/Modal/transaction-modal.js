@@ -10,9 +10,9 @@ export default function TransactionModal(props) {
   const [frequency, setFrequency] = useState("Single");
 
   const saveChanges = () => {
-    console.log(title, date, amount, frequency);
+    console.log(title, date, amount, frequency)
     closeModal();
-  };
+  }
 
   const closeModal = () => {
     props.handleClose();
@@ -20,28 +20,28 @@ export default function TransactionModal(props) {
     setDate(new Date());
     setAmount(0);
     setFrequency("Single");
-  };
+  }
 
   return (
     <>
       <Modal show={props.display} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {props.transactionType === "income"
-              ? "Add new income"
-              : "Add new cost"}
+            {props.transactionType === "income" ?
+              "Add new income" :
+              "Add new cost"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <TransactionForm
             title={title}
-            setTitle={e => setTitle(e.target.value)}
+            setTitle={(e) => setTitle(e.target.value)}
             date={date}
             setDate={setDate}
             amount={amount}
-            setAmount={e => setAmount(e.target.value)}
+            setAmount={(e) => setAmount(e.target.value)}
             frequency={frequency}
-            setFrequency={e => setFrequency(e.target.value)}
+            setFrequency={(e) => setFrequency(e.target.value)}
           />
         </Modal.Body>
         <Modal.Footer>
