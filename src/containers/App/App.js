@@ -5,20 +5,27 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TopBar from "react-bootstrap/Nav";
+import { ModalVisibilityContextProvider } from "../../contexts/ModalVisibilityContext";
+import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
+import LoginModal from "../../components/LoginModal/LoginModal";
 
 function App() {
   return (
-    <div className="App">
-      <TopBar className="justify-content-center ml-64 navBar-shadow">
-        <h1 id="topBar-title">HarMoney</h1>
-      </TopBar>
-      <SideBar />
-      <Container>
-        <Row>
-          <Col lg={true}></Col>
-        </Row>
-      </Container>
-    </div>
+    <ModalVisibilityContextProvider>
+      <div className="App">
+        <TopBar className="justify-content-center ml-64 navBar-shadow">
+          <h1 id="topBar-title">HarMoney</h1>
+        </TopBar>
+        <SideBar />
+        <Container>
+          <Row>
+            <Col lg={true}></Col>
+          </Row>
+        </Container>
+        <RegistrationModal/>
+        <LoginModal/>
+      </div>
+    </ModalVisibilityContextProvider>
   );
 }
 
