@@ -48,8 +48,6 @@ function App() {
                             <DashboardChart/>
 
                         </Col>
-                    </Row>
-                    <Row>
                         <Col
                             lg={colPosition}
                             md={colPosition}

@@ -19,7 +19,7 @@ export default function TransactionModal(props) {
     const jsonData = transactionToJson(title, date, amount, frequency, props.transactionType);
     postTransaction(jsonData);
     closeModal();
-  }
+  };
 
   const closeModal = () => {
     props.handleClose();
@@ -54,10 +54,10 @@ export default function TransactionModal(props) {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModal}>
+          <Button variant="outline-light" onClick={closeModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={saveChanges}>
+          <Button variant="outline-light" onClick={saveChanges}>
             Save Changes
           </Button>
         </Modal.Footer>

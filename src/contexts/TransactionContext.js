@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import Globals from "../utils/globals";
 
@@ -19,18 +19,22 @@ export const TransactionProvider = (props) => {
             } catch (e) {
                 console.log('Error:', e);
             }
-        }
+        };
 
     const postTransaction = (data) => {
         try {
             Axios.post(url, data, { headers: {
                 'Content-Type': 'application/json',
             }})
-            .then(resp => setTransactions([transactions, resp.data]))
+            .then(resp => setTransactions([transactions, resp.data]));
         } catch (e) {
             console.log('Error:', e);
         }
-    }
+    };
+
+    useEffect(() => {
+        fetchTransactions()
+    }, []);
 
     return(
         <TransactionContext.Provider value={{ transactions : [

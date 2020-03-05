@@ -12,10 +12,10 @@ function TransactionsList() {
         <Card>
             <Card.Body>
                 <Card.Title>Transactions</Card.Title>
-                <Card.Text>{transactions.map(transaction => (
-                    <TransactionCard title={transaction.title} amount={transaction.amount}
+                {transactions.map(transaction => (
+                    <TransactionCard key={transaction.id} title={transaction.title} amount={transaction.amount}
                                      direction={transaction.direction} date={transaction.dueDate}/>
-                ))}</Card.Text>
+                ))}
             </Card.Body>
         </Card>
     );
