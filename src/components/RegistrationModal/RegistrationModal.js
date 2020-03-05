@@ -57,7 +57,7 @@ export function RegistrationModal(props) {
                     <Button variant="outline-light" onClick={closeModal}>
                         Cancel
                     </Button>
-                    <Button variant="outline-dark" onClick={handleSubmit}>
+                    <Button variant="outline-light" onClick={handleSubmit}>
                         Submit
                     </Button>
                 </Modal.Footer>

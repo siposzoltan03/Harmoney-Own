@@ -28,7 +28,7 @@ export function LoginModal(props) {
                     <Button variant="outline-light" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="outline-dark" onClick={handleClose}>
+                    <Button variant="outline-light" onClick={handleClose}>
                         Submit
                     </Button>
                 </Modal.Footer>
