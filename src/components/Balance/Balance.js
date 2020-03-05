@@ -1,19 +1,17 @@
-import React from 'react';
-import './Balance.css';
+import React from "react";
+import "./Balance.css";
 import Card from "react-bootstrap/Card";
-import NumberFormater from '../../utils/NumberFormater'
+import NumberFormater from "../../utils/NumberFormater";
 
 const Balance = () => {
-    return (
-        <Card>
-            <Card.Body>
-                <Card.Title>Actual Balance</Card.Title>
-                <Card.Text>
-                    {NumberFormater.formatBalance(Value)}
-                </Card.Text>
-            </Card.Body>
-        </Card>
-    );
+  return (
+    <Card>
+      <Card.Body>
+        <Card.Title>Actual Balance</Card.Title>
+        <Card.Text>{NumberFormater.formatBalance(Value)}</Card.Text>
+      </Card.Body>
+    </Card>
+  );
 };
 
 const Value = 386450;
