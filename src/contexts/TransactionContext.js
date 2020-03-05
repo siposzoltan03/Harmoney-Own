@@ -26,7 +26,7 @@ export const TransactionProvider = (props) => {
             Axios.post(url, data, { headers: {
                 'Content-Type': 'application/json',
             }})
-            .then(resp => setTransactions([transactions, resp.data]));
+            .then(resp => setTransactions([...transactions, resp.data]));
         } catch (e) {
             console.log('Error:', e);
         }
