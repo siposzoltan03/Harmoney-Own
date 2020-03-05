@@ -1,5 +1,4 @@
-import React, {
-    useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { userToJson } from "../../utils/createjson";
 
@@ -22,12 +21,17 @@ export function RegistrationModal(props) {
 
     const closeModal = () => {
         setRegistrationModalIsVisible(false);
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
     }
 
     const handleSubmit = () => {
         const jsonData = userToJson(firstName, lastName, email, password)
         postRegistration(jsonData);
         setRegistrationModalIsVisible(false);
+        closeModal();
     }
 
     return (

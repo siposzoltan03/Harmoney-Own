@@ -16,3 +16,10 @@ export function userToJson(firstName, lastName, email, password) {
         password: password
     });
 }
+
+export function userToJsonLogin(email, password) {
+    return JSON.stringify({
+        email: email,
+        password: password
+    });
+}
