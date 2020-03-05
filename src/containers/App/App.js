@@ -10,11 +10,13 @@ import RegistrationModal from "../../components/RegistrationModal/RegistrationMo
 import LoginModal from "../../components/LoginModal/LoginModal";
 import Balance from "../../components/Balance/Balance";
 import Footer from "../../components/Footer/footer";
+import {TransactionProvider} from "../../contexts/TransactionContext";
 
 const colPosition = {span: true, offset: 3};
 
 function App() {
     return (
+        <TransactionProvider>
         <ModalVisibilityContextProvider>
             <div className="App">
                 <TopBar className="justify-content-center ml-32">
@@ -53,6 +55,7 @@ function App() {
                 </Footer>
             </div>
         </ModalVisibilityContextProvider>
+        </TransactionProvider>
     );
 }
 

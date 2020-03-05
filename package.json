@@ -9,6 +9,7 @@
     "@trendmicro/react-sidenav": "^0.5.0",
     "ant": "^0.2.0",
     "antd": "^4.0.1",
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "component": "^1.1.0",
     "design": "^0.1.0",
