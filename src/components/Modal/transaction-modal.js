@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 
+import { transactionToJson } from "../../utils/createjson";
 import TransactionForm from "../TransactionForm/transaction-form";
+import { TransactionContext } from "../../contexts/TransactionContext";
 
 export default function TransactionModal(props) {
   const [title, setTitle] = useState("");
@@ -9,13 +11,20 @@ export default function TransactionModal(props) {
   const [amount, setAmount] = useState(0);
   const [frequency, setFrequency] = useState("Single");
 
+  const transactionContext = useContext(TransactionContext);
+  const postTransaction = transactionContext.postTransaction;
+  const getTransactions = transactionContext.getTransactions;
+
   const saveChanges = () => {
-    console.log(title, date, amount, frequency)
+    const jsonData = transactionToJson(title, date, amount, frequency, props.transactionType);
+    postTransaction(jsonData);
     closeModal();
   }
 
   const closeModal = () => {
     props.handleClose();
+    // this must be changed to refresh front page function
+    getTransactions();
     setTitle("");
     setDate(new Date());
     setAmount(0);
@@ -27,9 +36,9 @@ export default function TransactionModal(props) {
       <Modal show={props.display} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {props.transactionType === "income" ?
-              "Add new income" :
-              "Add new cost"}
+            {props.transactionType === "Income" ?
+              "Add new Income" :
+              "Add new Expenditure"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

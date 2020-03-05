@@ -12,61 +12,74 @@ import Balance from "../../components/Balance/Balance";
 import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import Footer from "../../components/Footer/footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
+import DashboardChart from "../../components/Charts/DashboardChart";
 
 const colPosition = {span: true, offset: 3};
 
 function App() {
     return (
         <TransactionProvider>
-            <ModalVisibilityContextProvider>
-                <div className="App">
-                    <TopBar className="justify-content-center ml-32">
-                        <h1 id="topBar-title">Harmoney</h1>
-                    </TopBar>
-                    <SideBar/>
-                    <Container>
-                        <Row>
-                            <Col
-                                lg={colPosition}
-                                md={colPosition}
-                                sm={colPosition}
-                                xl={colPosition}
-                                xs={colPosition}
-                            >
-                                <Balance/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col
-                                lg={colPosition}
-                                md={colPosition}
-                                sm={colPosition}
-                                xl={colPosition}
-                                xs={colPosition}
-                            >
-                                <TransactionsList />
-                            </Col>
-                        </Row>
-                    </Container>
-                    <RegistrationModal/>
-                    <LoginModal/>
-                    <Footer className="ml-32">
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href="https://icons8.com/icons/set/finance-document---v2"
+        <ModalVisibilityContextProvider>
+            <div className="App">
+                <TopBar className="justify-content-center ml-32">
+                    <h1 id="topBar-title">Harmoney</h1>
+                </TopBar>
+                <SideBar/>
+                <Container>
+                    <Row>
+                        <Col
+                            lg={colPosition}
+                            md={colPosition}
+                            sm={colPosition}
+                            xl={colPosition}
+                            xs={colPosition}
                         >
-                            Finance Document icon
-                        </a>{" "}
-                        icon by{" "}
-                        <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">
-                            Icons8
-                        </a>
-                        <br/>
-                        Copyright 2020
-                    </Footer>
-                </div>
-            </ModalVisibilityContextProvider>
+                            <Balance/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col
+                            lg={colPosition}
+                            md={colPosition}
+                            sm={colPosition}
+                            xl={colPosition}
+                            xs={colPosition}
+                        >
+                            <DashboardChart/>
+
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col
+                            lg={colPosition}
+                            md={colPosition}
+                            sm={colPosition}
+                            xl={colPosition}
+                            xs={colPosition}
+                        >
+                            <TransactionsList />
+                        </Col>
+                    </Row>
+                </Container>
+                <RegistrationModal/>
+                <LoginModal/>
+                <Footer className="ml-32">
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://icons8.com/icons/set/finance-document---v2"
+                    >
+                        Finance Document icon
+                    </a>{" "}
+                    icon by{" "}
+                    <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">
+                        Icons8
+                    </a>
+                    <br/>
+                    Copyright 2020
+                </Footer>
+            </div>
+        </ModalVisibilityContextProvider>
         </TransactionProvider>
     );
 }

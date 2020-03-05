@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import Globals from "../utils/globals";
 
-const TransactionContext = React.createContext(undefined, undefined);
+const url = Globals.fetchUrl + "/api/transactions";
 
-const TransactionProvider = (props) => {
-    let url = Globals.fetchUrl + "/api/transactions";
+export const TransactionContext = React.createContext(undefined, undefined);
+
+export const TransactionProvider = (props) => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -13,24 +14,30 @@ const TransactionProvider = (props) => {
             try {
                 setLoading(true);
                 Axios.get(url)
-                    .then(resp => (setTransactions(resp.data)));
+                    .then(resp => (setTransactions(resp.data)))
                 setLoading(false);
             } catch (e) {
                 console.log('Error:', e);
             }
-        };
-    useEffect(() => {
-        fetchTransactions()
-    }, []);
+        }
+
+    const postTransaction = (data) => {
+        try {
+            Axios.post(url, data, { headers: {
+                'Content-Type': 'application/json',
+            }})
+            .then(resp => setTransactions([transactions, resp.data]))
+        } catch (e) {
+            console.log('Error:', e);
+        }
+    }
 
     return(
         <TransactionContext.Provider value={{ transactions : [
             transactions,
             setTransactions
-        ], loading : [loading, setLoading]}}>
+        ], loading : [loading, setLoading], getTransactions: fetchTransactions, postTransaction: postTransaction }}>
             {props.children}
         </TransactionContext.Provider>
     )
 };
-
-export { TransactionProvider, TransactionContext }
