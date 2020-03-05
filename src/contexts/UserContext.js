@@ -10,7 +10,7 @@ const loginUrl = Globals.fetchUrl + "/api/users/login";
 export const UserContext = React.createContext(undefined, undefined);
 
 export const UserProvider = (props) => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState({firstName: "Jóska"});
 
     const postRegistration = (data) => {
         try {
