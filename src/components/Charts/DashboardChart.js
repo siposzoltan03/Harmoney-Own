@@ -24,7 +24,7 @@ const DashboardChart = () => {
         datasets: [{
             data: [ Income  ,Expenditure],
             backgroundColor:[
-                '#BFA5A3',
+                '#004225',
                 '#600000'
             ],
             options: {
