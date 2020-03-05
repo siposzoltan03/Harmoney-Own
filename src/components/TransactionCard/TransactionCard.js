@@ -15,7 +15,7 @@ function TransactionCard(transaction) {
                 suffix="Ft"
             />
             <div className="due-date">
-                {transaction.date}
+                {transaction.date.slice(0, -9)}
             </div>
         </Card>
     );
