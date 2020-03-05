@@ -11,6 +11,7 @@ import LoginModal from "../../components/LoginModal/LoginModal";
 import Balance from "../../components/Balance/Balance";
 import Footer from "../../components/Footer/footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
+import DashboardChart from "../../components/Charts/DashboardChart";
 
 const colPosition = {span: true, offset: 3};
 
@@ -33,6 +34,18 @@ function App() {
                             xs={colPosition}
                         >
                             <Balance/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col
+                            lg={colPosition}
+                            md={colPosition}
+                            sm={colPosition}
+                            xl={colPosition}
+                            xs={colPosition}
+                        >
+                            <DashboardChart/>
+
                         </Col>
                     </Row>
                 </Container>
