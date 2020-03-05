@@ -36,7 +36,7 @@ function App() {
                 </Container>
                 <RegistrationModal/>
                 <LoginModal/>
-                <Footer>
+                <Footer className="ml-32">
                     <a
                         target="_blank"
                         rel="noopener noreferrer"
