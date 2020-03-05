@@ -13,8 +13,8 @@ import TransactionModal from "../Modal/transaction-modal";
 
 export const Navbar = () => {
   const { regModal, logModal } = useContext(ModalVisibilityContext);
-  const [registrationModalIsVisible, setRegistrationModalIsVisible] = regModal;
-  const [loginModalIsVisible, setLoginModalIsVisible] = logModal;
+  const setRegistrationModalIsVisible = regModal[1];
+  const setLoginModalIsVisible = logModal[1];
   const [transactionmodalDisplay, setTransactionModalDisplay] = useState(false);
   const [transactionType, setTransactionType] = useState();
 
