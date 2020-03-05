@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^7.2.1",
     "@trendmicro/react-sidenav": "^0.5.0",
     "ant": "^0.2.0",
+    "antd": "^4.0.1",
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "component": "^1.1.0",
@@ -15,8 +17,10 @@
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-chartjs-2": "^2.9.0",
+    "react-datepicker": "^2.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
+    "reactstrap": "^8.4.1",
     "styled": "^1.0.0"
   },
   "scripts": {
