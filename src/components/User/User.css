@@ -12,10 +12,10 @@
 }
 
 #user-sign-out {
-    background: #F08080;
+    background: #558A45;
     border-color: white;
 }
 
 #user-sign-out:hover {
-    background: #db3d44;
+    background: #004225;
 }
