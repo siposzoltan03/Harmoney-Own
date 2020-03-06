@@ -13,12 +13,12 @@ export function User() {
             <span className="user">
                 <i className="fas fa-user"/>
                 <p id="username">{userLoggedIn.firstName}</p>
-                <Button id="user-sign-out" OnClick={handleLogout}>Sign out</Button>
+                <Button id="user-sign-out" onClick={handleLogout}>Sign out</Button>
             </span>
         )
     } else {
         return (
-            <div className="user">no user</div>
+            <div className="user"/>
         )
     }
 }
