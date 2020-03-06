@@ -14,6 +14,7 @@ import Footer from "../../components/Footer/footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
 import DashboardChart from "../../components/Charts/DashboardChart";
 import { UserProvider } from "../../contexts/UserContext";
+import User from "../../components/User/User";
 
 const colPosition = {span: true, offset: 3};
 
@@ -25,6 +26,7 @@ function App() {
             <div className="App">
                 <TopBar className="justify-content-center ml-32">
                     <h1 id="topBar-title">Harmoney</h1>
+                    <User/>
                 </TopBar>
                 <SideBar/>
                 <Container>

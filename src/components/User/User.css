@@ -1,0 +1,21 @@
+.user {
+    position: absolute;
+    right: 0;
+    padding: 12px;
+    display: inline-flex;
+    color: white;
+
+}
+
+#username, .fa-user {
+    margin: 10px 10px 10px 5px;
+}
+
+#user-sign-out {
+    background: #558A45;
+    border-color: white;
+}
+
+#user-sign-out:hover {
+    background: #004225;
+}
