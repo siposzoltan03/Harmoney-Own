@@ -31,3 +31,7 @@
     margin: 0;
 }
 
+#root > div > div.container > div:nth-child(1) > div > div {
+    margin-top: 100px
+}
+
