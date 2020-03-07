@@ -37,7 +37,7 @@
 
 .sidenav---sidenav---_2tBP{
     background: #004225;
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
 }
