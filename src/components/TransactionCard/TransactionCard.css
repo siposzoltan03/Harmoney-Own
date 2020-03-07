@@ -1,0 +1,38 @@
+.ant-card-body {
+    height: 100%;
+    width: auto;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px black;
+    background: #3a4b40;
+}
+
+.ant-statistic-title, .ant-statistic-content {
+    font-size: 30px;
+}
+
+.ant-statistic {
+    display: flex;
+}
+
+.ant-statistic-title {
+    margin-right: 20px;
+}
+
+.ant-statistic-content {
+    margin-right: 20px;
+}
+
+.ant-statistic-content-prefix {
+    position: relative;
+    top: -7px;
+}
+
+.due-date {
+    font-size: 15px;
+    float: right;
+    margin: 20px;
+    top: 0;
+    right: 0;
+}

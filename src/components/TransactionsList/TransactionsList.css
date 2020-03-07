@@ -1,0 +1,29 @@
+.card-title{
+    color: white;
+    font-size: 30px;
+}
+
+.card{
+    border-radius: 5px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    background-color: #558A45;
+    position: relative;
+    margin-top: 20px;
+}
+
+.ant-statistic-title{
+    color: white;
+    text-transform: capitalize;
+}
+
+.due-date{
+    color: white;
+}
+
+.ant-statistic-content{
+    position: absolute;
+    right: 0;
+    padding-right: 10px;
+}

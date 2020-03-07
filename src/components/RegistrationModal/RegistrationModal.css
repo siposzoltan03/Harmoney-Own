@@ -1,0 +1,12 @@
+.modal-header, .modal-footer {
+    background-color: #004225;
+    color: white;
+}
+
+.close{
+    color: #FBCD28;
+}
+
+.close:hover{
+    color: white;
+}
