@@ -3,6 +3,9 @@
 .nav {
     background: #004225;
     height: 64px;
+    position: absolute;
+    left: 0;
+    right: 0;
 }
 
 .ml-32 {

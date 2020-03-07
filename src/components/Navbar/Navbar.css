@@ -3,10 +3,6 @@
 .nav {
     background: #004225;
     height: 64px;
-    position: fixed;
-    left: 0;
-    right: 0;
-    margin-bottom: 100px;
 }
 
 .ml-32 {
@@ -37,7 +33,11 @@
 
 .sidenav---sidenav---_2tBP{
     background: #004225;
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
+}
+
+#root > div > div.container > div:nth-child(1) > div > div {
+    margin-top: 100px
 }
