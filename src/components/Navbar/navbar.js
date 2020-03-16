@@ -10,13 +10,13 @@ import "./Navbar.css"
 
 import React, { useState, useContext } from "react";
 import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
-import TransactionModal from "../Modal/transaction-modal";
+import TransactionModal from "../TransactionModal/transaction-modal";
 
 export const Navbar = () => {
-  const { regModal, logModal } = useContext(ModalVisibilityContext);
+  const { regModal, logModal, transactionModal } = useContext(ModalVisibilityContext);
   const setRegistrationModalIsVisible = regModal[1];
   const setLoginModalIsVisible = logModal[1];
-  const [transactionModalDisplay, setTransactionModalDisplay] = useState(false);
+  const setTransactionModalIsVisible = transactionModal[1];
   const [transactionType, setTransactionType] = useState();
 
   return (
@@ -30,6 +30,9 @@ export const Navbar = () => {
             break;
           case "user-login":
             setLoginModalIsVisible(true);
+            break;
+          case "transaction":
+            setTransactionModalIsVisible(true);
             break;
           default:
           // code block
@@ -60,11 +63,8 @@ export const Navbar = () => {
         </NavItem>
 
         <NavItem
-          eventKey="Income"
-          onClick={() => {
-            setTransactionType("Income");
-            setTransactionModalDisplay(true);
-          }}
+          eventKey="transaction"
+          onClick={() => { setTransactionType("Income"); }}
         >
           <NavIcon>
             <i className="fa fa-plus" style={{ fontSize: "1.75em" }} />
@@ -73,11 +73,8 @@ export const Navbar = () => {
         </NavItem>
         
         <NavItem 
-            eventKey="Expenditure"
-            onClick={() => {
-                setTransactionType("Expenditure");  
-                setTransactionModalDisplay(true);
-        }}
+            eventKey="transaction"
+            onClick={() => { setTransactionType("Expenditure"); }}
         >
           <NavIcon>
             <i className="fa fa-minus" style={{ fontSize: "1.75em" }} />
@@ -86,8 +83,6 @@ export const Navbar = () => {
         </NavItem>
       </Nav>
       <TransactionModal
-        display={transactionModalDisplay}
-        handleClose={() => setTransactionModalDisplay(false)}
         transactionType={transactionType}
       />
     </SideNav>
