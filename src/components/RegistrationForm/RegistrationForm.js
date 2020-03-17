@@ -6,30 +6,32 @@ export function RegistrationForm(props) {
         <Form>
             <Form.Group controlId="formBasicFirstName">
                 <Form.Label>First name</Form.Label>
-                <Form.Control type="text" placeholder="Your first name" maxLength="50" value={props.firstName} onChange={props.setFirstName}/>
+                <Form.Control type="text" placeholder="Your first name" value={props.firstName} onChange={props.setFirstName}/>
+                <Form.Text className="text-danger" id="error-first-name"/>
             </Form.Group>
 
             <Form.Group controlId="formBasicLastName">
                 <Form.Label>Last name</Form.Label>
-                <Form.Control type="text" placeholder="Your last name" maxLength="20" value={props.lastName} onChange={props.setLastName}/>
+                <Form.Control type="text" placeholder="Your last name" value={props.lastName} onChange={props.setLastName}/>
+                <Form.Text className="text-danger" id="error-last-name"/>
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="example@example.com" maxLength="320" value={props.email} onChange={props.setEmail}/>
-                <Form.Text className="text-danger" id="error-email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-                </Form.Text>
+                <Form.Control type="email" placeholder="example@example.com" value={props.email} onChange={props.setEmail}/>
+                <Form.Text className="text-danger" id="error-email"/>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" maxLength="20"/>
+                <Form.Control type="password" placeholder="Password" value={props.password} onChange={props.setPassword}/>
+                <Form.Text className="text-danger" id="error-password"/>
             </Form.Group>
 
             <Form.Group controlId="formBasicPasswordConfirmation">
                 <Form.Label>Confirm password</Form.Label>
-                <Form.Control type="password" placeholder="Password" maxLength="20" value={props.password} onChange={props.setPassword} />
-                <Form.Text className="text-danger" id="error-password">
+                <Form.Control type="password" placeholder="Password" value={props.passwordConfirmation} onChange={props.setPasswordConfirmation} />
+                <Form.Text className="text-danger" id="error-password-confirmation">
                 </Form.Text>
             </Form.Group>
         </Form>
