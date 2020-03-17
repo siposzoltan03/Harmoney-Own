@@ -1,38 +1,28 @@
-.ant-card-body {
-    height: 100%;
-    width: auto;
-    padding: 20px;
-    margin-top: 40px;
-    border-radius: 2px;
-    box-shadow: 2px 2px 2px black;
-    background: #3a4b40;
-}
-
-.ant-statistic-title, .ant-statistic-content {
-    font-size: 30px;
-}
-
-.ant-statistic {
+h4.card-header {
+    color: white;
+    background: #004225;
     display: flex;
+    justify-content: space-between;
 }
 
-.ant-statistic-title {
-    margin-right: 20px;
+.transaction-delete:hover {
+    color: #558A45;
+    cursor: pointer;
 }
 
-.ant-statistic-content {
-    margin-right: 20px;
+h5.card-body {
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    margin: 0;
+    background: white;
+    justify-content: space-between;
 }
 
-.ant-statistic-content-prefix {
-    position: relative;
-    top: -7px;
-}
-
-.due-date {
-    font-size: 15px;
-    float: right;
-    margin: 20px;
-    top: 0;
-    right: 0;
+h6.card-footer {
+    color: white;
+    margin: 0;
+    background: #004225;
+    display: flex;
+    justify-content: space-between;
 }
