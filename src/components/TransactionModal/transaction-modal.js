@@ -12,14 +12,15 @@ export default function TransactionModal(props) {
   const [amount, setAmount] = useState(0);
   const [frequency, setFrequency] = useState("Single");
 
-  const { transactionModal } = useContext(ModalVisibilityContext);
+  const { transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
   const [transactionModalIsVisible, setTransactionModalIsVisible] = transactionModal;
+  const transactionType = transactionModalType[0];
 
   const transactionContext = useContext(TransactionContext);
   const postTransaction = transactionContext.postTransaction;
 
   const saveChanges = () => {
-    const jsonData = transactionToJson(title, date, amount, frequency, props.transactionType);
+    const jsonData = transactionToJson(title, date, amount, frequency, transactionType);
     postTransaction(jsonData);
     closeModal();
   };
@@ -37,7 +38,7 @@ export default function TransactionModal(props) {
       <Modal show={transactionModalIsVisible} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {props.transactionType === "Income" ?
+            {transactionType === "Income" ?
               "Add new Income" :
               "Add new Expenditure"}
           </Modal.Title>
