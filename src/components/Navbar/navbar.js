@@ -8,9 +8,8 @@ import SideNav, {
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import "./Navbar.css"
 
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
-import TransactionModal from "../TransactionModal/transaction-modal";
 
 export const Navbar = () => {
   const { regModal, logModal, transactionModal, transactionModalType } = useContext(ModalVisibilityContext);

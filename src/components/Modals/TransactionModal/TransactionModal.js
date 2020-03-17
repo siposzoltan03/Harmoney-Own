@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-import { transactionToJson } from "../../utils/createjson";
-import TransactionForm from "../TransactionForm/transaction-form";
-import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
-import { TransactionContext } from "../../contexts/TransactionContext";
+import { transactionToJson } from "../../../utils/createjson";
+import TransactionForm from "../../Forms/TransactionForm/TransactionForm";
+import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
+import { TransactionContext } from "../../../contexts/TransactionContext";
 
 export default function TransactionModal(props) {
   const [title, setTitle] = useState("");
