@@ -1,16 +1,15 @@
 import React from "react";
 import "./App.css";
-import SideBar from "../../components/Navbar/navbar";
+import SideBar from "../../components/Navbar/Navbar";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TopBar from "react-bootstrap/Nav";
 import {ModalVisibilityContextProvider} from "../../contexts/ModalVisibilityContext";
-import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
-import LoginModal from "../../components/LoginModal/LoginModal";
+import ModalContainer from "../ModalContainer/ModalContainer";
 import Balance from "../../components/Balance/Balance";
 import TransactionsList from "../../components/TransactionsList/TransactionsList";
-import Footer from "../../components/Footer/footer";
+import Footer from "../../components/Footer/Footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
 import DashboardChart from "../../components/Charts/DashboardChart";
 import { UserProvider } from "../../contexts/UserContext";
@@ -63,8 +62,7 @@ function App() {
                         </Col>
                     </Row>
                 </Container>
-                <RegistrationModal/>
-                <LoginModal/>
+                <ModalContainer/>
                 <Footer className="ml-32">
                     <a
                         target="_blank"

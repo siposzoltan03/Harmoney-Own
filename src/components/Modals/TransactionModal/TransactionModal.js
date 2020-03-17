@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-import { transactionToJson } from "../../utils/createjson";
-import TransactionForm from "../TransactionForm/transaction-form";
-import { TransactionContext } from "../../contexts/TransactionContext";
+import { transactionToJson } from "../../../utils/createjson";
+import TransactionForm from "../../Forms/TransactionForm/TransactionForm";
+import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
+import { TransactionContext } from "../../../contexts/TransactionContext";
 
 export default function TransactionModal(props) {
   const [title, setTitle] = useState("");
@@ -11,17 +12,21 @@ export default function TransactionModal(props) {
   const [amount, setAmount] = useState(0);
   const [frequency, setFrequency] = useState("Single");
 
+  const { transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
+  const [transactionModalIsVisible, setTransactionModalIsVisible] = transactionModal;
+  const transactionType = transactionModalType[0];
+
   const transactionContext = useContext(TransactionContext);
   const postTransaction = transactionContext.postTransaction;
 
   const saveChanges = () => {
-    const jsonData = transactionToJson(title, date, amount, frequency, props.transactionType);
+    const jsonData = transactionToJson(title, date, amount, frequency, transactionType);
     postTransaction(jsonData);
     closeModal();
   };
 
   const closeModal = () => {
-    props.handleClose();
+    setTransactionModalIsVisible(false);
     setTitle("");
     setDate(new Date());
     setAmount(0);
@@ -30,10 +35,10 @@ export default function TransactionModal(props) {
 
   return (
     <>
-      <Modal show={props.display} onHide={closeModal}>
+      <Modal show={transactionModalIsVisible} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {props.transactionType === "Income" ?
+            {transactionType === "Income" ?
               "Add new Income" :
               "Add new Expenditure"}
           </Modal.Title>

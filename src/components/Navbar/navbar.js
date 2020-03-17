@@ -8,16 +8,15 @@ import SideNav, {
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import "./Navbar.css"
 
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
-import TransactionModal from "../Modal/transaction-modal";
 
 export const Navbar = () => {
-  const { regModal, logModal } = useContext(ModalVisibilityContext);
+  const { regModal, logModal, transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
   const setRegistrationModalIsVisible = regModal[1];
   const setLoginModalIsVisible = logModal[1];
-  const [transactionModalDisplay, setTransactionModalDisplay] = useState(false);
-  const [transactionType, setTransactionType] = useState();
+  const setTransactionModalIsVisible = transactionModal[1];
+  const setTransactionType = transactionModalType[1];
 
   return (
     <SideNav
@@ -30,6 +29,14 @@ export const Navbar = () => {
             break;
           case "user-login":
             setLoginModalIsVisible(true);
+            break;
+          case "income":
+            setTransactionType("Income");
+            setTransactionModalIsVisible(true);
+            break;
+          case "expenditure":
+            setTransactionType("Expenditure");
+            setTransactionModalIsVisible(true);
             break;
           default:
           // code block
@@ -59,37 +66,20 @@ export const Navbar = () => {
           <NavText>Login</NavText>
         </NavItem>
 
-        <NavItem
-          eventKey="Income"
-          onClick={() => {
-            setTransactionType("Income");
-            setTransactionModalDisplay(true);
-          }}
-        >
+        <NavItem  eventKey="income">
           <NavIcon>
             <i className="fa fa-plus" style={{ fontSize: "1.75em" }} />
           </NavIcon>
           <NavText>Add Income</NavText>
         </NavItem>
         
-        <NavItem 
-            eventKey="Expenditure"
-            onClick={() => {
-                setTransactionType("Expenditure");  
-                setTransactionModalDisplay(true);
-        }}
-        >
+        <NavItem eventKey="expenditure">
           <NavIcon>
             <i className="fa fa-minus" style={{ fontSize: "1.75em" }} />
           </NavIcon>
           <NavText>Add Expenditure</NavText>
         </NavItem>
       </Nav>
-      <TransactionModal
-        display={transactionModalDisplay}
-        handleClose={() => setTransactionModalDisplay(false)}
-        transactionType={transactionType}
-      />
     </SideNav>
   );
 };
