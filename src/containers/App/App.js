@@ -8,6 +8,7 @@ import TopBar from "react-bootstrap/Nav";
 import {ModalVisibilityContextProvider} from "../../contexts/ModalVisibilityContext";
 import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
 import LoginModal from "../../components/LoginModal/LoginModal";
+import TransactionModal from "../../components/TransactionModal/transaction-modal";
 import Balance from "../../components/Balance/Balance";
 import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import Footer from "../../components/Footer/footer";
@@ -65,6 +66,7 @@ function App() {
                 </Container>
                 <RegistrationModal/>
                 <LoginModal/>
+                <TransactionModal/>
                 <Footer className="ml-32">
                     <a
                         target="_blank"

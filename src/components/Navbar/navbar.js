@@ -13,11 +13,11 @@ import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
 import TransactionModal from "../TransactionModal/transaction-modal";
 
 export const Navbar = () => {
-  const { regModal, logModal, transactionModal } = useContext(ModalVisibilityContext);
+  const { regModal, logModal, transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
   const setRegistrationModalIsVisible = regModal[1];
   const setLoginModalIsVisible = logModal[1];
   const setTransactionModalIsVisible = transactionModal[1];
-  const [transactionType, setTransactionType] = useState();
+  const setTransactionType = transactionModalType[1];
 
   return (
     <SideNav
@@ -31,7 +31,12 @@ export const Navbar = () => {
           case "user-login":
             setLoginModalIsVisible(true);
             break;
-          case "transaction":
+          case "income":
+            setTransactionType("Income");
+            setTransactionModalIsVisible(true);
+            break;
+          case "expenditure":
+            setTransactionType("Expenditure");
             setTransactionModalIsVisible(true);
             break;
           default:
@@ -62,29 +67,20 @@ export const Navbar = () => {
           <NavText>Login</NavText>
         </NavItem>
 
-        <NavItem
-          eventKey="transaction"
-          onClick={() => { setTransactionType("Income"); }}
-        >
+        <NavItem  eventKey="income">
           <NavIcon>
             <i className="fa fa-plus" style={{ fontSize: "1.75em" }} />
           </NavIcon>
           <NavText>Add Income</NavText>
         </NavItem>
         
-        <NavItem 
-            eventKey="transaction"
-            onClick={() => { setTransactionType("Expenditure"); }}
-        >
+        <NavItem eventKey="expenditure">
           <NavIcon>
             <i className="fa fa-minus" style={{ fontSize: "1.75em" }} />
           </NavIcon>
           <NavText>Add Expenditure</NavText>
         </NavItem>
       </Nav>
-      <TransactionModal
-        transactionType={transactionType}
-      />
     </SideNav>
   );
 };
