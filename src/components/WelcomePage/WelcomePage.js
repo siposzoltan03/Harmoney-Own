@@ -21,7 +21,7 @@ function WelcomePage(props) {
                         <Card.Header as="h1">Welcome</Card.Header>
                         <Card.Body>
                             <Card.Title>Lórem Ipse</Card.Title>
-                            <Card.Text>
+                            <Card.Text id="welcome-text">
                                 Lórum ipse mint gyatos lező bulás, elsősorban egy főző fűző. A fordéka után így a
                                 csikáriák csingítették a kordozás runcik klitás bá ' pingos zendra tronát. Holóriával
                                 moccannak továbbá a téző ceánynak, akik öntő mékfelettel vartozással meretin padékot
