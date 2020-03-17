@@ -13,24 +13,20 @@ export const UserProvider = (props) => {
     const [user, setUser] = useState();
 
     const postRegistration = (data) => {
-        try {
-            Axios.post(registrationUrl, data, { headers: {
-                'Content-Type': 'application/json',
-            }})
-        } catch (e) {
-            console.log('Error:', e);
-        }
+        
+        Axios.post(registrationUrl, data, { headers: {
+            'Content-Type': 'application/json',
+        }})
+        .catch (e => console.log('Error:', e))
     }
 
     const postLogin = (data) => {
-        try {
-            Axios.post(loginUrl, data, { headers: {
-                'Content-Type': 'application/json',
-            }})
-            .then(resp => setUser(resp.data))
-        } catch (e) {
-            console.log('Error:', e);
-        }
+        
+        Axios.post(loginUrl, data, { headers: {
+            'Content-Type': 'application/json',
+        }})
+        .then(resp => {setUser(resp.data)})
+        .catch (e => console.log('Error:', e))
     }
 
     return (
