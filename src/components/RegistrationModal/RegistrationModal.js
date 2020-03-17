@@ -12,6 +12,7 @@ export function RegistrationModal(props) {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
     const { regModal } = useContext(ModalVisibilityContext);
     const [registrationModalIsVisible, setRegistrationModalIsVisible] = regModal;
@@ -28,10 +29,133 @@ export function RegistrationModal(props) {
     }
 
     const handleSubmit = () => {
-        const jsonData = userToJson(firstName, lastName, email, password)
-        postRegistration(jsonData);
-        setRegistrationModalIsVisible(false);
-        closeModal();
+        const firstNameIsValid = validName("first");
+        const lastNameIsValid =  validName("last");
+        const emailIsValid = validEmail();
+        const passwordIsValid = validPassword();
+        const passwordConfirmationIsValid = validPasswordConfirmation();
+        const submittable = firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid && passwordConfirmationIsValid;
+        if(submittable) {
+            const jsonData = userToJson(firstName, lastName, email, password);
+            postRegistration(jsonData);
+            setRegistrationModalIsVisible(false);
+            closeModal();
+        }
+    }
+
+    const validateFirstName = (e) => {
+        setFirstName(e.target.value);
+        validName("first")
+    }
+
+    const validateLastName = (e) => {
+        setLastName(e.target.value);
+        validName("last");
+    }
+
+    const validName = (name) => {
+        const formId = name === "first" ? "#formBasicFirstName" : "#formBasicLastName";
+        const notificationId = name === "first" ? "#error-first-name" : "#error-last-name";
+        const maxLength = name === "first" ? 50 : 20;
+        const currentName = document.querySelector(formId).value;
+        const notification = document.querySelector(notificationId);
+        const pattern = `[a-zA-Z.,'-\\s]{1,${maxLength}}$`;
+        if (currentName.length === 0) {
+            notification.textContent = "This field is required";
+            return false;
+        }
+        if (currentName.length > maxLength) {
+            notification.textContent = `The ${name} name can't be longer than ${maxLength} characters`;
+            return false;
+        }
+        if (currentName.match(pattern)) {
+            notification.textContent = "";
+            return true;
+        }
+        notification.textContent = `The ${name} name can't contain any number or special character`;
+        return false;
+    }
+
+    const validateEmail = (e) => {
+        setEmail(e.target.value);
+        validEmail();
+    }
+
+    const validEmail = () => {
+        const currentEmail = document.querySelector("#formBasicEmail").value;
+        const notification = document.querySelector("#error-email");
+        const pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
+        if (currentEmail.length === 0) {
+            notification.textContent = "This field is required";
+            return false;
+        }
+        if (currentEmail.length > 320) {
+            notification.textContent = "Email address can't be longer than 320 characters";
+            return false;
+        }
+        if (currentEmail.match(pattern)) {
+            notification.textContent = "";
+            return true;
+        } else {
+            notification.textContent = "Please enter a valid email address ie. e_xa-+mp.le%@example.com";
+            return false;
+        }
+    }
+
+    const validatePassword = (e) => {
+        setPassword(e.target.value);
+        validPassword();
+        validPasswordConfirmation();
+    }
+
+    const validPassword = () => {
+        const currentPassword = document.querySelector("#formBasicPassword").value;
+        const notification = document.querySelector("#error-password");
+        const pattern = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_-])(?!.*?[\\s\"˘°˛`˙´˝¨¤]).{4,20}$";
+        const exclusionPattern = "[\\s\"˘°˛`˙´˝¨¤]$";
+        if(currentPassword.length === 0) {
+            notification.textContent = "This field is required";
+            return false;
+        }
+        if (currentPassword.match(exclusionPattern)) {
+            notification.textContent = "The password can't contain other special characters than #?!@$%^&*_-";
+            return false;
+        }
+        if (currentPassword.length < 4) {
+            notification.textContent = "The password must be at least 4 characters long";
+            return false;
+        }
+        if (currentPassword.length > 20) {
+            notification.textContent = "Password can't be longer than 20 characters";
+            return false;
+        }
+        if (currentPassword.match(pattern)) {
+            notification.textContent = "";
+            return true;
+        }
+        notification.textContent = "The password must contain at least one uppercase letter, one lowercase letter, one number and a special character";
+        return false;
+    }
+
+    const validatePasswordConfirmation = (e) => {
+        setPasswordConfirmation(e.target.value);
+        validPasswordConfirmation();
+    }
+
+    const validPasswordConfirmation = () => {
+        const currentPassword = document.querySelector("#formBasicPassword").value;
+        const confirmationPassword = document.querySelector("#formBasicPasswordConfirmation").value;
+        const notification = document.querySelector("#error-password-confirmation");
+        if (confirmationPassword.length === 0) {
+            notification.textContent = "This field is required";
+            return false;
+        }
+        if (currentPassword === confirmationPassword) {
+            notification.textContent = "";
+            return true;
+        }
+        notification.textContent = "Passwords don't match";
+        return false;
     }
 
     return (
@@ -48,13 +172,15 @@ export function RegistrationModal(props) {
                 <Modal.Body>
                     <RegistrationForm
                         firstName={firstName}
-                        setFirstName={(e) => setFirstName(e.target.value)}
+                        setFirstName={validateFirstName}
                         lastName={lastName}
-                        setLastName={(e) => setLastName(e.target.value)}
+                        setLastName={validateLastName}
                         email={email}
-                        setEmail={(e) => setEmail(e.target.value)}
+                        setEmail={validateEmail}
                         password={password}
-                        setPassword={(e) => setPassword(e.target.value)}
+                        setPassword={validatePassword}
+                        passwordConfirmation={passwordConfirmation}
+                        setPasswordConfirmation={validatePasswordConfirmation}
                     />
                 </Modal.Body>
                 <Modal.Footer>
