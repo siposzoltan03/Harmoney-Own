@@ -11,25 +11,23 @@ export const TransactionProvider = (props) => {
     const [loading, setLoading] = useState(false);
 
     const fetchTransactions = () => {
-            try {
-                setLoading(true);
-                Axios.get(url)
-                    .then(resp => (setTransactions(resp.data)))
-                setLoading(false);
-            } catch (e) {
-                console.log('Error:', e);
-            }
-        };
+            
+        setLoading(true);
+        Axios.get(url)
+            .then(resp => {
+                (setTransactions(resp.data));
+                setLoading(false)
+            })
+            .catch (e => console.log('Error:', e))
+    };
 
     const postTransaction = (data) => {
-        try {
-            Axios.post(url, data, { headers: {
-                'Content-Type': 'application/json',
-            }})
-            .then(resp => setTransactions([...transactions, resp.data]));
-        } catch (e) {
-            console.log('Error:', e);
-        }
+        
+        Axios.post(url, data, { headers: {
+            'Content-Type': 'application/json',
+        }})
+            .then(resp => setTransactions([...transactions, resp.data]))
+            .catch (e => console.log('Error:', e))
     };
 
     useEffect(() => {

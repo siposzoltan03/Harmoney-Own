@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { userToJson } from "../../utils/createjson";
+import { userToJson } from "../../../utils/createjson";
 
-import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
-import { UserContext } from "../../contexts/UserContext";
-import { RegistrationForm } from "../RegistrationForm/RegistrationForm";
+import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
+import { UserContext } from "../../../contexts/UserContext";
+import { RegistrationForm } from "../../Forms/RegistrationForm/RegistrationForm";
 import "./RegistrationModal.css";
 
 export function RegistrationModal(props) {
