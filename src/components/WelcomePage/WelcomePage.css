@@ -18,3 +18,7 @@
 .ml-32 {
     margin-left: 32px;
 }
+
+.card-text {
+    font-size: 20px;
+}
