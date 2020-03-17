@@ -10,6 +10,7 @@ import "./Navbar.css"
 
 import React, { useContext } from "react";
 import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
+import {UserContext} from "../../contexts/UserContext";
 
 export const Navbar = () => {
   const { regModal, logModal, transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
@@ -17,6 +18,8 @@ export const Navbar = () => {
   const setLoginModalIsVisible = logModal[1];
   const setTransactionModalIsVisible = transactionModal[1];
   const setTransactionType = transactionModalType[1];
+  const { user } = useContext(UserContext);
+  const userLoggedIn = user[0];
 
   return (
     <SideNav
@@ -45,6 +48,7 @@ export const Navbar = () => {
     >
       <Toggle />
       <Nav defaultSelected="home">
+
         <NavItem eventKey="home">
           <NavIcon>
             <i className="fa fa-fw fa-home" style={{ fontSize: "1.75em" }} />
@@ -52,33 +56,38 @@ export const Navbar = () => {
           <NavText>Home</NavText>
         </NavItem>
 
-        <NavItem eventKey="user-registration">
-          <NavIcon>
-            <i className="fas fa-user-plus" style={{ fontSize: "1.75em" }} />
-          </NavIcon>
-          <NavText>Registration</NavText>
-        </NavItem>
+        {userLoggedIn ?
+          <NavItem eventKey="income">
+            <NavIcon>
+              <i className="fa fa-plus" style={{fontSize: "1.75em"}}/>
+            </NavIcon>
+            <NavText>Add Income</NavText>
+          </NavItem> : ""}
 
-        <NavItem eventKey="user-login">
-          <NavIcon>
-            <i className="fas fa-user-check" style={{ fontSize: "1.75em" }} />
-          </NavIcon>
-          <NavText>Login</NavText>
-        </NavItem>
+        {userLoggedIn ?
+          <NavItem eventKey="expenditure">
+            <NavIcon>
+              <i className="fa fa-minus" style={{ fontSize: "1.75em" }} />
+            </NavIcon>
+            <NavText>Add Expenditure</NavText>
+          </NavItem> : ""}
 
-        <NavItem  eventKey="income">
-          <NavIcon>
-            <i className="fa fa-plus" style={{ fontSize: "1.75em" }} />
-          </NavIcon>
-          <NavText>Add Income</NavText>
-        </NavItem>
-        
-        <NavItem eventKey="expenditure">
-          <NavIcon>
-            <i className="fa fa-minus" style={{ fontSize: "1.75em" }} />
-          </NavIcon>
-          <NavText>Add Expenditure</NavText>
-        </NavItem>
+        {!userLoggedIn ?
+          <NavItem eventKey="user-registration">
+            <NavIcon>
+              <i className="fas fa-user-plus" style={{ fontSize: "1.75em" }} />
+            </NavIcon>
+            <NavText>Registration</NavText>
+          </NavItem>: ""}
+
+        {!userLoggedIn ?
+          <NavItem eventKey="user-login">
+            <NavIcon>
+              <i className="fas fa-user-check" style={{ fontSize: "1.75em" }} />
+            </NavIcon>
+            <NavText>Login</NavText>
+          </NavItem> : ""}
+
       </Nav>
     </SideNav>
   );
