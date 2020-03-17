@@ -1,21 +1,15 @@
 import React from "react";
 import "./App.css";
 import SideBar from "../../components/Navbar/Navbar";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import TopBar from "react-bootstrap/Nav";
+import Dashboard from "../../components/Dashboard/Dashboard";
 import {ModalVisibilityContextProvider} from "../../contexts/ModalVisibilityContext";
 import ModalContainer from "../ModalContainer/ModalContainer";
-import Balance from "../../components/Balance/Balance";
-import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import Footer from "../../components/Footer/Footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
-import DashboardChart from "../../components/Charts/DashboardChart";
 import { UserProvider } from "../../contexts/UserContext";
 import User from "../../components/User/User";
 
-const colPosition = {span: true, offset: 3};
 
 function App() {
     return (
@@ -28,40 +22,7 @@ function App() {
                     <User/>
                 </TopBar>
                 <SideBar/>
-                <Container>
-                    <Row>
-                        <Col
-                            lg={colPosition}
-                            md={colPosition}
-                            sm={colPosition}
-                            xl={colPosition}
-                            xs={colPosition}
-                        >
-                            <Balance/>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col
-                            lg={colPosition}
-                            md={colPosition}
-                            sm={colPosition}
-                            xl={colPosition}
-                            xs={colPosition}
-                        >
-                            <DashboardChart/>
-
-                        </Col>
-                        <Col
-                            lg={colPosition}
-                            md={colPosition}
-                            sm={colPosition}
-                            xl={colPosition}
-                            xs={colPosition}
-                        >
-                            <TransactionsList />
-                        </Col>
-                    </Row>
-                </Container>
+                <Dashboard/>
                 <ModalContainer/>
                 <Footer className="ml-32">
                     <a
