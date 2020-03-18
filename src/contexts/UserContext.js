@@ -31,10 +31,11 @@ export const UserProvider = (props) => {
             'Content-Type': 'application/json',
         }})
         .then(resp => {
-            setUser(resp.data);
             if (resp.data.firstName && resp.data.lastName && resp.data.email && resp.data.email === JSON.parse(data).email) {
+                setUser(resp.data);
                 return false;
             }
+            return true;
         })
         .catch (e => {
             console.log('Error:', e);
