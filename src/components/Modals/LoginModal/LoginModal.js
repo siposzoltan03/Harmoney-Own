@@ -21,11 +21,19 @@ export function LoginModal(props) {
         setEmail("");
         setPassword("");
     }
-    const handleSubmit = () => {
-        const jsonData = userToJsonLogin(email, password)
-        postLogin(jsonData);
-        setLoginModalIsVisible(false);
-        closeModal();
+    const handleSubmit = async () => {
+        const jsonData = userToJsonLogin(email, password);
+        let loginFailed = await postLogin(jsonData);
+        if (loginFailed) {
+            loginNotification();
+        } else {
+            closeModal();
+        }
+    }
+
+    const loginNotification = () => {
+        const notification = document.querySelector("#error-credentials");
+        notification.textContent = "Invalid credentials"
     }
 
     return (
