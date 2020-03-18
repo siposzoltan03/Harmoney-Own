@@ -59,7 +59,7 @@ export function RegistrationModal(props) {
         const maxLength = name === "first" ? 50 : 20;
         const currentName = document.querySelector(formId).value;
         const notification = document.querySelector(notificationId);
-        const pattern = `[a-zA-Z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ffőŐűŰ.,'\\s-]{1,${maxLength}}`;
+        const pattern = `^[a-zA-Z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ffőŐűŰ.,'\\s-]{1,${maxLength}}$`;
         if (currentName.length === 0) {
             notification.textContent = "This field is required";
             return false;
