@@ -8,6 +8,7 @@ import CaretDownOutlined from "@ant-design/icons/lib/icons/CaretDownOutlined";
 
 import "./TransactionCard.css"
 import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
+import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 
 const Amount = styled.div`
     color: ${prop => prop.direction === "Income" ? 'green' : 'red'}
@@ -25,10 +26,13 @@ function TransactionCard(transaction) {
     };
 
     return (
-        <Card onClick={editHandler}>
+        <Card>
             <Card.Header as="h4">
                 <div className="transaction-title">{transaction.title}</div>
-                <div className="transaction-delete" ><CloseSquareOutlined /></div>
+                <div className="edit-delete-container">
+                    <div className="transaction-edit"><EditOutlined onClick={editHandler} /></div>
+                    <div className="transaction-delete" ><CloseSquareOutlined /></div>
+                </div>
             </Card.Header>
             <Card.Body as="h5">
                 <Amount className="transaction-direction" direction={transaction.direction}>{transaction.direction === "Income" ? <CaretUpOutlined /> : <CaretDownOutlined />}</Amount>
