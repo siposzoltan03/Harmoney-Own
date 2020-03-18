@@ -5,6 +5,7 @@ import { transactionToJson } from "../../../utils/createjson";
 import TransactionForm from "../../Forms/TransactionForm/TransactionForm";
 import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
 import { TransactionContext } from "../../../contexts/TransactionContext";
+import {store} from "react-notifications-component";
 
 export default function TransactionModal(props) {
   const [title, setTitle] = useState("");
@@ -19,14 +20,19 @@ export default function TransactionModal(props) {
   const transactionContext = useContext(TransactionContext);
   const postTransaction = transactionContext.postTransaction;
 
-  const saveChanges = () => {
+  const saveChanges = async () => {
     const titleIsValid = validTitle();
     const dateIsValid = validDate();
     const amountIsValid = validAmount();
     let submittable = titleIsValid && dateIsValid && amountIsValid;
     if (submittable) {
       const jsonData = transactionToJson(title, date, parseInt(amount), frequency, transactionType);
-      postTransaction(jsonData);
+      const transactionFailed = await postTransaction(jsonData);
+      if (transactionFailed) {
+        showTransactionNotification("failure")
+      } else {
+        showTransactionNotification("success")
+      }
       closeModal();
     }
   };
@@ -80,6 +86,20 @@ export default function TransactionModal(props) {
   const validateAmount = (e) => {
     setAmount(e.target.value);
     validAmount();
+  }
+  const showTransactionNotification = (type) => {
+    store.addNotification({
+      title: type === "success" ? "Success!" : "Error!",
+      message: type === "success" ? "Transaction successfully added" : "Something went wrong",
+      type: type === "success" ? "success" : "danger",
+      insert: "top",
+      container: "bottom-right",
+      animationIn: ["animated", "flipInX"],
+      animationOut: ["animated", "flipOutX"],
+      dismiss: {
+        duration: 3000
+      }
+    });
   }
 
   const validAmount = () => {
