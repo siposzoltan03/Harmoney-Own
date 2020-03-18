@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import Axios from "axios";
 import Globals from "../utils/globals";
 
-
 const registrationUrl = Globals.fetchUrl + "/api/users/registration";
 const loginUrl = Globals.fetchUrl + "/api/users/login";
-
 
 export const UserContext = React.createContext(undefined, undefined);
 
@@ -20,13 +18,20 @@ export const UserProvider = (props) => {
         .catch (e => console.log('Error:', e))
     }
 
-    const postLogin = (data) => {
-        
-        Axios.post(loginUrl, data, { headers: {
+    const postLogin = async (data) => {
+        return await Axios.post(loginUrl, data, { headers: {
             'Content-Type': 'application/json',
         }})
-        .then(resp => {setUser(resp.data)})
-        .catch (e => console.log('Error:', e))
+        .then(resp => {
+            setUser(resp.data);
+            if (resp.data.firstName && resp.data.lastName && resp.data.email && resp.data.email === JSON.parse(data).email) {
+                return false;
+            }
+        })
+        .catch (e => {
+            console.log('Error:', e);
+            return true;
+        })
     }
 
     return (
