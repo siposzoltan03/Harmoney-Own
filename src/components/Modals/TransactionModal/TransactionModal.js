@@ -89,7 +89,6 @@ export default function TransactionModal(props) {
     const notification = document.querySelector("#error-amount");
     const pattern = "^\\d+$";
     if (currentAmountFloat === 0 || inputAmount.length === 0) {
-      console.log(inputAmount);
       notification.textContent = "This field is required";
       return false
     }
@@ -104,7 +103,6 @@ export default function TransactionModal(props) {
     notification.textContent = "";
     return true
   }
-
 
   return (
     <>
