@@ -10,12 +10,20 @@ export const UserContext = React.createContext(undefined, undefined);
 export const UserProvider = (props) => {
     const [user, setUser] = useState();
 
-    const postRegistration = (data) => {
-        
-        Axios.post(registrationUrl, data, { headers: {
+    const postRegistration = async (data) => {
+        return await Axios.post(registrationUrl, data, { headers: {
             'Content-Type': 'application/json',
         }})
-        .catch (e => console.log('Error:', e))
+        .then(resp => {
+            if (resp.data.firstName && resp.data.lastName && resp.data.email && resp.data.email === JSON.parse(data).email) {
+                return false;
+            }
+            return true;
+        })
+        .catch (e => {
+            console.log('Error:', e);
+            return true;
+        })
     }
 
     const postLogin = async (data) => {

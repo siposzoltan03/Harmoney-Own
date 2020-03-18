@@ -28,7 +28,7 @@ export function RegistrationModal(props) {
         setPassword("");
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const firstNameIsValid = validName("first");
         const lastNameIsValid =  validName("last");
         const emailIsValid = validEmail();
@@ -37,10 +37,19 @@ export function RegistrationModal(props) {
         const submittable = firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid && passwordConfirmationIsValid;
         if(submittable) {
             const jsonData = userToJson(firstName, lastName, email, password);
-            postRegistration(jsonData);
-            setRegistrationModalIsVisible(false);
-            closeModal();
+            const registrationFailed = await postRegistration(jsonData);
+            if (registrationFailed) {
+                registrationNotification();
+            } else {
+                setRegistrationModalIsVisible(false);
+                closeModal();
+            }
         }
+    }
+
+    const registrationNotification = () => {
+        const notification = document.querySelector("#error-email");
+        notification.textContent = "Email address is already taken";
     }
 
     const validateFirstName = (e) => {
