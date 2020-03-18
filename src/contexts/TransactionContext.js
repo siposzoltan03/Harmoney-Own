@@ -21,13 +21,23 @@ export const TransactionProvider = (props) => {
             .catch (e => console.log('Error:', e))
     };
 
-    const postTransaction = (data) => {
+    const postTransaction = async (data) => {
         
-        Axios.post(url, data, { headers: {
+        return await Axios.post(url, data, { headers: {
             'Content-Type': 'application/json',
         }})
-            .then(resp => setTransactions([...transactions, resp.data]))
-            .catch (e => console.log('Error:', e))
+            .then(resp => {
+                const transaction = resp.data;
+                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
+                    setTransactions([...transactions, resp.data]);
+                    return false;
+                }
+                return true;
+            })
+            .catch (e => {
+                console.log('Error:', e);
+                return true;
+            })
     };
 
     useEffect(() => {
