@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { userToJson } from "../../../utils/createjson";
+import { store } from "react-notifications-component";
 
 import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
 import { UserContext } from "../../../contexts/UserContext";
@@ -39,17 +40,32 @@ export function RegistrationModal(props) {
             const jsonData = userToJson(firstName, lastName, email, password);
             const registrationFailed = await postRegistration(jsonData);
             if (registrationFailed) {
-                registrationNotification();
+                registrationFailureNotification();
             } else {
-                setRegistrationModalIsVisible(false);
+                registrationSuccessNotification();
                 closeModal();
             }
         }
     }
 
-    const registrationNotification = () => {
+    const registrationFailureNotification = () => {
         const notification = document.querySelector("#error-email");
         notification.textContent = "Email address is already taken";
+    }
+
+    const registrationSuccessNotification = () => {
+        store.addNotification({
+            title: "Success!",
+            message: "You have successfully signed up",
+            type: "success",
+            insert: "top",
+            container: "bottom-right",
+            animationIn: ["animated", "flipInX"],
+            animationOut: ["animated", "flipOutX"],
+            dismiss: {
+                duration: 3000
+            }
+        });
     }
 
     const validateFirstName = (e) => {
