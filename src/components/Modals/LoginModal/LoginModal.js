@@ -33,7 +33,7 @@ export function LoginModal(props) {
 
     const loginNotification = () => {
         const notification = document.querySelector("#error-credentials");
-        notification.textContent = "Invalid credentials"
+        if (notification != null) notification.textContent = "Invalid credentials" // todo FIX
     }
 
     return (
