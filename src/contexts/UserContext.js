@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Axios from "axios";
 import Globals from "../utils/globals";
 
-const registrationUrl = Globals.fetchUrl + "/api/users/registration";
-const loginUrl = Globals.fetchUrl + "/api/users/login";
+const registrationUrl = Globals.fetchUrl + "/api/account/register";
+const loginUrl = Globals.fetchUrl + "/api/account/login";
 
 export const UserContext = React.createContext(undefined, undefined);
 
