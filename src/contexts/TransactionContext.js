@@ -75,6 +75,28 @@ export const TransactionProvider = (props) => {
             })
     };
 
+    const deleteTransaction = async (id ) => {
+
+        return await Axios.delete(url + id, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(resp => {
+                const transaction = resp.data;
+                const items = transactions.filter(item => item.id !== transaction.id);
+                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
+                    setTransactions(items);
+                    return false;
+                }
+                return true;
+            })
+            .catch(e => {
+                console.log('Error:', e);
+                return true;
+            })
+    };
+
     useEffect(() => {
         fetchTransactions()
     }, [transactions]);
@@ -91,7 +113,8 @@ export const TransactionProvider = (props) => {
             httpRequest: [httpRequest, setHttpRequest],
             getTransactions: fetchTransactions,
             postTransaction: postTransaction,
-            putTransaction: putTransaction
+            putTransaction: putTransaction,
+            deleteTransaction: deleteTransaction
         }}>
             {props.children}
         </TransactionContext.Provider>
