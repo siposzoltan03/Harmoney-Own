@@ -9,23 +9,30 @@ export const TransactionContext = React.createContext(undefined, undefined);
 export const TransactionProvider = (props) => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [title, setTitle] = useState("");
+    const [date, setDate] = useState(new Date());
+    const [amount, setAmount] = useState("");
+    const [frequency, setFrequency] = useState("Single");
+    const [httpRequest, setHttpRequest] = useState("");
 
     const fetchTransactions = () => {
-            
+
         setLoading(true);
         Axios.get(url)
             .then(resp => {
                 (setTransactions(resp.data));
                 setLoading(false)
             })
-            .catch (e => console.log('Error:', e))
+            .catch(e => console.log('Error:', e))
     };
 
     const postTransaction = async (data) => {
-        
-        return await Axios.post(url, data, { headers: {
-            'Content-Type': 'application/json',
-        }})
+
+        return await Axios.post(url, data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
             .then(resp => {
                 const transaction = resp.data;
                 if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
@@ -34,7 +41,7 @@ export const TransactionProvider = (props) => {
                 }
                 return true;
             })
-            .catch (e => {
+            .catch(e => {
                 console.log('Error:', e);
                 return true;
             })
@@ -44,11 +51,18 @@ export const TransactionProvider = (props) => {
         fetchTransactions()
     }, []);
 
-    return(
-        <TransactionContext.Provider value={{ transactions : [
-            transactions,
-            setTransactions
-        ], loading : [loading, setLoading], getTransactions: fetchTransactions, postTransaction: postTransaction }}>
+    return (
+        <TransactionContext.Provider value={{
+            transactions: [transactions, setTransactions],
+            loading: [loading, setLoading],
+            title: [title, setTitle],
+            date: [date, setDate],
+            amount: [amount, setAmount],
+            frequency: [frequency, setFrequency],
+            httpRequest: [httpRequest, setHttpRequest],
+            getTransactions: fetchTransactions,
+            postTransaction: postTransaction
+        }}>
             {props.children}
         </TransactionContext.Provider>
     )

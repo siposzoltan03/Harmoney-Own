@@ -1,23 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 import { transactionToJson } from "../../../utils/createjson";
 import TransactionForm from "../../Forms/TransactionForm/TransactionForm";
 import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
 import { TransactionContext } from "../../../contexts/TransactionContext";
-import {store} from "react-notifications-component";
+import { store } from "react-notifications-component";
 
 export default function TransactionModal(props) {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [amount, setAmount] = useState("");
-  const [frequency, setFrequency] = useState("Single");
-
+  const transactionContext = useContext(TransactionContext);
   const { transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
+
+  const [title, setTitle] = transactionContext.title;
+  const [amount, setAmount] = transactionContext.amount;
+  const [date, setDate] = transactionContext.date;
+  const [frequency, setFrequency] = transactionContext.frequency;
+
   const [transactionModalIsVisible, setTransactionModalIsVisible] = transactionModal;
   const transactionType = transactionModalType[0];
 
-  const transactionContext = useContext(TransactionContext);
   const postTransaction = transactionContext.postTransaction;
 
   const saveChanges = async () => {

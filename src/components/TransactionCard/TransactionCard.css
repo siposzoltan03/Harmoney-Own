@@ -5,7 +5,12 @@ h4.card-header {
     justify-content: space-between;
 }
 
-.transaction-delete:hover {
+.edit-delete-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.transaction-delete:hover, .transaction-edit:hover{
     color: #558A45;
     cursor: pointer;
 }
