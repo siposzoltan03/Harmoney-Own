@@ -9,6 +9,7 @@ export function transactionToJson(id, title, dueDate, amount, frequency, directi
         });
     } else {
         return JSON.stringify({
+            id: parseInt(id),
             title: title,
             dueDate: dueDate,
             amount: parseInt(amount),
