@@ -19,3 +19,9 @@
 #user-sign-out:hover {
     background: #004225;
 }
+
+@media screen and (max-width: 600px) {
+    #username, .fa-user {
+        display: none;
+    }
+}

@@ -15,23 +15,8 @@
 #topBar-title {
     z-index: 1007;
     font-family: 'Lobster', sans-serif;
-}
-
-.container {
-    padding: 0;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: calc(1em + 1vw);
-    position: relative;
-    left: 32px;
-}
-
-.row {
-    margin: 0;
-}
-
-.col{
-    margin: 0;
+    font-size: 40px;
+    padding-top: 5px;
 }
 
 #root > div > div.container > div:nth-child(1) > div > div {

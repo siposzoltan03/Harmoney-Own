@@ -1,5 +1,5 @@
 .card-text{
-    font-size: 120px;
+    font-size: 7vw;
     color: white;
 }
 
@@ -16,4 +16,5 @@
     background-color: #db3d44;
     position: relative;
     margin-top: 20px;
+    text-align: center;
 }

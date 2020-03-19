@@ -7,22 +7,25 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function TransactionForm(props) {
     return (
         <Form>
-            <Form.Group controlId="title">
+            <Form.Group controlId="formBasicTitle">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" maxLength={30} value={props.title} onChange={props.setTitle} />
+                <Form.Control type="text" value={props.title} onChange={props.setTitle} />
+                <Form.Text className="text-danger" id="error-title"/>
             </Form.Group>
 
-            <Form.Group controlId="date">
+            <Form.Group controlId="formBasicDate">
                 <Form.Label>Date</Form.Label>
                 <DatePicker selected={props.date} onChange={props.setDate} />
+                <Form.Text className="text-danger" id="error-date"/>
             </Form.Group>
 
-            <Form.Group controlId="amount">
+            <Form.Group controlId="formBasicAmount">
                 <Form.Label>Amount</Form.Label>
-                <Form.Control type="number" min={0} value={props.amount} onChange={props.setAmount}/>
+                <Form.Control type="text" value={props.amount} onChange={props.setAmount}/>
+                <Form.Text className="text-danger" id="error-amount"/>
             </Form.Group>
 
-            <Form.Group controlId="frequency">
+            <Form.Group controlId="formBasicFrequency">
                 <Form.Label>Frequency</Form.Label>
                 <Form.Control as="select" value={props.frequency} onChange={props.setFrequency}>
                     <option>Single</option>
