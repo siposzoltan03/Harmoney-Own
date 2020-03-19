@@ -10,6 +10,7 @@ import "./TransactionCard.css"
 import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
 import {TransactionContext} from "../../contexts/TransactionContext";
+import {store} from "react-notifications-component";
 
 const Amount = styled.div`
     color: ${prop => prop.direction === "Income" ? 'green' : 'red'}
@@ -24,6 +25,8 @@ function TransactionCard(transaction) {
     const setDate = transactionContext.date[1];
     const setFrequency = transactionContext.frequency[1];
     const setHttpRequest = transactionContext.httpRequest[1];
+
+    const deleteTransaction = transactionContext.deleteTransaction;
 
     const transactionModal = useContext(ModalVisibilityContext).transactionModal;
     const transactionModalType = useContext(ModalVisibilityContext).transactionModalType;
@@ -42,13 +45,37 @@ function TransactionCard(transaction) {
         setTransactionModalIsVisible(true);
     };
 
+    const deleteHandler = async () => {
+        const transactionFailed = await deleteTransaction(transaction.id);
+        if (transactionFailed) {
+            showTransactionNotification("failure")
+        } else {
+            showTransactionNotification("success")
+        }
+    };
+
+    const showTransactionNotification = (type) => {
+        store.addNotification({
+            title: type === "success" ? "Success!" : "Error!",
+            message: type === "success" ? "The transaction has been deleted" : "The transaction couldn't be deleted",
+            type: type === "success" ? "success" : "danger",
+            insert: "top",
+            container: "bottom-right",
+            animationIn: ["animated", "flipInX"],
+            animationOut: ["animated", "flipOutX"],
+            dismiss: {
+                duration: 3000
+            }
+        });
+    };
+
     return (
         <Card>
             <Card.Header as="h4">
                 <div className="transaction-title">{transaction.title}</div>
                 <div className="edit-delete-container">
                     <div className="transaction-edit"><EditOutlined onClick={editHandler} /></div>
-                    <div className="transaction-delete" ><CloseSquareOutlined /></div>
+                    <div className="transaction-delete" ><CloseSquareOutlined onClick={deleteHandler} /></div>
                 </div>
             </Card.Header>
             <Card.Body as="h5">
