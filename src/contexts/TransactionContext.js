@@ -9,6 +9,7 @@ export const TransactionContext = React.createContext(undefined, undefined);
 export const TransactionProvider = (props) => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [id, setId] = useState(null);
     const [title, setTitle] = useState("");
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState("");
@@ -82,6 +83,7 @@ export const TransactionProvider = (props) => {
         <TransactionContext.Provider value={{
             transactions: [transactions, setTransactions],
             loading: [loading, setLoading],
+            id: [id, setId],
             title: [title, setTitle],
             date: [date, setDate],
             amount: [amount, setAmount],
