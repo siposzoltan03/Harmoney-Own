@@ -4,6 +4,7 @@ import Globals from "../utils/globals";
 
 const registrationUrl = Globals.fetchUrl + "/api/account/register";
 const loginUrl = Globals.fetchUrl + "/api/account/login";
+const logoutUrl = Globals.fetchUrl + "/api/account/logout";
 
 export const UserContext = React.createContext(undefined, undefined);
 
@@ -15,10 +16,7 @@ export const UserProvider = (props) => {
             'Content-Type': 'application/json',
         }})
         .then(resp => {
-            if (resp.data.firstName && resp.data.lastName && resp.data.email && resp.data.email === JSON.parse(data).email) {
-                return false;
-            }
-            return true;
+            return !(resp.data.firstName && resp.data.lastName && resp.data.email && resp.data.email === JSON.parse(data).email);
         })
         .catch (e => {
             console.log('Error:', e);
@@ -27,6 +25,7 @@ export const UserProvider = (props) => {
     }
 
     const postLogin = async (data) => {
+        console.log(data);
         return await Axios.post(loginUrl, data, { headers: {
             'Content-Type': 'application/json',
         }})
@@ -43,8 +42,21 @@ export const UserProvider = (props) => {
         })
     }
 
+    const postLogout = async (data) => {
+        return await Axios.post(logoutUrl, data, { headers: {
+                'Content-Type': 'application/json',
+            }})
+            .then(resp => {
+                return false;
+            })
+            .catch (e => {
+                console.log('Error:', e);
+                return true;
+            })
+    }
+
     return (
-        <UserContext.Provider value={{ user : [user, setUser ], registration: postRegistration, login: postLogin }}>
+        <UserContext.Provider value={{ user : [user, setUser ], registration: postRegistration, login: postLogin, logout: postLogout }}>
             {props.children}
         </UserContext.Provider>
     )
