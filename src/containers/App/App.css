@@ -12,5 +12,7 @@
 #topBar-title {
     z-index: 1007;
     font-family: 'Lobster', sans-serif;
+    font-size: 40px;
+    padding-top: 5px;
 }
 
