@@ -34,7 +34,6 @@ function TransactionCard(transaction) {
     const setTransactionType = transactionModalType[1];
 
     const editHandler = () => {
-        console.log(transaction.date);
         setId(transaction.id);
         setTitle(transaction.title);
         setAmount(transaction.amount);
@@ -53,6 +52,18 @@ function TransactionCard(transaction) {
             showTransactionNotification("success")
         }
     };
+
+    const formatDate = (date) => {
+        if (date == null) return "";
+        let dateDate = new Date(date); // todo FIXXX
+        return `
+            ${dateDate.getFullYear()}.${str_pad(dateDate.getMonth() + 1)}.${dateDate.getDate()}.
+        `
+    }
+
+    function str_pad(n) {
+        return String("00" + n).slice(-2);
+    }
 
     const showTransactionNotification = (type) => {
         store.addNotification({
@@ -84,7 +95,7 @@ function TransactionCard(transaction) {
             </Card.Body>
             <Card.Footer as="h6">
                 <div className="transaction-tags">Tags</div>
-                <div className="transaction-date">{(transaction.date || " ").slice(0, 10)}</div>
+                <div className="transaction-date">{formatDate(transaction.date)}</div>
             </Card.Footer>
         </Card>
     );
