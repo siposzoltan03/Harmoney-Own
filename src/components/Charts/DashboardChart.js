@@ -41,11 +41,22 @@ const DashboardChart = () => {
         ],
     };
 
+    const options = {
+        legend: {
+            labels: {
+                // This more specific font property overrides the global property
+                fontColor: 'white',
+                fontSize: 20,
+                fontFamily: "'Open Sans', sans-serif"
+            }
+        }
+    }
+
     return (
         <Card>
             <Card.Body>
                 <Card.Title>Cashflow ratio</Card.Title>
-                <Doughnut data={data}/>
+                <Doughnut data={data} options={options}/>
             </Card.Body>
         </Card>
     );
