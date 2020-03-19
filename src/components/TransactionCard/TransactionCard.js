@@ -9,18 +9,35 @@ import CaretDownOutlined from "@ant-design/icons/lib/icons/CaretDownOutlined";
 import "./TransactionCard.css"
 import {ModalVisibilityContext} from "../../contexts/ModalVisibilityContext";
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
+import {TransactionContext} from "../../contexts/TransactionContext";
 
 const Amount = styled.div`
     color: ${prop => prop.direction === "Income" ? 'green' : 'red'}
 `;
 
 function TransactionCard(transaction) {
+    const transactionContext = useContext(TransactionContext);
+
+    const setId = transactionContext.id[1];
+    const setTitle = transactionContext.title[1];
+    const setAmount = transactionContext.amount[1];
+    const setDate = transactionContext.date[1];
+    const setFrequency = transactionContext.frequency[1];
+    const setHttpRequest = transactionContext.httpRequest[1];
+
     const transactionModal = useContext(ModalVisibilityContext).transactionModal;
     const transactionModalType = useContext(ModalVisibilityContext).transactionModalType;
     const setTransactionModalIsVisible = transactionModal[1];
     const setTransactionType = transactionModalType[1];
 
     const editHandler = () => {
+        console.log(transaction.date);
+        setId(transaction.id);
+        setTitle(transaction.title);
+        setAmount(transaction.amount);
+        setDate(new Date(transaction.date));
+        setFrequency(transaction.frequency);
+        setHttpRequest("PUT");
         setTransactionType(transaction.direction);
         setTransactionModalIsVisible(true);
     };
