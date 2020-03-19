@@ -11,6 +11,7 @@ export default function TransactionModal(props) {
   const transactionContext = useContext(TransactionContext);
   const { transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
 
+  const [id, setId] = transactionContext.id;
   const [title, setTitle] = transactionContext.title;
   const [amount, setAmount] = transactionContext.amount;
   const [date, setDate] = transactionContext.date;
@@ -21,6 +22,7 @@ export default function TransactionModal(props) {
   const transactionType = transactionModalType[0];
 
   const postTransaction = transactionContext.postTransaction;
+  const putTransaction = transactionContext.putTransaction;
 
   const saveChanges = async () => {
     const titleIsValid = validTitle();
@@ -28,8 +30,8 @@ export default function TransactionModal(props) {
     const amountIsValid = validAmount();
     let submittable = titleIsValid && dateIsValid && amountIsValid;
     if (submittable) {
-      const jsonData = transactionToJson(title, date, parseInt(amount), frequency, transactionType);
-      const transactionFailed = await postTransaction(jsonData);
+      const jsonData = transactionToJson(id, title, date, amount, frequency, transactionType);
+      const transactionFailed = httpRequest === "POST" ? await postTransaction(jsonData) : await putTransaction(jsonData);
       if (transactionFailed) {
         showTransactionNotification("failure")
       } else {
@@ -41,6 +43,7 @@ export default function TransactionModal(props) {
 
   const closeModal = () => {
     setTransactionModalIsVisible(false);
+    setId(null);
     setTitle("");
     setDate(new Date());
     setAmount("");
