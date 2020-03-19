@@ -57,14 +57,8 @@ export const TransactionProvider = (props) => {
         })
             .then(resp => {
                 const transaction = resp.data;
-                const items = [...transactions];
                 if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
-                    for (let item of items) {
-                        if (item.id === transaction.id) {
-                            item = transaction;
-                        }
-                    }
-                    setTransactions(items);
+                    fetchTransactions();
                     return false;
                 }
                 return true;
@@ -84,9 +78,8 @@ export const TransactionProvider = (props) => {
         })
             .then(resp => {
                 const transaction = resp.data;
-                const items = transactions.filter(item => item.id !== transaction.id);
                 if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
-                    setTransactions(items);
+                    fetchTransactions();
                     return false;
                 }
                 return true;
@@ -99,7 +92,7 @@ export const TransactionProvider = (props) => {
 
     useEffect(() => {
         fetchTransactions()
-    }, [transactions]);
+    }, []);
 
     return (
         <TransactionContext.Provider value={{
