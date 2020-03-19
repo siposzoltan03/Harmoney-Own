@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Axios from "axios";
 import Globals from "../utils/globals";
 
-const url = Globals.fetchUrl + "/api/transactions";
+const url = Globals.fetchUrl + "/api/transactions/";
 
 export const TransactionContext = React.createContext(undefined, undefined);
 
@@ -47,6 +47,33 @@ export const TransactionProvider = (props) => {
             })
     };
 
+    const putTransaction = async (data, id ) => {
+
+        return await Axios.put(url + id, data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(resp => {
+                const transaction = resp.data;
+                const items = [...transactions];
+                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
+                    for (let item of items) {
+                        if (item.id === transaction.id) {
+                            item = transaction;
+                        }
+                    }
+                    setTransactions(items);
+                    return false;
+                }
+                return true;
+            })
+            .catch(e => {
+                console.log('Error:', e);
+                return true;
+            })
+    };
+
     useEffect(() => {
         fetchTransactions()
     }, []);
@@ -61,7 +88,8 @@ export const TransactionProvider = (props) => {
             frequency: [frequency, setFrequency],
             httpRequest: [httpRequest, setHttpRequest],
             getTransactions: fetchTransactions,
-            postTransaction: postTransaction
+            postTransaction: postTransaction,
+            putTransaction: putTransaction
         }}>
             {props.children}
         </TransactionContext.Provider>
