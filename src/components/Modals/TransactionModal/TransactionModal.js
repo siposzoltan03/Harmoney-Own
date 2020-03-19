@@ -15,6 +15,7 @@ export default function TransactionModal(props) {
   const [amount, setAmount] = transactionContext.amount;
   const [date, setDate] = transactionContext.date;
   const [frequency, setFrequency] = transactionContext.frequency;
+  const [httpRequest, setHttpRequest] = transactionContext.httpRequest;
 
   const [transactionModalIsVisible, setTransactionModalIsVisible] = transactionModal;
   const transactionType = transactionModalType[0];
@@ -44,6 +45,7 @@ export default function TransactionModal(props) {
     setDate(new Date());
     setAmount("");
     setFrequency("Single");
+    setHttpRequest("");
   }
 
   const validateTitle = (e) => {
@@ -130,7 +132,7 @@ export default function TransactionModal(props) {
       <Modal show={transactionModalIsVisible} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {transactionType === "Income" ?
+            {httpRequest === "PUT" ? `Edit ${title}` : transactionType === "Income" ?
               "Add new Income" :
               "Add new Expenditure"}
           </Modal.Title>
