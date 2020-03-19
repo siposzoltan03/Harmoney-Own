@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import "./Balance.css";
 import './Balance.css';
 import Card from "react-bootstrap/Card";
-import NumberFormater from "../../utils/NumberFormater";
+import NumberFormatter from "../../utils/NumberFormatter";
 import {TransactionContext} from "../../contexts/TransactionContext";
 
 
@@ -17,7 +17,7 @@ const Balance = () => {
         <Card>
             <Card.Body>
                 <Card.Title>Actual Balance</Card.Title>
-                <Card.Text>{NumberFormater.formatBalance(sum)} Ft</Card.Text>
+                <Card.Text>{NumberFormatter.formatBalance(sum)} Ft</Card.Text>
             </Card.Body>
         </Card>
     );
