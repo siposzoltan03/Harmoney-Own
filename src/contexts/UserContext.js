@@ -25,7 +25,6 @@ export const UserProvider = (props) => {
     }
 
     const postLogin = async (data) => {
-        console.log(data);
         return await Axios.post(loginUrl, data, { headers: {
             'Content-Type': 'application/json',
         }})
