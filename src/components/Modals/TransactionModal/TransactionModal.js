@@ -93,6 +93,7 @@ export default function TransactionModal(props) {
     setAmount(e.target.value);
     validAmount();
   }
+
   const showTransactionNotification = (type) => {
     store.addNotification({
       title: type === "success" ? "Success!" : "Error!",
