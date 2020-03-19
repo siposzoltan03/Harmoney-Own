@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {Card} from "react-bootstrap";
-import NumberFormater from "../../utils/NumberFormater";
+import NumberFormatter from "../../utils/NumberFormatter";
 import CaretUpOutlined from "@ant-design/icons/lib/icons/CaretUpOutlined";
 import CloseSquareOutlined from "@ant-design/icons/lib/icons/CloseSquareOutlined";
 import CaretDownOutlined from "@ant-design/icons/lib/icons/CaretDownOutlined";
@@ -21,7 +21,7 @@ function TransactionCard(transaction) {
             </Card.Header>
             <Card.Body as="h5">
                 <Amount className="transaction-direction" direction={transaction.direction}>{transaction.direction === "Income" ? <CaretUpOutlined /> : <CaretDownOutlined />}</Amount>
-                <Amount className="transaction-amount" direction={transaction.direction}>{NumberFormater.formatBalance(transaction.amount)} Ft</Amount>
+                <Amount className="transaction-amount" direction={transaction.direction}>{NumberFormatter.formatBalance(transaction.amount)} Ft</Amount>
             </Card.Body>
             <Card.Footer as="h6">
                 <div className="transaction-tags">Tags</div>

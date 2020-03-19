@@ -9,6 +9,9 @@ import {TransactionProvider} from "../../contexts/TransactionContext";
 import {UserProvider} from "../../contexts/UserContext";
 import User from "../../components/User/User";
 import Content from "../Content/Content";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import "animate.css";
 
 
 function App() {
@@ -17,6 +20,7 @@ function App() {
         <UserProvider>
         <ModalVisibilityContextProvider>
             <div className="App">
+                <ReactNotification/>
                 <TopBar className="justify-content-center ml-32">
                     <h1 id="topBar-title">Harmoney</h1>
                     <User/>
