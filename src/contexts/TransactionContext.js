@@ -77,7 +77,7 @@ export const TransactionProvider = (props) => {
 
     useEffect(() => {
         fetchTransactions()
-    }, []);
+    }, [transactions]);
 
     return (
         <TransactionContext.Provider value={{
