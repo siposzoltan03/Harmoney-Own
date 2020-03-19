@@ -11,15 +11,18 @@ export default function TransactionModal(props) {
   const transactionContext = useContext(TransactionContext);
   const { transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
 
+  const [id, setId] = transactionContext.id;
   const [title, setTitle] = transactionContext.title;
   const [amount, setAmount] = transactionContext.amount;
   const [date, setDate] = transactionContext.date;
   const [frequency, setFrequency] = transactionContext.frequency;
+  const [httpRequest, setHttpRequest] = transactionContext.httpRequest;
 
   const [transactionModalIsVisible, setTransactionModalIsVisible] = transactionModal;
   const transactionType = transactionModalType[0];
 
   const postTransaction = transactionContext.postTransaction;
+  const putTransaction = transactionContext.putTransaction;
 
   const saveChanges = async () => {
     const titleIsValid = validTitle();
@@ -27,8 +30,8 @@ export default function TransactionModal(props) {
     const amountIsValid = validAmount();
     let submittable = titleIsValid && dateIsValid && amountIsValid;
     if (submittable) {
-      const jsonData = transactionToJson(title, date, parseInt(amount), frequency, transactionType);
-      const transactionFailed = await postTransaction(jsonData);
+      const jsonData = transactionToJson(id, title, date, amount, frequency, transactionType);
+      const transactionFailed = httpRequest === "POST" ? await postTransaction(jsonData) : await putTransaction(jsonData, id);
       if (transactionFailed) {
         showTransactionNotification("failure")
       } else {
@@ -40,10 +43,12 @@ export default function TransactionModal(props) {
 
   const closeModal = () => {
     setTransactionModalIsVisible(false);
+    setId(null);
     setTitle("");
     setDate(new Date());
     setAmount("");
     setFrequency("Single");
+    setHttpRequest("");
   }
 
   const validateTitle = (e) => {
@@ -88,6 +93,7 @@ export default function TransactionModal(props) {
     setAmount(e.target.value);
     validAmount();
   }
+
   const showTransactionNotification = (type) => {
     store.addNotification({
       title: type === "success" ? "Success!" : "Error!",
@@ -130,7 +136,7 @@ export default function TransactionModal(props) {
       <Modal show={transactionModalIsVisible} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {transactionType === "Income" ?
+            {httpRequest === "PUT" ? `Edit ${title}` : transactionType === "Income" ?
               "Add new Income" :
               "Add new Expenditure"}
           </Modal.Title>

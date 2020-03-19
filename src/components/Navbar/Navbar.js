@@ -11,8 +11,10 @@ import "./Navbar.css"
 import React, { useContext } from "react";
 import { ModalVisibilityContext } from "../../contexts/ModalVisibilityContext";
 import {UserContext} from "../../contexts/UserContext";
+import {TransactionContext} from "../../contexts/TransactionContext";
 
 export const Navbar = () => {
+  const transactionContext = useContext(TransactionContext);
   const { regModal, logModal, transactionModal, transactionModalType } = useContext(ModalVisibilityContext);
   const setRegistrationModalIsVisible = regModal[1];
   const setLoginModalIsVisible = logModal[1];
@@ -20,6 +22,7 @@ export const Navbar = () => {
   const setTransactionType = transactionModalType[1];
   const { user } = useContext(UserContext);
   const userLoggedIn = user[0];
+  const setHttpRequest = transactionContext.httpRequest[1];
 
   return (
     <SideNav
@@ -36,10 +39,12 @@ export const Navbar = () => {
           case "income":
             setTransactionType("Income");
             setTransactionModalIsVisible(true);
+            setHttpRequest("POST");
             break;
           case "expenditure":
             setTransactionType("Expenditure");
             setTransactionModalIsVisible(true);
+            setHttpRequest("POST");
             break;
           default:
           // code block

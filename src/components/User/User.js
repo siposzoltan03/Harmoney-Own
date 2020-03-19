@@ -4,9 +4,17 @@ import { Button } from 'react-bootstrap';
 import "./User.css"
 
 export function User() {
-    const { user } = useContext(UserContext);
+    const { user, logout } = useContext(UserContext);
     const [userLoggedIn, setUserLoggedIn] = user;
-    const handleLogout = () => setUserLoggedIn(null);
+
+    const handleLogout = async () => {
+        const data = JSON.stringify(userLoggedIn);
+        console.log(data);
+        const logoutFailed = await logout(data);
+        if (!logoutFailed) {
+            setUserLoggedIn(null)
+        }
+    }
 
     if (userLoggedIn) {
         return(
