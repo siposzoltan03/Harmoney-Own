@@ -31,7 +31,7 @@ export default function TransactionModal(props) {
     let submittable = titleIsValid && dateIsValid && amountIsValid;
     if (submittable) {
       const jsonData = transactionToJson(id, title, date, amount, frequency, transactionType);
-      const transactionFailed = httpRequest === "POST" ? await postTransaction(jsonData) : await putTransaction(jsonData);
+      const transactionFailed = httpRequest === "POST" ? await postTransaction(jsonData) : await putTransaction(jsonData, id);
       if (transactionFailed) {
         showTransactionNotification("failure")
       } else {
