@@ -3,9 +3,11 @@
 .nav {
     background: #004225;
     height: 64px;
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
+    top: 0;
+    z-index: 1000;
 }
 
 .ml-32 {
