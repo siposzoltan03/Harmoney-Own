@@ -24,4 +24,23 @@
     #username, .fa-user {
         display: none;
     }
+
+    #user-sign-out {
+        font-size: 15px;
+    }
+
+    .user {
+        padding-top: 15px;
+    }
+
+    @media screen and (max-width: 375px) {
+
+        #user-sign-out {
+            font-size: 11px;
+        }
+
+        .user {
+            padding-top: 18px;
+        }
+    }
 }
