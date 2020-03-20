@@ -9,7 +9,6 @@ export function User() {
 
     const handleLogout = async () => {
         const data = JSON.stringify(userLoggedIn);
-        console.log(data);
         const logoutFailed = await logout(data);
         if (!logoutFailed) {
             setUserLoggedIn(null)

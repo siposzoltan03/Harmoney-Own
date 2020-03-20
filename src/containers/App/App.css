@@ -3,9 +3,11 @@
 .nav {
     background: #004225;
     height: 64px;
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
+    top: 0;
+    z-index: 1000;
 }
 
 .ml-32 {
@@ -23,3 +25,24 @@
     margin-top: 100px
 }
 
+.card-title{
+    color: white;
+    font-size: 30px;
+}
+
+.card{
+    border-radius: 5px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    background-color: #db3d44;
+    position: relative;
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media screen and (max-width: 375px) {
+    h1 {
+        margin-right: 60px;
+    }
+}

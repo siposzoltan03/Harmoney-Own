@@ -2,19 +2,3 @@
     font-size: 7vw;
     color: white;
 }
-
-.card-title{
-    color: white;
-    font-size: 30px;
-}
-
-.card{
-    border-radius: 5px;
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    background-color: #db3d44;
-    position: relative;
-    margin-top: 20px;
-    text-align: center;
-}
