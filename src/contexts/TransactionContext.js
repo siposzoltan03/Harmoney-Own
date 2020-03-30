@@ -14,6 +14,7 @@ export const TransactionProvider = (props) => {
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState("");
     const [frequency, setFrequency] = useState("Single");
+    const [category, setCategory] = useState("Other");
     const [httpRequest, setHttpRequest] = useState("");
 
     const fetchTransactions = () => {
@@ -57,7 +58,7 @@ export const TransactionProvider = (props) => {
         })
             .then(resp => {
                 const transaction = resp.data;
-                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
+                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction && transaction.category) {
                     fetchTransactions();
                     return false;
                 }
@@ -78,7 +79,7 @@ export const TransactionProvider = (props) => {
         })
             .then(resp => {
                 const transaction = resp.data;
-                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
+                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction && transaction.category) {
                     fetchTransactions();
                     return false;
                 }
@@ -103,6 +104,7 @@ export const TransactionProvider = (props) => {
             date: [date, setDate],
             amount: [amount, setAmount],
             frequency: [frequency, setFrequency],
+            category: [category, setCategory],
             httpRequest: [httpRequest, setHttpRequest],
             getTransactions: fetchTransactions,
             postTransaction: postTransaction,
