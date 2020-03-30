@@ -3,6 +3,11 @@
 .nav {
     background: #004225;
     height: 64px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
 }
 
 .ml-32 {
@@ -12,22 +17,32 @@
 #topBar-title {
     z-index: 1007;
     font-family: 'Lobster', sans-serif;
+    font-size: 40px;
+    padding-top: 5px;
 }
 
-.container {
-    padding: 0;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: calc(1em + 1vw);
+#root > div > div.container > div:nth-child(1) > div > div {
+    margin-top: 100px
+}
+
+.card-title{
+    color: white;
+    font-size: 30px;
+}
+
+.card{
+    border-radius: 5px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    background-color: #db3d44;
     position: relative;
-    left: 32px;
+    margin-top: 20px;
+    text-align: center;
 }
 
-.row {
-    margin: 0;
+@media screen and (max-width: 375px) {
+    h1 {
+        margin-right: 60px;
+    }
 }
-
-.col{
-    margin: 0;
-}
-
