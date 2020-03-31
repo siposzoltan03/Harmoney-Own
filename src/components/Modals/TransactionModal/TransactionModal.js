@@ -16,6 +16,7 @@ export default function TransactionModal(props) {
   const [amount, setAmount] = transactionContext.amount;
   const [date, setDate] = transactionContext.date;
   const [frequency, setFrequency] = transactionContext.frequency;
+  const [category, setCategory] = transactionContext.category;
   const [httpRequest, setHttpRequest] = transactionContext.httpRequest;
 
   const [transactionModalIsVisible, setTransactionModalIsVisible] = transactionModal;
@@ -30,7 +31,7 @@ export default function TransactionModal(props) {
     const amountIsValid = validAmount();
     let submittable = titleIsValid && dateIsValid && amountIsValid;
     if (submittable) {
-      const jsonData = transactionToJson(id, title, date, amount, frequency, transactionType);
+      const jsonData = transactionToJson(id, title, date, amount, frequency, transactionType, category);
       const transactionFailed = httpRequest === "POST" ? await postTransaction(jsonData) : await putTransaction(jsonData, id);
       if (transactionFailed) {
         showTransactionNotification("failure")
@@ -48,13 +49,14 @@ export default function TransactionModal(props) {
     setDate(new Date());
     setAmount("");
     setFrequency("Single");
+    setCategory("Other");
     setHttpRequest("");
-  }
+  };
 
   const validateTitle = (e) => {
     setTitle(e.target.value);
     validTitle();
-  }
+  };
 
   const validTitle = () => {
     const currentTitle = document.querySelector("#formBasicTitle").value;
@@ -69,7 +71,7 @@ export default function TransactionModal(props) {
     }
     notification.textContent = "";
     return true;
-  }
+  };
 
   const validDate = () => {
     const currentDate = date;
@@ -87,12 +89,12 @@ export default function TransactionModal(props) {
     }
     notification.textContent = "";
     return true;
-  }
+  };
 
   const validateAmount = (e) => {
     setAmount(e.target.value);
     validAmount();
-  }
+  };
 
   const showTransactionNotification = (type) => {
     store.addNotification({
@@ -151,6 +153,9 @@ export default function TransactionModal(props) {
             setAmount={validateAmount}
             frequency={frequency}
             setFrequency={(e) => setFrequency(e.target.value)}
+            category={category}
+            setCategory={(e) => setCategory(e.target.value)}
+            transactionType={transactionType}
           />
         </Modal.Body>
         <Modal.Footer>

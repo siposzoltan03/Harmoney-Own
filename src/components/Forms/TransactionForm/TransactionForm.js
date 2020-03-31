@@ -34,6 +34,33 @@ export default function TransactionForm(props) {
                     <option>Yearly</option>
                 </Form.Control>
             </Form.Group>
+            <Form.Group controlId="formBasicCategory">
+                <Form.Label>Category</Form.Label>
+                { props.transactionType === "Income" ?
+                <Form.Control as="select" value={props.category} onChange={props.setCategory}>
+                    <option>Extra</option>
+                    <option>Gift</option>
+                    <option>Heritage</option>
+                    <option>Increment</option>
+                    <option>Other</option>
+                    <option>Prize</option>
+                    <option>Salary</option>
+                </Form.Control> :
+                    <Form.Control as="select" value={props.category} onChange={props.setCategory}>
+                        <option>Education</option>
+                        <option>Entertainment</option>
+                        <option>Groceries</option>
+                        <option>Health</option>
+                        <option>Household</option>
+                        <option>Insurance</option>
+                        <option>Investment</option>
+                        <option>Kids</option>
+                        <option>Other</option>
+                        <option>Pets</option>
+                        <option>Sport</option>
+                        <option>Transportation</option>
+                    </Form.Control>}
+            </Form.Group>
         </Form>
     )
 }
