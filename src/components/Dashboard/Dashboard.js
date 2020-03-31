@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Balance from "../Balance/Balance";
-import DashboardChart from "../Charts/DashboardChart";
+import BalanceChart from "../Charts/BalanceChart";
 import ExpenditureChart from "../Charts/ExpenditureChart";
 import TransactionsList from "../TransactionsList/TransactionsList";
 import IncomeChart from "../Charts/IncomeChart";
@@ -34,7 +34,7 @@ function Dashboard() {
                     xl={colPosition}
                     xs={colPosition}
                 >
-                    <DashboardChart/>
+                    <BalanceChart/>
                     <ExpenditureChart/>
                     <IncomeChart/>
                 </Col>
