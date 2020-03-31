@@ -33,19 +33,8 @@ function Dashboard() {
                     xl={colPosition}
                     xs={colPosition}
                 >
-                    <ExpenditureChart/>
-                </Col>
-            </Row>
-            <Row>
-                <Col
-                    lg={colPosition}
-                    md={colPosition}
-                    sm={colPosition}
-                    xl={colPosition}
-                    xs={colPosition}
-                >
                     <DashboardChart/>
-
+                    <ExpenditureChart/>
                 </Col>
                 <Col
                     lg={colPosition}
