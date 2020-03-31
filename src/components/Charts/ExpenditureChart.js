@@ -78,13 +78,16 @@ const ExpenditureChart = () => {
         }],
         labels: [
             "Education", "Entertainment", "Groceries", "Health", "Household", "Insurance", "Investment", "Kids", "Other",
-            "Pets", "Sport", "transportation"
+            "Pets", "Sport", "Transportation"
         ],
     };
 
     const options = {
+        responsive: true,
         legend: {
+            position: 'left',
             labels: {
+                boxWidth: 20,
                 fontColor: 'white',
                 fontSize: 20,
                 fontFamily: "'Open Sans', sans-serif"
@@ -96,7 +99,7 @@ const ExpenditureChart = () => {
         <Card>
             <Card.Body>
                 <Card.Title>Expenditures</Card.Title>
-                <Doughnut data={data} options={options}/>
+                <Doughnut data={data} options={options} height={400}/>
             </Card.Body>
         </Card>
     );
