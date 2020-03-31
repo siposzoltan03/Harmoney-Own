@@ -3,7 +3,7 @@ import { Doughnut } from 'react-chartjs-2';
 import Card from "react-bootstrap/Card";
 import {TransactionContext} from "../../contexts/TransactionContext";
 
-const DashboardChart = () => {
+const BalanceChart = () => {
     const appContext = useContext(TransactionContext);
     const transactions = appContext.transactions[0];
     let income = 0;
@@ -50,9 +50,4 @@ const DashboardChart = () => {
     );
 };
 
-
-
-
-
-
-export default DashboardChart;
+export default BalanceChart;
