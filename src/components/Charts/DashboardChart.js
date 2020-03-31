@@ -3,38 +3,27 @@ import { Doughnut } from 'react-chartjs-2';
 import Card from "react-bootstrap/Card";
 import {TransactionContext} from "../../contexts/TransactionContext";
 
-let Income = 0;
-let Expenditure = 0;
-
 const DashboardChart = () => {
     const appContext = useContext(TransactionContext);
     const transactions = appContext.transactions[0];
-    Income = 0;
-    Expenditure = 0;
+    let income = 0;
+    let expenditure = 0;
     transactions.forEach(function (transaction) {
         if (transaction.direction === 'Income') {
-            Income += transaction.amount;
+            income += transaction.amount;
         }else{
-            Expenditure += transaction.amount;
+            expenditure += transaction.amount;
         }
     });
 
     const data = {
         datasets: [{
-            data: [ Income  ,Expenditure],
+            data: [ income, expenditure],
             backgroundColor:[
                 '#004225',
                 '#600000'
-            ],
-            options: {
-                plugins:{
-                fontSize: "120px",
-                color: 'yellow'
-                }
-            }
+            ]
         }],
-
-        // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
             'Income',
             'Expenditure',
@@ -44,13 +33,12 @@ const DashboardChart = () => {
     const options = {
         legend: {
             labels: {
-                // This more specific font property overrides the global property
                 fontColor: 'white',
                 fontSize: 20,
                 fontFamily: "'Open Sans', sans-serif"
             }
         }
-    }
+    };
 
     return (
         <Card>
