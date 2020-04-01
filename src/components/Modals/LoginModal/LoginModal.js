@@ -5,6 +5,8 @@ import { userToJsonLogin } from "../../../utils/createjson";
 import { UserContext } from "../../../contexts/UserContext";
 import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
 import { LoginForm } from "../../Forms/LoginForm/LoginForm";
+import {TransactionContext} from "../../../contexts/TransactionContext";
+
 
 export function LoginModal(props) {
     const [email, setEmail] = useState("");
@@ -15,6 +17,8 @@ export function LoginModal(props) {
 
     const userContext = useContext(UserContext);
     const postLogin = userContext.login;
+    const transactionsContext = useContext(TransactionContext);
+
 
     const closeModal = () => {
         setLoginModalIsVisible(false);
@@ -28,6 +32,7 @@ export function LoginModal(props) {
             loginNotification();
         } else {
             closeModal();
+            transactionsContext.getTransactions();
         }
     }
 
