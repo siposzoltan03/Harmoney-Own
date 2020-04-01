@@ -48,7 +48,7 @@ function WelcomePage(props) {
                      sm={colPosition}
                      xl={colPosition}
                      xs={colPosition}>
-                    <img src={income} alt="expenditures" className="feature-image" />
+                    <img src={income} alt="income" className="feature-image" />
                 </Col>
                 <Col className="feature-text" lg={colPosition}
                      md={colPosition}
@@ -76,7 +76,7 @@ function WelcomePage(props) {
                      sm={colPosition}
                      xl={colPosition}
                      xs={colPosition}>
-                    <img src={ratio} alt="expenditures" className="feature-image" />
+                    <img src={ratio} alt="ratio" className="feature-image" />
                 </Col>
             </Row>
             <Row className="feature-row">
@@ -85,7 +85,7 @@ function WelcomePage(props) {
                      sm={colPosition}
                      xl={colPosition}
                      xs={colPosition}>
-                    <img src={transactions} alt="expenditures" className="feature-image" />
+                    <img src={transactions} alt="transactions" className="feature-image" />
                 </Col>
                 <Col className="feature-text" lg={colPosition}
                      md={colPosition}
