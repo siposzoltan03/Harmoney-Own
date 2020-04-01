@@ -4,36 +4,98 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import "./WelcomePage.css"
-import Card from "react-bootstrap/Card";
+import expenditures from "../../images/expenditures.jpg";
+import income from "../../images/incomes.jpg";
+import ratio from "../../images/ratio.jpg";
+import transactions from "../../images/transactions.jpg";
 
 const colPosition = {span: true, offset: 3};
 
 function WelcomePage(props) {
     return (
-        <Container>
-            <Row>
+        <Container className="feature-container">
+            <Row id="welcome-text" className="feature-row" >
                 <Col lg={colPosition}
                      md={colPosition}
                      sm={colPosition}
                      xl={colPosition}
                      xs={colPosition}>
-                    <Card>
-                        <Card.Header as="h1">Welcome</Card.Header>
-                        <Card.Body>
-                            <Card.Title>Lórem Ipse</Card.Title>
-                            <Card.Text id="welcome-text">
-                                Lórum ipse mint gyatos lező bulás, elsősorban egy főző fűző. A fordéka után így a
-                                csikáriák csingítették a kordozás runcik klitás bá ' pingos zendra tronát. Holóriával
-                                moccannak továbbá a téző ceánynak, akik öntő mékfelettel vartozással meretin padékot
-                                kutámlnak a keztet rajzsaihoz. Öntő vasárnap (bogadázás 14.30) lefág kodál érségbe.
-                                Bályka 20-án 18 parságkor a zugád rátságában gyező csikszeglit bozik érség hámozás
-                                rekésze. Bályka artennáján a gyomos böregek macska áranára sugatja az anka folherű
-                                szitort. A karos az anka kozáltban lesz kb. 13,30 parságkor. Bályka artennáján a
-                                dítérdés szinus bőgő hajogás haságomában bitanja meg a statás csonyos hatos csalan klás
-                                tudságát a gyomos gulis musta SE.
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
+                    <i>"We provide the highest quality of financial management"</i>
+                </Col>
+            </Row>
+            <Row className="feature-row">
+                <Col className="feature-text" lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <div>
+                        You can monitor your expenditures with Harmoney. Provide tags for your expenses
+                        so you can examine in real time where all your money goes.
+                    </div>
+                </Col>
+                <Col lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <img src={expenditures} alt="expenditures" className="feature-image" />
+                </Col>
+            </Row>
+            <Row className="feature-row">
+                <Col lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <img src={income} alt="income" className="feature-image" />
+                </Col>
+                <Col className="feature-text" lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <div>
+                        Harmony gives you the possibility to see what generates you a fortune!
+                    </div>
+                </Col>
+            </Row>
+            <Row className="feature-row">
+                <Col className="feature-text" lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <div>
+                        It is possible to see how much your revenue is relative to your spending.
+                        This is a great opportunity to keep our financial decisions in the right balance.
+                    </div>
+                </Col>
+                <Col lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <img src={ratio} alt="ratio" className="feature-image" />
+                </Col>
+            </Row>
+            <Row className="feature-row">
+                <Col lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <img src={transactions} alt="transactions" className="feature-image" />
+                </Col>
+                <Col className="feature-text" lg={colPosition}
+                     md={colPosition}
+                     sm={colPosition}
+                     xl={colPosition}
+                     xs={colPosition}>
+                    <div>
+                        Record your expenses and income. Harmoney notes for you what financial
+                        activities you have done recently.
+                    </div>
                 </Col>
             </Row>
         </Container>
