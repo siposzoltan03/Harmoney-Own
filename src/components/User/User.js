@@ -11,6 +11,7 @@ export function User() {
         const data = JSON.stringify(userLoggedIn);
         const logoutFailed = await logout(data);
         if (!logoutFailed) {
+            localStorage.removeItem("token");
             setUserLoggedIn(null)
         }
     }
