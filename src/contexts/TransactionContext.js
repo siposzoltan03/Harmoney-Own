@@ -3,6 +3,7 @@ import Axios from "axios";
 import Globals from "../utils/globals";
 
 const url = Globals.fetchUrl + "/api/transactions/";
+let jwtToken = localStorage.getItem("token");
 
 export const TransactionContext = React.createContext(undefined, undefined);
 
@@ -17,9 +18,10 @@ export const TransactionProvider = (props) => {
     const [httpRequest, setHttpRequest] = useState("");
 
     const fetchTransactions = () => {
-
         setLoading(true);
-        Axios.get(url)
+        Axios.get(url, {withCredentials: true, headers:{
+            Authorization: `Bearer ${jwtToken}`
+            }})
             .then(resp => {
                 (setTransactions(resp.data));
                 setLoading(false)
@@ -32,6 +34,7 @@ export const TransactionProvider = (props) => {
         return await Axios.post(url, data, {
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwtToken}`
             }
         })
             .then(resp => {
@@ -53,6 +56,7 @@ export const TransactionProvider = (props) => {
         return await Axios.put(url + id, data, {
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwtToken}`
             }
         })
             .then(resp => {
@@ -74,6 +78,7 @@ export const TransactionProvider = (props) => {
         return await Axios.delete(url + id, {
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwtToken}`
             }
         })
             .then(resp => {
