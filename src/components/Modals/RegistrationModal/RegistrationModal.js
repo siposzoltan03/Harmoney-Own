@@ -27,7 +27,7 @@ export function RegistrationModal(props) {
         setLastName("");
         setEmail("");
         setPassword("");
-    }
+    };
 
     const handleSubmit = async () => {
         const firstNameIsValid = validName("first");
@@ -46,12 +46,12 @@ export function RegistrationModal(props) {
                 closeModal();
             }
         }
-    }
+    };
 
     const registrationFailureNotification = () => {
         const notification = document.querySelector("#error-email");
         notification.textContent = "Email address is already taken";
-    }
+    };
 
     const registrationSuccessNotification = () => {
         store.addNotification({
@@ -66,17 +66,17 @@ export function RegistrationModal(props) {
                 duration: 3000
             }
         });
-    }
+    };
 
     const validateFirstName = (e) => {
         setFirstName(e.target.value);
         validName("first")
-    }
+    };
 
     const validateLastName = (e) => {
         setLastName(e.target.value);
         validName("last");
-    }
+    };
 
     const validName = (name) => {
         const formId = name === "first" ? "#formBasicFirstName" : "#formBasicLastName";
@@ -99,12 +99,12 @@ export function RegistrationModal(props) {
         }
         notification.textContent = `The ${name} name can't contain any number or special character`;
         return false;
-    }
+    };
 
     const validateEmail = (e) => {
         setEmail(e.target.value);
         validEmail();
-    }
+    };
 
     const validEmail = () => {
         const currentEmail = document.querySelector("#formBasicEmail").value;
@@ -125,13 +125,13 @@ export function RegistrationModal(props) {
             notification.textContent = "Please enter a valid email address ie. e_xa-+mp.le%@example.com";
             return false;
         }
-    }
+    };
 
     const validatePassword = (e) => {
         setPassword(e.target.value);
         validPassword();
         validPasswordConfirmation();
-    }
+    };
 
     const validPassword = () => {
         const currentPassword = document.querySelector("#formBasicPassword").value;
@@ -160,12 +160,12 @@ export function RegistrationModal(props) {
         }
         notification.textContent = "The password must contain at least one uppercase letter, one lowercase letter, one number and a special character";
         return false;
-    }
+    };
 
     const validatePasswordConfirmation = (e) => {
         setPasswordConfirmation(e.target.value);
         validPasswordConfirmation();
-    }
+    };
 
     const validPasswordConfirmation = () => {
         const currentPassword = document.querySelector("#formBasicPassword").value;
@@ -181,7 +181,7 @@ export function RegistrationModal(props) {
         }
         notification.textContent = "Passwords don't match";
         return false;
-    }
+    };
 
     return (
         <>
