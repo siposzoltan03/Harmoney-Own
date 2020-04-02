@@ -59,7 +59,7 @@ function TransactionCard(transaction) {
         if (date == null) return "";
         let dateDate = new Date(date); // todo FIXXX
         return `
-            ${dateDate.getFullYear()}.${str_pad(dateDate.getMonth() + 1)}.${dateDate.getDate()}.
+            ${dateDate.getFullYear()}.${str_pad(dateDate.getMonth() + 1)}.${str_pad(dateDate.getDate())}.
         `
     };
 
