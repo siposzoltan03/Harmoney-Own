@@ -1,11 +1,9 @@
 import React, {useState, useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { userToJsonLogin } from "../../../utils/createjson";
-
 import { UserContext } from "../../../contexts/UserContext";
 import { ModalVisibilityContext } from "../../../contexts/ModalVisibilityContext";
 import { LoginForm } from "../../Forms/LoginForm/LoginForm";
-import {TransactionContext} from "../../../contexts/TransactionContext";
 
 
 export function LoginModal(props) {
@@ -17,14 +15,14 @@ export function LoginModal(props) {
 
     const userContext = useContext(UserContext);
     const postLogin = userContext.login;
-    const transactionsContext = useContext(TransactionContext);
 
 
     const closeModal = () => {
         setLoginModalIsVisible(false);
         setEmail("");
         setPassword("");
-    }
+    };
+
     const handleSubmit = async () => {
         const jsonData = userToJsonLogin(email, password);
         let loginFailed = await postLogin(jsonData);
@@ -32,14 +30,13 @@ export function LoginModal(props) {
             loginNotification();
         } else {
             closeModal();
-            transactionsContext.getTransactions();
         }
-    }
+    };
 
     const loginNotification = () => {
         const notification = document.querySelector("#error-credentials");
         if (notification != null) notification.textContent = "Invalid credentials" // todo FIX
-    }
+    };
 
     return (
         <>
