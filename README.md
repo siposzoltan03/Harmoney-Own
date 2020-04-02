@@ -1,8 +1,32 @@
 # Harmoney Project Frontend - React
 
-
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## The project
+This repository contains the Frontend for the website called HarMoney. It is a three sprint long project which aims to 
+create a "one-pager" website that display the HarMoney web application. The main technologies behind are the following:
+ * Node.js
+ * JavaScript
+ * React UI framework
+ * React-Bootstrap
+
+HarMoney is a personal financial management web application. Users are able to register their incomes and expenditures so
+they can monitor and analyze their financial decisions.
+
+## How to run
+To be able to run the React application you have to follow these simple steps:
+ * After cloning the repository, run ```npm install``` to get all the necessary Node packages
+ * Run ```npm start``` and the application will run
+ 
+The React application will use the deployed HarMoney WebAPI on [Heroku](https://har-money.herokuapp.com/)
+
+## Contributors
+The contributors of this project are all students of Codecool Ltd.
+
+ * [Paróczi Márk](https://github.com/MParoczi)
+ * [Sipos Zoltán](https://github.com/siposzoltan03)
+ * [Szűcs Nikolett](https://github.com/szucsnikolett)
+ * [Vörös Eszter](https://github.com/wory04)
 
 ## Available Scripts
 
@@ -40,33 +64,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
