@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useContext, useEffect, useState} from "react";
 import Axios from "axios";
 import Globals from "../utils/globals";
+import {UserContext} from "./UserContext";
 
 const url = Globals.fetchUrl + "/api/transactions/";
-let jwtToken = localStorage.getItem("token");
 
 export const TransactionContext = React.createContext(undefined, undefined);
 
@@ -17,6 +17,10 @@ export const TransactionProvider = (props) => {
     const [frequency, setFrequency] = useState("Single");
     const [category, setCategory] = useState("Other");
     const [httpRequest, setHttpRequest] = useState("");
+    const { user, jwt} = useContext(UserContext);
+    const userLoggedIn = user[0];
+    const jwtToken = jwt[0];
+
 
     const fetchTransactions = () => {
         setLoading(true);
@@ -31,7 +35,6 @@ export const TransactionProvider = (props) => {
     };
 
     const postTransaction = async (data) => {
-
         return await Axios.post(url, data, {
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +56,6 @@ export const TransactionProvider = (props) => {
     };
 
     const putTransaction = async (data, id ) => {
-
         return await Axios.put(url + id, data, {
             headers: {
                 'Content-Type': 'application/json',
@@ -75,7 +77,6 @@ export const TransactionProvider = (props) => {
     };
 
     const deleteTransaction = async (id ) => {
-
         return await Axios.delete(url + id, {
             headers: {
                 'Content-Type': 'application/json',
@@ -97,8 +98,10 @@ export const TransactionProvider = (props) => {
     };
 
     useEffect(() => {
-        fetchTransactions()
-    }, []);
+        if (userLoggedIn != null) {
+            fetchTransactions()
+        }
+    }, [userLoggedIn]);
 
     return (
         <TransactionContext.Provider value={{
