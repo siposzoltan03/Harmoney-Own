@@ -1,11 +1,12 @@
-export function transactionToJson(id, title, dueDate, amount, frequency, direction) {
+export function transactionToJson(id, title, dueDate, amount, frequency, direction, category) {
     if (id === null) {
         return JSON.stringify({
             title: title,
             dueDate: dueDate,
             amount: parseInt(amount),
             frequency: frequency,
-            direction: direction
+            direction: direction,
+            category: category
         });
     } else {
         return JSON.stringify({
@@ -14,7 +15,8 @@ export function transactionToJson(id, title, dueDate, amount, frequency, directi
             dueDate: dueDate,
             amount: parseInt(amount),
             frequency: frequency,
-            direction: direction
+            direction: direction,
+            category: category
         });
     }
 }

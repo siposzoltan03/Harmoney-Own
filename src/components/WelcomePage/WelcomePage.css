@@ -20,5 +20,29 @@
 }
 
 #welcome-text {
-    font-size: 20px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.feature-image {
+    height: auto;
+    width: auto;
+    border: 2px solid #004225;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+}
+
+.feature-text {
+    color: #004225;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: auto;
+    font-style: italic;
+}
+
+.feature-row {
+    margin-bottom: 100px;
+    padding-right: 50px;
+    padding-left: 50px;
 }

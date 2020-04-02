@@ -24,6 +24,7 @@ function TransactionCard(transaction) {
     const setAmount = transactionContext.amount[1];
     const setDate = transactionContext.date[1];
     const setFrequency = transactionContext.frequency[1];
+    const setCategory = transactionContext.category[1];
     const setHttpRequest = transactionContext.httpRequest[1];
 
     const deleteTransaction = transactionContext.deleteTransaction;
@@ -39,6 +40,7 @@ function TransactionCard(transaction) {
         setAmount(transaction.amount);
         setDate(new Date(transaction.date));
         setFrequency(transaction.frequency);
+        setCategory(transaction.category);
         setHttpRequest("PUT");
         setTransactionType(transaction.direction);
         setTransactionModalIsVisible(true);
@@ -57,9 +59,9 @@ function TransactionCard(transaction) {
         if (date == null) return "";
         let dateDate = new Date(date); // todo FIXXX
         return `
-            ${dateDate.getFullYear()}.${str_pad(dateDate.getMonth() + 1)}.${dateDate.getDate()}.
+            ${dateDate.getFullYear()}.${str_pad(dateDate.getMonth() + 1)}.${str_pad(dateDate.getDate())}.
         `
-    }
+    };
 
     function str_pad(n) {
         return String("00" + n).slice(-2);
@@ -94,7 +96,7 @@ function TransactionCard(transaction) {
                 <Amount className="transaction-amount" direction={transaction.direction}>{NumberFormatter.formatBalance(transaction.amount)} Ft</Amount>
             </Card.Body>
             <Card.Footer as="h6">
-                <div className="transaction-tags">Tags</div>
+                <div className="transaction-category">{transaction.category}</div>
                 <div className="transaction-date">{formatDate(transaction.date)}</div>
             </Card.Footer>
         </Card>
