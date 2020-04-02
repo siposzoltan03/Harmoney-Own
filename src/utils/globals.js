@@ -1,6 +1,6 @@
 
 const Globals = {
-    fetchUrl: "https://localhost:5001"
+    fetchUrl: "https://har-money.herokuapp.com"
 };
 
 export default Globals
