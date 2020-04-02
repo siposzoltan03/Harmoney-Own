@@ -14,15 +14,7 @@ const colPosition = {span: true, offset: 3};
 function WelcomePage(props) {
     return (
         <Container className="feature-container">
-            <Row id="welcome-text" className="feature-row" >
-                <Col lg={colPosition}
-                     md={colPosition}
-                     sm={colPosition}
-                     xl={colPosition}
-                     xs={colPosition}>
-                    <i>"We provide the highest quality of financial management"</i>
-                </Col>
-            </Row>
+            <div id="welcome-text">Hidden text</div>
             <Row className="feature-row">
                 <Col className="feature-text" lg={colPosition}
                      md={colPosition}

@@ -56,7 +56,7 @@ export function RegistrationModal(props) {
     const registrationSuccessNotification = () => {
         store.addNotification({
             title: "Success!",
-            message: "You have successfully signed up",
+            message: "Confirmation email has been sent, check your email account",
             type: "success",
             insert: "top",
             container: "bottom-right",
