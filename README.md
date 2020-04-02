@@ -14,6 +14,8 @@ HarMoney is a personal financial management web application. Users are able to r
 they can monitor and analyze their financial decisions.
 
 ## How to run
+First of all, Node.js have to be installed on your system to run the React application.
+
 To be able to run the React application you have to follow these simple steps:
  * After cloning the repository, run ```npm install``` to get all the necessary Node packages
  * Run ```npm start``` and the application will run
