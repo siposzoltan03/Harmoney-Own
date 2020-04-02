@@ -4,17 +4,19 @@ import { Button } from 'react-bootstrap';
 import "./User.css"
 
 export function User() {
-    const { user, logout } = useContext(UserContext);
+    const { user, logout, jwt } = useContext(UserContext);
     const [userLoggedIn, setUserLoggedIn] = user;
+    const setJwtToken = jwt[1];
 
     const handleLogout = async () => {
         const data = JSON.stringify(userLoggedIn);
         const logoutFailed = await logout(data);
         if (!logoutFailed) {
             localStorage.removeItem("token");
+            setJwtToken(null);
             setUserLoggedIn(null)
         }
-    }
+    };
 
     if (userLoggedIn) {
         return(
