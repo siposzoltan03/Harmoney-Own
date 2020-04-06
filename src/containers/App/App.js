@@ -16,8 +16,8 @@ import "animate.css";
 
 function App() {
     return (
-        <TransactionProvider>
         <UserProvider>
+        <TransactionProvider>
         <ModalVisibilityContextProvider>
             <div className="App">
                 <ReactNotification/>
@@ -31,8 +31,8 @@ function App() {
                 <Footer className="ml-32"/>
             </div>
         </ModalVisibilityContextProvider>
-        </UserProvider>
         </TransactionProvider>
+        </UserProvider>
     );
 }
 

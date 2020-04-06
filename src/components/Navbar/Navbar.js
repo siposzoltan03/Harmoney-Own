@@ -52,7 +52,7 @@ export const Navbar = () => {
       }}
     >
       <Toggle />
-      <Nav defaultSelected="home">
+      <Nav>
 
         <NavItem eventKey="home">
           <NavIcon>
