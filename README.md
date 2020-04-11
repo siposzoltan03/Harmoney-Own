@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## The project
 This repository contains the Frontend for the website called HarMoney. It is a three sprint long project which aims to 
-create a "one-pager" website that display the HarMoney web application. The main technologies behind are the following:
+create a "one-pager" website that displays the HarMoney web application. The main technologies behind are the following:
  * Node.js
  * JavaScript
  * React UI framework
