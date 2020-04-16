@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## The project
 This repository contains the Frontend for the website called HarMoney. It is a three sprint long project which aims to 
-create a "one-pager" website that display the HarMoney web application. The main technologies behind are the following:
+create a "one-pager" website that displays the HarMoney web application. The main technologies behind are the following:
  * Node.js
  * JavaScript
  * React UI framework
@@ -21,6 +21,10 @@ To be able to run the React application you have to follow these simple steps:
  * Run ```npm start``` and the application will run
  
 The React application will use the deployed HarMoney WebAPI on [Heroku](https://har-money.herokuapp.com/)
+
+## Backend
+The WebAPI that serves the HarMoney frontend is available at the following GitHub repository:
+[HarMoney Backend](https://github.com/MParoczi/Harmoney-Backend)
 
 ## Contributors
 The contributors of this project are all students of Codecool Ltd.
