@@ -22,6 +22,10 @@ To be able to run the React application you have to follow these simple steps:
  
 The React application will use the deployed HarMoney WebAPI on [Heroku](https://har-money.herokuapp.com/)
 
+## Backend
+The WebAPI that serves the HarMoney frontend is available at the following GitHub repository:
+[HarMoney Backend](https://github.com/MParoczi/Harmoney-Backend)
+
 ## Contributors
 The contributors of this project are all students of Codecool Ltd.
 
