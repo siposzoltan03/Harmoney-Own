@@ -24,8 +24,8 @@ export const TransactionProvider = (props) => {
 
     const fetchTransactions = () => {
         setLoading(true);
-        Axios.get(url, {withCredentials: true, headers:{
-            Authorization: `Bearer ${jwtToken}`
+        Axios.get(url, { headers:{
+            'x-auth-token': jwtToken
             }})
             .then(resp => {
                 (setTransactions(resp.data));
@@ -38,12 +38,12 @@ export const TransactionProvider = (props) => {
         return await Axios.post(url, data, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${jwtToken}`
+                'x-auth-token': jwtToken
             }
         })
             .then(resp => {
                 const transaction = resp.data;
-                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction) {
+                if (transaction._id && transaction.title && transaction.dueDate && transaction.amount) {
                     setTransactions([...transactions, resp.data]);
                     return false;
                 }
@@ -59,12 +59,12 @@ export const TransactionProvider = (props) => {
         return await Axios.put(url + id, data, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${jwtToken}`
+                'x-auth-token': jwtToken
             }
         })
             .then(resp => {
                 const transaction = resp.data;
-                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction && transaction.category) {
+                if (transaction._id && transaction.title && transaction.dueDate && transaction.amount) {
                     fetchTransactions();
                     return false;
                 }
@@ -80,12 +80,15 @@ export const TransactionProvider = (props) => {
         return await Axios.delete(url + id, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${jwtToken}`
+                'x-auth-token': jwtToken,
+            },
+            body:{
+                'id': id._id,
             }
         })
             .then(resp => {
                 const transaction = resp.data;
-                if (transaction.id && transaction.title && transaction.dueDate && transaction.amount && transaction.frequency && transaction.direction && transaction.category) {
+                if (transaction._id && transaction.title && transaction.dueDate && transaction.amount) {
                     fetchTransactions();
                     return false;
                 }

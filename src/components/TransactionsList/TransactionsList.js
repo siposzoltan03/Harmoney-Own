@@ -13,8 +13,8 @@ function TransactionsList() {
             <Card.Body>
                 <Card.Title>Transactions</Card.Title>
                 {transactions.map(transaction => (
-                    <TransactionCard key={transaction.id}
-                                     id={transaction.id}
+                    <TransactionCard key={transaction._id}
+                                     id={transaction._id}
                                      title={transaction.title}
                                      amount={transaction.amount}
                                      direction={transaction.direction}

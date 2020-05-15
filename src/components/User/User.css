@@ -9,6 +9,9 @@
 
 #username, .fa-user {
     margin: 10px 10px 10px 5px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
 
 #user-sign-out {

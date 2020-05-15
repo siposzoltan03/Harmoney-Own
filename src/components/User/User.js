@@ -1,10 +1,17 @@
-import React, { useContext } from "react";
-import { UserContext} from "../../contexts/UserContext";
-import { Button } from 'react-bootstrap';
+import React, {useContext} from "react";
+import {UserContext} from "../../contexts/UserContext";
+import {Button} from 'react-bootstrap';
 import "./User.css"
+import UserPage from "../../containers/UserPage/UserPage";
+import {Link} from "react-router-dom";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import {Avatar} from "@material-ui/core";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export function User() {
-    const { user, logout, jwt } = useContext(UserContext);
+    const {user, logout, jwt} = useContext(UserContext);
     const [userLoggedIn, setUserLoggedIn] = user;
     const setJwtToken = jwt[1];
 
@@ -18,13 +25,32 @@ export function User() {
         }
     };
 
+    const showUserPage = () => {
+        console.log("jeeeeee");
+        return <UserPage/>
+    };
+
     if (userLoggedIn) {
-        return(
-            <span className="user">
-                <i className="fas fa-user"/>
-                <p id="username">{userLoggedIn.firstName}</p>
-                <Button id="user-sign-out" onClick={handleLogout}>Sign out</Button>
-            </span>
+        return (
+            <div>
+                <Link to={`/user/${userLoggedIn.firstName + userLoggedIn.lastName + userLoggedIn._id}`}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <Avatar alt={userLoggedIn.firstName}/>
+                        </ListItemIcon>
+                        <ListItemText primary={userLoggedIn.firstName}/>
+                    </ListItem>
+                </Link>
+                <Link to={'/'}>
+                    <ListItem button onClick={() => handleLogout()}>
+                        <ListItemIcon>
+                            <ExitToAppIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Log out"/>
+                    </ListItem>
+                </Link>
+            </div>
+
         )
     } else {
         return (

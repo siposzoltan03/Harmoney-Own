@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -18,13 +18,7 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import MainListItems, {secondaryListItems} from '../ListItems/ListItems';
-import Content from "../../containers/Content/Content";
-import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import ListItemText from "@material-ui/core/ListItemText";
-import TemporaryDrawer from "./NavbarIcons";
+import { mainListItems, secondaryListItems } from '../ListItems/ListItems';
 
 function Copyright() {
     return (
@@ -120,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Navbar(props) {
+export default function NavbarContainer() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -129,59 +123,9 @@ export default function Navbar(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
     return (
         <div className={classes.root}>
-            <CssBaseline/>
-            <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-                <Toolbar className={classes.toolbar}>
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        {props.title}
-                    </Typography>
-                    {/*<IconButton color="inherit">*/}
-                    {/*  <Badge badgeContent={4} color="secondary">*/}
-                    {/*    <NotificationsIcon />*/}
-                    {/*  </Badge>*/}
-                    {/*</IconButton>*/}
-                    {/*<IconButton>*/}
-                    {/*  <AccountCircleOutlinedIcon style={{color: 'white'}}/>*/}
-                    {/*</IconButton>*/}
-                    {/*<TemporaryDrawer/>*/}
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant="permanent"
-                classes={{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                }}
-                open={open}
-            >
-                <div className={classes.toolbarIcon}>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon/>
-                    </IconButton>
-                </div>
-                <Divider/>
-                <List>
-                    <MainListItems/>
-                </List>
-                <Divider/>
-                {/*<List>{secondaryListItems}</List>*/}
-            </Drawer>
-            {props.children}
-            {/*<Box pt={4}>*/}
-            {/*  <Copyright />*/}
-            {/*</Box>*/}
+
         </div>
-    );
-}
+    )
+};
