@@ -1,15 +1,9 @@
 import React from "react";
 import "./App.css";
-import SideBar from "../../components/Navbar/Navbar";
-import TopBar from "react-bootstrap/Nav";
 import {ModalVisibilityContextProvider} from "../../contexts/ModalVisibilityContext";
-import ModalContainer from "../ModalContainer/ModalContainer";
-import Footer from "../../components/Footer/Footer";
 import {TransactionProvider} from "../../contexts/TransactionContext";
 import {UserProvider} from "../../contexts/UserContext";
-import User from "../../components/User/User";
 import Content from "../Content/Content";
-import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import "animate.css";
 import {
@@ -18,13 +12,11 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import UserPage from "../UserPage/UserPage";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Navbar from "../../components/Navbar/Navbar"
-import NavbarContainer from "../../components/NavbarContainer/NavbarContainer";
-import SignInPage from "../../components/SignInPage";
-import SignUpPage from "../../components/SignUpPage/SignUpPage";
-import ProfilePage from "../../components/ProfilePage/ProfilePage"
+import SignInPage from "../../containers/SignInPage";
+import SignUpPage from "../../containers/SignUpPage";
+import ProfilePage from "../../containers/ProfilePage"
 
 
 function App() {
