@@ -25,34 +25,34 @@ export const UserProvider = (props) => {
 
     const postRegistration = async (data) => {
         return await Axios.post(registrationUrl, data, { headers: {
-            'Content-Type': 'application/json',
-        }})
-        .then(resp => {
-            return !(resp.data.firstName && resp.data.lastName && resp.data.email && resp.data.email === JSON.parse(data).email);
-        })
-        .catch (e => {
-            console.log('Error:', e);
-            return true;
-        })
+                'Content-Type': 'application/json',
+            }})
+            .then(resp => {
+                return !(resp.data.firstName && resp.data.lastName && resp.data.email && resp.data.email === JSON.parse(data).email);
+            })
+            .catch (e => {
+                console.log('Error:', e);
+                return true;
+            })
     };
 
     const postLogin = async (data) => {
         return await Axios.post(loginUrl, data, { headers: {
-            'Content-Type': 'application/json',
-        }})
-        .then(resp => {
-            if (resp.data.user.firstName && resp.data.user.lastName && resp.data.user.email && resp.data.user.email === JSON.parse(data).email) {
-                localStorage.setItem("token", resp.data.token);
-                setJwtToken(resp.data.token);
-                setUser(resp.data.user);
-                return false;
-            }
-            return true;
-        })
-        .catch (e => {
-            console.log('Error:', e);
-            return true;
-        })
+                'Content-Type': 'application/json',
+            }})
+            .then(resp => {
+                if (resp.data.user.firstName && resp.data.user.lastName && resp.data.user.email && resp.data.user.email === JSON.parse(data).email) {
+                    localStorage.setItem("token", resp.data.token);
+                    setJwtToken(resp.data.token);
+                    setUser(resp.data.user);
+                    return false;
+                }
+                return true;
+            })
+            .catch (e => {
+                console.log('Error:', e);
+                return true;
+            })
     };
 
     const postLogout = async (data) => {
@@ -73,7 +73,7 @@ export const UserProvider = (props) => {
         return await Axios.get(currentUserUrl,
             {withCredentials: true,
                 headers:{'Content-Type': 'application/json',
-                'x-auth-token': jwtToken}})
+                    'x-auth-token': jwtToken}})
             .then(resp => {
                 return resp.data;
             })
