@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Chart from '../Charts/Chart';
-import Deposits from '../Deposits/Deposits';
+import DashboardBalance from '../DashboardBalance/DashboardBalance';
 
 function Copyright() {
     return (
@@ -129,10 +129,10 @@ export default function Dashboard() {
                                 <Chart />
                             </Paper>
                         </Grid>
-                        {/* Recent Deposits */}
+                        {/* Recent DashboardBalance */}
                         <Grid item xs={12} md={4} lg={3}>
                             <Paper className={fixedHeightPaper}>
-                                <Deposits />
+                                <DashboardBalance />
                             </Paper>
                         </Grid>
                         {/* Recent Orders */}
