@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import { UserContext } from "../../contexts/UserContext";
-// import Dashboard from "../../components/Dashboard/Dashboard";
 import WelcomePage from "../../components/WelcomePage/WelcomePage";
 import Transactions from "../../components/Transactions/Transactions";
 
