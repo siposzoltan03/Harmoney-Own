@@ -92,4 +92,5 @@ const TransactionTable = () => {
     )
 };
 
+
 export default TransactionTable;
