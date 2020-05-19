@@ -25,7 +25,7 @@ export const TransactionProvider = (props) => {
     const fetchTransactions = () => {
         setLoading(true);
         Axios.get(url, { headers:{
-            'x-auth-token': jwtToken
+                'x-auth-token': jwtToken
             }})
             .then(resp => {
                 (setTransactions(resp.data));
