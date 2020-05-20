@@ -7,7 +7,7 @@ import BalanceChart from "../Charts/BalanceChart";
 import ExpenditureChart from "../Charts/ExpenditureChart";
 import IncomeChart from "../Charts/IncomeChart";
 
-import "./Transactions.css";
+// import "./Transactions.css";
 import TransactionTable from "../TransactionTable/TransactionTable";
 
 const colPosition = {span: true, offset: 3};
