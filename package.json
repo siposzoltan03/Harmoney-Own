@@ -28,7 +28,12 @@
     "react-scripts": "3.4.0",
     "reactstrap": "^8.4.1",
     "styled": "^1.0.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "@material-ui/icons": "latest",
+    "@material-ui/core": "latest",
+    "@material-ui/core": "latest",
+    "clsx": "latest",
+    "clsx": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
