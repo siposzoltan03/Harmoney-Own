@@ -1,6 +1,6 @@
 
 const Globals = {
-    fetchUrl: "https://localhost:5001"
+    fetchUrl: "http://localhost:3000"
 };
 
 export default Globals
