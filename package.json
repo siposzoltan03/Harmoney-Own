@@ -2,8 +2,11 @@
   "name": "harmoney",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9000",
   "dependencies": {
     "@ant-design/icons": "latest",
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/lab": "^4.0.0-alpha.53",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
@@ -12,26 +15,37 @@
     "animate.css-react": "^1.0.0",
     "ant": "^0.2.0",
     "antd": "^4.0.1",
+    "assets": "^3.0.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "chartjs-plugin-datalabels": "^0.7.0",
+    "clsx": "latest",
     "component": "^1.1.0",
     "design": "^0.1.0",
     "jwt-decode": "^2.2.0",
+    "material-table": "^1.57.2",
+    "prop-types": "latest",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-chartjs-2": "^2.9.0",
     "react-datepicker": "^2.13.0",
     "react-dom": "^16.13.0",
     "react-notifications-component": "^2.4.0",
+    "react-number-format": "^4.4.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "reactstrap": "^8.4.1",
+    "recharts": "^1.8.5",
     "styled": "^1.0.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "clsx": "latest",
+    "@material-ui/core": "latest",
+    "@material-ui/icons": "latest",
+    "react-router-dom": "latest"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=5001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -50,5 +64,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@material-ui/icons": "^4.9.1"
   }
 }
