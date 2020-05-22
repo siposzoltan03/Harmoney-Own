@@ -1,12 +1,10 @@
-import React from 'react';
-import Link from '@material-ui/core/Link';
+import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from '../Title/Title';
-
-function preventDefault(event) {
-    event.preventDefault();
-}
+import {TransactionContext} from "../../contexts/TransactionContext";
+import NumberFormatter from "../../utils/NumberFormatter";
 
 const useStyles = makeStyles({
     depositContext: {
@@ -16,17 +14,26 @@ const useStyles = makeStyles({
 
 export default function DashboardBalance() {
     const classes = useStyles();
+    const appContext = useContext(TransactionContext);
+    const transactions = appContext.transactions[0];
+
+    const calculateSum = (transactions) => {
+        let sum = 0;
+        transactions.forEach(transaction => transaction.direction === 0 ? sum += transaction.amount : sum -= transaction.amount)
+        return sum;
+    };
+
     return (
         <React.Fragment>
             <Title>Recent Deposits</Title>
             <Typography component="p" variant="h4">
-                $3,024.00
+                {NumberFormatter.formatBalance(calculateSum(transactions))} Ft
             </Typography>
             <Typography color="textSecondary" className={classes.depositContext}>
-                on 15 March, 2019
+                On {new Date().toDateString()}
             </Typography>
             <div>
-                <Link color="primary" href="#" onClick={preventDefault}>
+                <Link color="primary" to="/transactions">
                     View balance
                 </Link>
             </div>
