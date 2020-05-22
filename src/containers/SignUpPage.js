@@ -13,15 +13,15 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {UserContext} from "../contexts/UserContext";
-import {userToJson, userToJsonLogin} from "../utils/createjson";
+import {userToJson} from "../utils/createjson";
 import {useHistory} from "react-router-dom";
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" to="https://material-ui.com/">
-                Your Website
+            <Link color="inherit" to="/">
+                Harmoney
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -72,7 +72,7 @@ export default function SignUp() {
         const passwordIsValid = true;
         const passwordConfirmationIsValid = true;
         const submittable = firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid && passwordConfirmationIsValid;
-        if(submittable) {
+        if (submittable) {
             const jsonData = userToJson(state.firstName, state.lastName, state.email, state.password);
             const registrationFailed = await postRegistration(jsonData);
             if (registrationFailed) {
@@ -103,11 +103,11 @@ export default function SignUp() {
 
         if (currentName.match(pattern)) {
             result.isValid = true;
-        }else{
+        } else {
             result.errorText = `The ${name} name can't contain any number or special character`;
         }
         if (currentName.length > maxLength) {
-            result.errorText =`The ${name} name can't be longer than ${maxLength} characters`;
+            result.errorText = `The ${name} name can't be longer than ${maxLength} characters`;
         }
         if (currentName.length === 0) {
             result.errorText = "This field is required";
@@ -156,7 +156,7 @@ export default function SignUp() {
         if (currentPassword.match(pattern)) {
             result.errorText = "";
             result.isValid = true;
-        }else{
+        } else {
             result.errorText = "The password must contain at least one uppercase letter, one lowercase letter, one number and a special character";
             result.isValid = false;
         }
@@ -166,7 +166,7 @@ export default function SignUp() {
             result.isValid = false;
         }
 
-        if(currentPassword.length === 0) {
+        if (currentPassword.length === 0) {
             result.errorText = "This field is required";
             result.isValid = false;
         }
@@ -186,19 +186,27 @@ export default function SignUp() {
 
 
     const validPasswordConfirmation = () => {
-        const currentPassword = document.querySelector("#formBasicPassword").value;
-        const confirmationPassword = document.querySelector("#formBasicPasswordConfirmation").value;
-        const notification = document.querySelector("#error-password-confirmation");
-        if (confirmationPassword.length === 0) {
-            notification.textContent = "This field is required";
-            return false;
-        }
+        const result = {
+            isValid: false,
+            errorText: ""
+        };
+        const currentPassword = state.password;
+        const confirmationPassword = state.passwordConfirmation;
+
         if (currentPassword === confirmationPassword) {
-            notification.textContent = "";
-            return true;
+            result.errorText = "";
+            result.isValid = true;
+        } else {
+            result.errorText = "Passwords don't match";
+            result.isValid = false;
         }
-        notification.textContent = "Passwords don't match";
-        return false;
+
+        if (confirmationPassword.length === 0) {
+            result.errorText = "This field is required";
+            result.isValid = false;
+        }
+
+        return result;
     };
 
     return (
@@ -281,12 +289,15 @@ export default function SignUp() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                name="password-confirmation"
+                                name="passwordConfirmation"
                                 label="Password Confirmation"
                                 type="password"
                                 id="password-confirmation"
                                 autoComplete="current-password"
                                 onChange={handleInputChange}
+                                error={!validPasswordConfirmation().isValid}
+                                helperText={validPasswordConfirmation().errorText}
+                                value={state.passwordConfirmation}
                             />
                         </Grid>
                         <Grid item xs={12}>
