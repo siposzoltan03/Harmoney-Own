@@ -144,32 +144,44 @@ export default function SignUp() {
 
 
     const validPassword = () => {
-        const currentPassword = document.querySelector("#formBasicPassword").value;
-        const notification = document.querySelector("#error-password");
+        const result = {
+            isValid: false,
+            errorText: ""
+        };
+
+        const currentPassword = state.password;
         const pattern = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_-])(?!.*?[\\s\"˘°˛`˙´˝¨¤]).{4,20}$";
         const exclusionPattern = "[\\s\"˘°˛`˙´˝¨¤]$";
-        if(currentPassword.length === 0) {
-            notification.textContent = "This field is required";
-            return false;
-        }
-        if (currentPassword.match(exclusionPattern)) {
-            notification.textContent = "The password can't contain other special characters than #?!@$%^&*_-";
-            return false;
-        }
-        if (currentPassword.length < 4) {
-            notification.textContent = "The password must be at least 4 characters long";
-            return false;
-        }
-        if (currentPassword.length > 20) {
-            notification.textContent = "Password can't be longer than 20 characters";
-            return false;
-        }
+
         if (currentPassword.match(pattern)) {
-            notification.textContent = "";
-            return true;
+            result.errorText = "";
+            result.isValid = true;
+        }else{
+            result.errorText = "The password must contain at least one uppercase letter, one lowercase letter, one number and a special character";
+            result.isValid = false;
         }
-        notification.textContent = "The password must contain at least one uppercase letter, one lowercase letter, one number and a special character";
-        return false;
+
+        if (currentPassword.length < 4) {
+            result.errorText = "The password must be at least 4 characters long";
+            result.isValid = false;
+        }
+
+        if(currentPassword.length === 0) {
+            result.errorText = "This field is required";
+            result.isValid = false;
+        }
+
+        if (currentPassword.length > 20) {
+            result.errorText = "Password can't be longer than 20 characters";
+            result.isValid = false;
+        }
+
+        if (currentPassword.match(exclusionPattern)) {
+            result.errorText = "The password can't contain other special characters than #?!@$%^&*_-";
+            result.isValid = false;
+        }
+
+        return result;
     };
 
 
@@ -259,6 +271,9 @@ export default function SignUp() {
                                 id="password"
                                 autoComplete="current-password"
                                 onChange={handleInputChange}
+                                error={!validPassword().isValid}
+                                helperText={validPassword().errorText}
+                                value={state.password}
                             />
                         </Grid>
                         <Grid item xs={12}>
