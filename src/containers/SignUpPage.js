@@ -20,7 +20,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link color="inherit" to="https://material-ui.com/">
                 Your Website
             </Link>{' '}
             {new Date().getFullYear()}
@@ -92,26 +92,27 @@ export default function SignUp() {
     };
 
     const validName = (name) => {
-        const formId = name === "first" ? "#formBasicFirstName" : "#formBasicLastName";
-        const notificationId = name === "first" ? "#error-first-name" : "#error-last-name";
-        const maxLength = name === "first" ? 50 : 20;
-        const currentName = document.querySelector(formId).value;
-        const notification = document.querySelector(notificationId);
+        const result = {
+            "isValid": false,
+            "errorText": ""
+        };
+        const maxLength = name === state.firstName ? 20 : 50;
+        const currentName = name;
         const pattern = `^[a-zA-Z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ffőŐűŰ.,'\\s-]{1,${maxLength}}$`;
-        if (currentName.length === 0) {
-            notification.textContent = "This field is required";
-            return false;
+
+
+        if (currentName.match(pattern)) {
+            result.isValid = true;
+        }else{
+            result.errorText = `The ${name} name can't contain any number or special character`;
         }
         if (currentName.length > maxLength) {
-            notification.textContent = `The ${name} name can't be longer than ${maxLength} characters`;
-            return false;
+            result.errorText =`The ${name} name can't be longer than ${maxLength} characters`;
         }
-        if (currentName.match(pattern)) {
-            notification.textContent = "";
-            return true;
+        if (currentName.length === 0) {
+            result.errorText = "This field is required";
         }
-        notification.textContent = `The ${name} name can't contain any number or special character`;
-        return false;
+        return result;
     };
 
 
@@ -205,7 +206,10 @@ export default function SignUp() {
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
-                                onChange={handleFirstNameChange}
+                                onChange={handleInputChange}
+                                error={!validName(state.firstName).isValid}
+                                helperText={validName(state.firstName).errorText}
+                                value={state.firstName}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -217,7 +221,10 @@ export default function SignUp() {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="lname"
-                                onChange={handleLastNameChange}
+                                onChange={handleInputChange}
+                                error={!validName(state.lastName).isValid}
+                                helperText={validName(state.lastName).errorText}
+                                value={state.lastName}
 
                             />
                         </Grid>
@@ -230,7 +237,7 @@ export default function SignUp() {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
-                                onChange={handleEmailChange}
+                                onChange={handleInputChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -243,7 +250,7 @@ export default function SignUp() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
-                                onChange={handlePasswordChange}
+                                onChange={handleInputChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -256,7 +263,7 @@ export default function SignUp() {
                                 type="password"
                                 id="password-confirmation"
                                 autoComplete="current-password"
-                                onChange={handlePasswordConfirmationChange}
+                                onChange={handleInputChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
