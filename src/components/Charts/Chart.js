@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from '../Title/Title';
+import {TransactionContext} from "../../contexts/TransactionContext"
 
 // Generate Sales Data
-function createData(time, amount) {
-    return { time, amount };
+// function createData(time, amount) {
+//     return { time, amount };
+// }
+
+function createData(date, amount) {
+    return {date, amount}
 }
 
 const data = [
@@ -22,13 +27,17 @@ const data = [
 
 export default function Chart() {
     const theme = useTheme();
+    const appContext = useContext(TransactionContext);
+    const transactions = appContext.transactions[0];
+
+    const data = transactions.map(transaction => createData(`${transaction.dueDate.month} ${transaction.dueDate.day}`, transaction.amount));
 
     return (
         <React.Fragment>
-            <Title>Today</Title>
+            <Title>This Month</Title>
             <ResponsiveContainer>
                 <LineChart
-                    data={data}
+                    data={data.reverse()}
                     margin={{
                         top: 16,
                         right: 16,
@@ -43,7 +52,7 @@ export default function Chart() {
                             position="left"
                             style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
                         >
-                            Sales ($)
+                            Transactions
                         </Label>
                     </YAxis>
                     <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
