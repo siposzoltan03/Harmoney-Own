@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import {UserContext} from "../contexts/UserContext";
 import {userToJson} from "../utils/createjson";
 import {useHistory} from "react-router-dom";
+import {validName, validEmail, validPassword, validPasswordConfirmation} from "../utils/inputValidator"
 
 function Copyright() {
     return (
@@ -91,124 +92,6 @@ export default function SignUp() {
         });
     };
 
-    const validName = (name) => {
-        const result = {
-            "isValid": false,
-            "errorText": ""
-        };
-        const maxLength = name === state.firstName ? 20 : 50;
-        const currentName = name;
-        const pattern = `^[a-zA-Z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ffőŐűŰ.,'\\s-]{1,${maxLength}}$`;
-
-
-        if (currentName.match(pattern)) {
-            result.isValid = true;
-        } else {
-            result.errorText = `The ${name} name can't contain any number or special character`;
-        }
-        if (currentName.length > maxLength) {
-            result.errorText = `The ${name} name can't be longer than ${maxLength} characters`;
-        }
-        if (currentName.length === 0) {
-            result.errorText = "This field is required";
-        }
-        return result;
-    };
-
-
-    const validEmail = () => {
-        const result = {
-            isValid: false,
-            errorText: ""
-        };
-        const currentEmail = state.email;
-        const pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
-
-        if (currentEmail.match(pattern)) {
-            result.errorText = "";
-            result.isValid = true;
-        } else {
-            result.errorText = "Please enter a valid email address ie. e_xa-+mp.le%@example.com";
-            result.isValid = false;
-        }
-        if (currentEmail.length === 0) {
-            result.errorText = "This field is required";
-            result.isValid = false;
-        }
-        if (currentEmail.length > 320) {
-            result.errorText = "Email address can't be longer than 320 characters";
-            result.isValid = false;
-        }
-        return result;
-    };
-
-
-    const validPassword = () => {
-        const result = {
-            isValid: false,
-            errorText: ""
-        };
-
-        const currentPassword = state.password;
-        const pattern = "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_-])(?!.*?[\\s\"˘°˛`˙´˝¨¤]).{4,20}$";
-        const exclusionPattern = "[\\s\"˘°˛`˙´˝¨¤]$";
-
-        if (currentPassword.match(pattern)) {
-            result.errorText = "";
-            result.isValid = true;
-        } else {
-            result.errorText = "The password must contain at least one uppercase letter, one lowercase letter, one number and a special character";
-            result.isValid = false;
-        }
-
-        if (currentPassword.length < 4) {
-            result.errorText = "The password must be at least 4 characters long";
-            result.isValid = false;
-        }
-
-        if (currentPassword.length === 0) {
-            result.errorText = "This field is required";
-            result.isValid = false;
-        }
-
-        if (currentPassword.length > 20) {
-            result.errorText = "Password can't be longer than 20 characters";
-            result.isValid = false;
-        }
-
-        if (currentPassword.match(exclusionPattern)) {
-            result.errorText = "The password can't contain other special characters than #?!@$%^&*_-";
-            result.isValid = false;
-        }
-
-        return result;
-    };
-
-
-    const validPasswordConfirmation = () => {
-        const result = {
-            isValid: false,
-            errorText: ""
-        };
-        const currentPassword = state.password;
-        const confirmationPassword = state.passwordConfirmation;
-
-        if (currentPassword === confirmationPassword) {
-            result.errorText = "";
-            result.isValid = true;
-        } else {
-            result.errorText = "Passwords don't match";
-            result.isValid = false;
-        }
-
-        if (confirmationPassword.length === 0) {
-            result.errorText = "This field is required";
-            result.isValid = false;
-        }
-
-        return result;
-    };
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
@@ -232,8 +115,8 @@ export default function SignUp() {
                                 label="First Name"
                                 autoFocus
                                 onChange={handleInputChange}
-                                error={!validName(state.firstName).isValid}
-                                helperText={validName(state.firstName).errorText}
+                                error={!validName(state.firstName, state).isValid}
+                                helperText={validName(state.firstName, state).errorText}
                                 value={state.firstName}
                             />
                         </Grid>
@@ -247,8 +130,8 @@ export default function SignUp() {
                                 name="lastName"
                                 autoComplete="lname"
                                 onChange={handleInputChange}
-                                error={!validName(state.lastName).isValid}
-                                helperText={validName(state.lastName).errorText}
+                                error={!validName(state.lastName, state).isValid}
+                                helperText={validName(state.lastName, state).errorText}
                                 value={state.lastName}
 
                             />
@@ -263,8 +146,8 @@ export default function SignUp() {
                                 name="email"
                                 autoComplete="email"
                                 onChange={handleInputChange}
-                                error={!validEmail().isValid}
-                                helperText={validEmail().errorText}
+                                error={!validEmail(state).isValid}
+                                helperText={validEmail(state).errorText}
                                 value={state.email}
                             />
                         </Grid>
@@ -279,8 +162,8 @@ export default function SignUp() {
                                 id="password"
                                 autoComplete="current-password"
                                 onChange={handleInputChange}
-                                error={!validPassword().isValid}
-                                helperText={validPassword().errorText}
+                                error={!validPassword(state).isValid}
+                                helperText={validPassword(state).errorText}
                                 value={state.password}
                             />
                         </Grid>
@@ -295,8 +178,8 @@ export default function SignUp() {
                                 id="password-confirmation"
                                 autoComplete="current-password"
                                 onChange={handleInputChange}
-                                error={!validPasswordConfirmation().isValid}
-                                helperText={validPasswordConfirmation().errorText}
+                                error={!validPasswordConfirmation(state).isValid}
+                                helperText={validPasswordConfirmation(state).errorText}
                                 value={state.passwordConfirmation}
                             />
                         </Grid>
