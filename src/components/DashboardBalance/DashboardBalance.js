@@ -34,7 +34,7 @@ export default function DashboardBalance() {
             </Typography>
             <div>
                 <Link color="primary" to="/transactions">
-                    View balance
+                    View transactions
                 </Link>
             </div>
         </React.Fragment>
