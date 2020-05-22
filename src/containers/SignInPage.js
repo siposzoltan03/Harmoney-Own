@@ -66,6 +66,10 @@ export default function SignInPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
+    const [errorText, setErrorText] = useState("");
+
+
 
 
     const userContext = useContext(UserContext);
@@ -77,6 +81,8 @@ export default function SignInPage() {
         let loginFailed = await postLogin(jsonData);
         if (loginFailed) {
             history.push('/');
+            setError(true);
+            setErrorText("Invalid email or password");
         } else {
             history.push('/dashboard');
         }
@@ -114,6 +120,7 @@ export default function SignInPage() {
                             autoComplete="email"
                             autoFocus
                             onChange={handleEmailChange}
+                            error={error}
                         />
                         <TextField
                             variant="outlined"
@@ -126,6 +133,8 @@ export default function SignInPage() {
                             id="password"
                             autoComplete="current-password"
                             onChange={handlePasswordChange}
+                            error={error}
+                            helperText={errorText}
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
