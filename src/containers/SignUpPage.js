@@ -117,24 +117,29 @@ export default function SignUp() {
 
 
     const validEmail = () => {
-        const currentEmail = document.querySelector("#formBasicEmail").value;
-        const notification = document.querySelector("#error-email");
+        const result = {
+            isValid: false,
+            errorText: ""
+        };
+        const currentEmail = state.email;
         const pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
+
+        if (currentEmail.match(pattern)) {
+            result.errorText = "";
+            result.isValid = true;
+        } else {
+            result.errorText = "Please enter a valid email address ie. e_xa-+mp.le%@example.com";
+            result.isValid = false;
+        }
         if (currentEmail.length === 0) {
-            notification.textContent = "This field is required";
-            return false;
+            result.errorText = "This field is required";
+            result.isValid = false;
         }
         if (currentEmail.length > 320) {
-            notification.textContent = "Email address can't be longer than 320 characters";
-            return false;
+            result.errorText = "Email address can't be longer than 320 characters";
+            result.isValid = false;
         }
-        if (currentEmail.match(pattern)) {
-            notification.textContent = "";
-            return true;
-        } else {
-            notification.textContent = "Please enter a valid email address ie. e_xa-+mp.le%@example.com";
-            return false;
-        }
+        return result;
     };
 
 
@@ -238,6 +243,9 @@ export default function SignUp() {
                                 name="email"
                                 autoComplete="email"
                                 onChange={handleInputChange}
+                                error={!validEmail().isValid}
+                                helperText={validEmail().errorText}
+                                value={state.email}
                             />
                         </Grid>
                         <Grid item xs={12}>
