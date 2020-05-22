@@ -54,11 +54,13 @@ export default function SignUp() {
     const history = useHistory();
     const classes = useStyles();
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [state, setState] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        passwordConfirmation: ""
+    });
 
     const userContext = useContext(UserContext);
     const postRegistration = userContext.registration;
@@ -71,7 +73,7 @@ export default function SignUp() {
         const passwordConfirmationIsValid = true;
         const submittable = firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid && passwordConfirmationIsValid;
         if(submittable) {
-            const jsonData = userToJson(firstName, lastName, email, password);
+            const jsonData = userToJson(state.firstName, state.lastName, state.email, state.password);
             const registrationFailed = await postRegistration(jsonData);
             if (registrationFailed) {
                 history.push('/registration');
@@ -81,24 +83,12 @@ export default function SignUp() {
         }
     };
 
-    const handleFirstNameChange = (event) =>{
-        setFirstName(event.target.value);
-    };
-
-    const handleLastNameChange = (event) =>{
-        setLastName(event.target.value);
-    };
-
-    const handleEmailChange = (event) =>{
-        setEmail(event.target.value);
-    };
-
-    const handlePasswordChange = (event) =>{
-        setPassword(event.target.value);
-    };
-
-    const handlePasswordConfirmationChange = (event) =>{
-        setPassword(event.target.value);
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setState({
+            ...state,
+            [event.target.name]: value
+        });
     };
 
     const validName = (name) => {
