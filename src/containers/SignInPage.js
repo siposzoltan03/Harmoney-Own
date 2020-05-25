@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import {UserContext} from "../contexts/UserContext";
 import {userToJsonLogin} from "../utils/createjson";
-import SingInImage from "../assets/signinimage.jpg"
+import SingInImage from "../assets/img/signinimage.jpg"
 
 
 function Copyright() {
