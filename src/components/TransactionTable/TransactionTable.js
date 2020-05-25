@@ -13,6 +13,7 @@ const TransactionTable = () => {
     const putTransaction = appContext.putTransaction;
     const deleteTransaction = appContext.deleteTransaction;
     const {user} = useContext(UserContext);
+    const userLoggedIn = user[0];
 
     return (
         <MaterialTable
@@ -22,7 +23,7 @@ const TransactionTable = () => {
                     title: "Users", field: "users", editable: "never",
                     render: rowData =>
                         <AvatarGroup>
-                            <Avatar alt={user.firstName} src="/src/assets/images/ZoltanSipos.jpg"/>
+                            <Avatar alt={userLoggedIn?.firstName} src={require("../../assets/img/ZoltanSipos.jpg")}/>
                         </AvatarGroup>
                 },
                 {title: "Title", field: "title"},
