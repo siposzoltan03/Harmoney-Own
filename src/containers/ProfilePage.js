@@ -16,7 +16,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import Fab from "@material-ui/core/Fab";
+import Image from '../assets/img/ZoltanSipos.jpg'
+import DefaultAvatar from '../assets/img/avatar.jpg'
+
 
 import "../assets/css/paper-dashboard.css";
 
@@ -34,17 +39,87 @@ import {
     Col
 } from "reactstrap";
 import {UserContext} from "../contexts/UserContext";
-import {userToJsonLogin} from "../utils/createjson";
+import { makeStyles } from "@material-ui/core/styles";
+import blue from "@material-ui/core/colors/blue";
 
-
+const useStyles =makeStyles(theme => ({
+    // root: {
+    //     backgroundColor: theme.palette.background.paper,
+    //     width: 500,
+    //     display: "flex",
+    //     justifyContent: "center",
+    //     alignItems: "flex-end"
+    // },
+    icon: {
+        margin: theme.spacing.unit * 2
+    },
+    // iconHover: {
+    //     margin: theme.spacing.unit * 2,
+    //     "&:hover": {
+    //         color: red[800]
+    //     }
+    // },
+    // cardHeader: {
+    //     textalign: "center",
+    //     align: "center",
+    //     backgroundColor: "white"
+    // },
+    input: {
+        display: "none"
+    },
+    // title: {
+    //     color: blue[800],
+    //     fontWeight: "bold",
+    //     fontFamily: "Montserrat",
+    //     align: "center"
+    // },
+    button: {
+        color: blue[900],
+        margin: 10
+    },
+    secondaryButton: {
+        color: "gray",
+        margin: 10
+    },
+    // typography: {
+    //     margin: theme.spacing.unit * 2,
+    //     backgroundColor: "default"
+    // },
+    //
+    // searchRoot: {
+    //     padding: "2px 4px",
+    //     display: "flex",
+    //     alignItems: "center",
+    //     width: 400
+    // },
+    // searchInput: {
+    //     marginLeft: 8,
+    //     flex: 1
+    // }
+}));
 
 function User() {
+    const classes = useStyles();
 
     const {user} = useContext(UserContext);
     const userLoggedIn = user[0];
+    const [profileImageUploaded, setProfileImageUploaded] = useState(false);
+    const [imageToUpload, setImageToUpload] = useState(null);
 
     const getFullName = (user) => {
         return `${user.firstName} ${user.lastName}`
+    };
+    const handleUploadClick = event => {
+        console.log();
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        const url = reader.readAsDataURL(file);
+
+        reader.onloadend = function (e) {
+            setImageToUpload(reader.result);
+            console.log(reader.result);
+        };
+        console.log(url);
     };
 
 
@@ -66,10 +141,24 @@ function User() {
                                         <img
                                             alt="..."
                                             className="avatar border-gray"
-                                            src={require("../assets/img/ZoltanSipos.jpg")}
+                                            src={profileImageUploaded ? Image : DefaultAvatar}
                                         />
                                         <h5 className="title">{`${userLoggedIn?.firstName} ${userLoggedIn?.lastName}`}</h5>
                                     </a>
+                                    <input
+                                        accept="image/*"
+                                        className={classes.input}
+                                        id="contained-button-file"
+                                        multiple
+                                        type="file"
+                                        onChange={handleUploadClick}
+                                    />
+                                    <label htmlFor="contained-button-file">
+                                        <Fab component="span" className={classes.button}>
+                                            <AddPhotoAlternateIcon />
+                                        </Fab>
+                                    </label>
+
                                     <p className="description">@{`${userLoggedIn?.firstName} ${userLoggedIn?.lastName}`}</p>
                                 </div>
                                 <p className="description text-center">
@@ -244,7 +333,7 @@ function User() {
                                                 </label>
                                                 <Input placeholder="Email"
                                                        type="email"
-                                                value={userLoggedIn?.email}/>
+                                                       value={userLoggedIn?.email}/>
                                             </FormGroup>
                                         </Col>
                                     </Row>
@@ -342,6 +431,6 @@ function User() {
             </div>
         </>
     );
-}
+};
 
 export default User;
