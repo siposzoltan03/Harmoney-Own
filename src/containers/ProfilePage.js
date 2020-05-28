@@ -19,7 +19,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import Fab from "@material-ui/core/Fab";
-import Image from '../assets/img/ZoltanSipos.jpg'
+// import Image from '../assets/img/ZoltanSipos.jpg'
 import DefaultAvatar from '../assets/img/avatar.jpg'
 
 
@@ -41,6 +41,9 @@ import {
 import {UserContext} from "../contexts/UserContext";
 import { makeStyles } from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
+import Uploader from "../components/Uploader/Uploader"
+import {Upload} from "antd";
+import {Image} from 'cloudinary-react'
 
 const useStyles =makeStyles(theme => ({
     // root: {
@@ -101,25 +104,36 @@ const useStyles =makeStyles(theme => ({
 function User() {
     const classes = useStyles();
 
-    const {user} = useContext(UserContext);
+    const {user, updateUser} = useContext(UserContext);
     const userLoggedIn = user[0];
-    const [profileImageUploaded, setProfileImageUploaded] = useState(false);
-    const [imageToUpload, setImageToUpload] = useState(null);
+    const updateUserDetails = updateUser;
+    // const [profileImageUploaded, setProfileImageUploaded] = useState(false);
+    const [imageUrl, setImageUrl] = useState("");
+    // userLoggedIn.imageUrl = imageUrl;
+
 
     const getFullName = (user) => {
         return `${user.firstName} ${user.lastName}`
     };
-    const handleUploadClick = event => {
-        console.log();
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        const url = reader.readAsDataURL(file);
 
-        reader.onloadend = function (e) {
-            setImageToUpload(reader.result);
-            console.log(reader.result);
-        };
-        console.log(url);
+    let widget = window.cloudinary.createUploadWidget({
+            cloudName: 'harmoney-profile-images',
+            apiKey: '868976747589266',
+            uploadPreset: 'upload'
+        },
+        (error, result) => {
+            if (result.event === 'success') {
+                console.log(result.info.url);
+                setImageUrl(result.info.url);
+                console.log(imageUrl);
+                userLoggedIn.imageUrl = result.info.url;
+            }
+            console.log(result.event);
+        });
+
+
+    const showWidget = widget => {
+        widget.open();
     };
 
 
@@ -141,30 +155,24 @@ function User() {
                                         <img
                                             alt="..."
                                             className="avatar border-gray"
-                                            src={profileImageUploaded ? Image : DefaultAvatar}
+                                            src={userLoggedIn?.profileImage !== "" ? userLoggedIn?.profileImage : DefaultAvatar}
                                         />
                                         <h5 className="title">{`${userLoggedIn?.firstName} ${userLoggedIn?.lastName}`}</h5>
                                     </a>
-                                    <input
-                                        accept="image/*"
-                                        className={classes.input}
-                                        id="contained-button-file"
-                                        multiple
-                                        type="file"
-                                        onChange={handleUploadClick}
-                                    />
-                                    <label htmlFor="contained-button-file">
-                                        <Fab component="span" className={classes.button}>
-                                            <AddPhotoAlternateIcon />
-                                        </Fab>
-                                    </label>
+                                    {/*<Uploader*/}
+                                    {/*    className={classes}*/}
+                                    {/*    onClick={showWidget(widget)}*/}
+                                    {/*/>*/}
+                                    <Uploader
+                                        className={classes}
+                                        onClick={() => showWidget(widget)}/>
 
                                     <p className="description">@{`${userLoggedIn?.firstName} ${userLoggedIn?.lastName}`}</p>
                                 </div>
-                                <p className="description text-center">
-                                    "I like the way you work it <br/>
-                                    No diggity <br/>I wanna bag it up"
-                                </p>
+                                {/*<p className="description text-center">*/}
+                                {/*    "I like the way you work it <br/>*/}
+                                {/*    No diggity <br/>I wanna bag it up"*/}
+                                {/*</p>*/}
                             </CardBody>
                             <CardFooter>
                                 <hr/>
@@ -319,7 +327,6 @@ function User() {
                                             <FormGroup>
                                                 <label>Username</label>
                                                 <Input
-                                                    defaultValue="michael23"
                                                     placeholder="Username"
                                                     type="text"
                                                     value={userLoggedIn?.email}
@@ -418,6 +425,7 @@ function User() {
                                                 className="btn-round"
                                                 color="primary"
                                                 type="submit"
+                                                onClick={() => updateUserDetails({user: userLoggedIn, imageUrl: imageUrl}, userLoggedIn?.id)}
                                             >
                                                 Update Profile
                                             </Button>
