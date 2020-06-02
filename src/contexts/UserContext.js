@@ -6,6 +6,7 @@ const registrationUrl = Globals.fetchUrl + "/api/users";
 const loginUrl = Globals.fetchUrl + "/api/auth";
 const logoutUrl = Globals.fetchUrl + "/api/auth/logout";
 const currentUserUrl = Globals.fetchUrl + "/api/users/me";
+const updateUserUrl = Globals.fetchUrl + "/api/auth/update";
 
 export const UserContext = React.createContext(undefined, undefined);
 
@@ -83,8 +84,18 @@ export const UserProvider = (props) => {
             })
     }
 
+    const updateUser = async (data, id) => {
+        return await Axios.put(updateUserUrl + `/${id}`, data, {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': `${localStorage.getItem("token")}`
+            }
+        })
+            .then(res => setUser(res.data.user));
+    };
+
     return (
-        <UserContext.Provider value={{ user : [user, setUser ], jwt: [jwtToken, setJwtToken], registration: postRegistration, login: postLogin, logout: postLogout }}>
+        <UserContext.Provider value={{ user : [user, setUser ], jwt: [jwtToken, setJwtToken], registration: postRegistration, login: postLogin, logout: postLogout, updateUser: updateUser}}>
             {props.children}
         </UserContext.Provider>
     )

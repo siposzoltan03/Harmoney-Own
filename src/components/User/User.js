@@ -7,6 +7,8 @@ import {Avatar} from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import DefaultAvatar from '../../assets/img/avatar.jpg'
+
 
 export function User() {
     const { user, logout, jwt } = useContext(UserContext);
@@ -29,7 +31,7 @@ export function User() {
                 <Link to={`/user/${userLoggedIn.firstName + userLoggedIn.lastName + userLoggedIn._id}`}>
                     <ListItem button>
                         <ListItemIcon>
-                            <Avatar alt={userLoggedIn.firstName}/>
+                            <Avatar alt={userLoggedIn.firstName} src={userLoggedIn?.profileImage !== '' ? userLoggedIn?.profileImage : DefaultAvatar}/>
                         </ListItemIcon>
                         <ListItemText primary={userLoggedIn.firstName}/>
                     </ListItem>

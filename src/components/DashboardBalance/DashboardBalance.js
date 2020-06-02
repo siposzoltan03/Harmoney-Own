@@ -25,7 +25,7 @@ export default function DashboardBalance() {
 
     return (
         <React.Fragment>
-            <Title>Recent Deposits</Title>
+            <Title>Current Balance</Title>
             <Typography component="p" variant="h4">
                 {NumberFormatter.formatBalance(calculateSum(transactions))} Ft
             </Typography>

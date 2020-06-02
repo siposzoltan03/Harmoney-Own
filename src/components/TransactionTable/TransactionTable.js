@@ -5,6 +5,8 @@ import NumberFormatter from "../../utils/NumberFormatter"
 import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import {UserContext} from "../../contexts/UserContext";
+import DefaultAvatar from '../../assets/img/avatar.jpg'
+
 
 const TransactionTable = () => {
     const appContext = useContext(TransactionContext);
@@ -13,6 +15,7 @@ const TransactionTable = () => {
     const putTransaction = appContext.putTransaction;
     const deleteTransaction = appContext.deleteTransaction;
     const {user} = useContext(UserContext);
+    const userLoggedIn = user[0];
 
     return (
         <MaterialTable
@@ -22,7 +25,7 @@ const TransactionTable = () => {
                     title: "Users", field: "users", editable: "never",
                     render: rowData =>
                         <AvatarGroup>
-                            <Avatar alt={user.firstName} src="/src/assets/images/ZoltanSipos.jpg"/>
+                            <Avatar alt={userLoggedIn?.firstName} src={userLoggedIn?.profileImage !== '' ? userLoggedIn?.profileImage : DefaultAvatar}/>
                         </AvatarGroup>
                 },
                 {title: "Title", field: "title"},
