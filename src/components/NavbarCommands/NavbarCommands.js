@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -15,9 +15,45 @@ import {Link} from 'react-router-dom'
 import Badge from "@material-ui/core/Badge";
 import MessageIcon from '@material-ui/icons/Message';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
+import PopoverMenu from "../PopoverMenu/PopoverMenu"
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+// import Popover from "react-popover/source";
 
+
+const useStyles = makeStyles((theme) => ({
+    typography: {
+        padding: theme.spacing(2),
+    },
+}));
 
 const NavbarCommands = () => {
+    const classes = useStyles();
+    const [anchorElNotifications, setAnchorElNotifications] = useState(null);
+    const [anchorElMessages, setAnchorElMessages] = useState(null);
+    const [openNotifications, setOpenNotifications] = useState(false);
+    const [openMessages, setOpenMessages] = useState(false);
+
+    const handleClickNotifications = (event) => {
+        setAnchorElNotifications(event.currentTarget);
+        setOpenNotifications(!openNotifications);
+
+    };
+
+    const handleCloseNotifications = () => {
+        setAnchorElNotifications(null);
+    };
+
+    const handleClickMessages = (event) => {
+        setAnchorElMessages(event.currentTarget);
+        setOpenMessages(!openMessages);
+    };
+
+    const handleCloseMessages = () => {
+        setAnchorElMessages(null);
+    };
+
     return (
         <div>
             <Link to={'/dashboard'}>
@@ -48,19 +84,48 @@ const NavbarCommands = () => {
                 </ListItemIcon>
                 <ListItemText primary="Reports"/>
             </ListItem>
-            <ListItem button>
+            <ListItem button
+                      onClick={handleClickMessages}>
                 <ListItemIcon>
                     <MessageIcon/>
                 </ListItemIcon>
                 <ListItemText primary="Messages"/>
+                <PopoverMenu open={openMessages}
+                             onClose={handleCloseMessages}
+                             anchorEl={anchorElMessages}
+                             title={"Messages"}
+                >
+                    {['Teszt', 'Teszt2'].map(element =>
+                        <Typography className={classes.typography}>
+                            {element}
+                        </Typography>
+                    )}
+                </PopoverMenu>
             </ListItem>
-            <ListItem button>
+            <ListItem button
+                // variant={"contained"}
+                // aria-describedby={id}
+                      onClick={handleClickNotifications}>
                 <ListItemIcon>
                     <Badge badgeContent={2} color={"secondary"}>
                         <NotificationImportantIcon/>
                     </Badge>
                 </ListItemIcon>
                 <ListItemText primary="Notifications"/>
+                <PopoverMenu open={openNotifications}
+                             onClose={handleCloseNotifications}
+                    // id={id}
+                             anchorEl={anchorElNotifications}
+                             title={"Notifications"}
+                >
+                    {['Teszt', 'Teszt2'].map(element =>
+                        <Typography className={classes.typography}>
+                            {element}
+                        </Typography>
+                    )}
+
+                </PopoverMenu>
+                {/*<Popover body={['valami']}/>*/}
             </ListItem>
             <User/>
         </div>
