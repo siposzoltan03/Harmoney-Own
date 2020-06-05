@@ -19,8 +19,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import Fab from "@material-ui/core/Fab";
-// import Image from '../assets/img/ZoltanSipos.jpg'
 import DefaultAvatar from '../assets/img/avatar.jpg'
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 
 import "../assets/css/paper-dashboard.css";
@@ -39,13 +39,21 @@ import {
     Col
 } from "reactstrap";
 import {UserContext} from "../contexts/UserContext";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 import Uploader from "../components/Uploader/Uploader"
 import {Upload} from "antd";
 import {Image} from 'cloudinary-react'
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem";
+import User from "../components/User/User";
+import Friends from "../components/Friends/Friends";
+import PopoverMenu from "../components/PopoverMenu/PopoverMenu";
+import {FriendRequestContext} from "../contexts/FriendRequestContext";
 
-const useStyles =makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
     // root: {
     //     backgroundColor: theme.palette.background.paper,
     //     width: 500,
@@ -54,7 +62,7 @@ const useStyles =makeStyles(theme => ({
     //     alignItems: "flex-end"
     // },
     icon: {
-        margin: theme.spacing.unit * 2
+        margin: theme.spacing(2)
     },
     // iconHover: {
     //     margin: theme.spacing.unit * 2,
@@ -101,19 +109,34 @@ const useStyles =makeStyles(theme => ({
     // }
 }));
 
-function User() {
+function ProfilePage() {
     const classes = useStyles();
 
-    const {user, updateUser} = useContext(UserContext);
+    const {user, updateUser, getAllUser} = useContext(UserContext);
     const userLoggedIn = user[0];
     const updateUserDetails = updateUser;
+
+    const {sendFriendRequest} = useContext(FriendRequestContext);
     // const [profileImageUploaded, setProfileImageUploaded] = useState(false);
     const [imageUrl, setImageUrl] = useState("");
     // userLoggedIn.imageUrl = imageUrl;
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [open, setOpen] = useState(false);
 
 
     const getFullName = (user) => {
         return `${user.firstName} ${user.lastName}`
+    };
+
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+        setOpen(!open);
+
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
     };
 
     let widget = window.cloudinary.createUploadWidget({
@@ -215,59 +238,21 @@ function User() {
                                     </li>
                                     <li>
                                         <Row>
-                                            <Col md="2" xs="2">
-                                                <div className="avatar">
-                                                    <img
-                                                        alt="..."
-                                                        className="img-circle img-no-padding img-responsive"
-                                                        // src={require("assets/img/faces/ayo-ogunseinde-2.jpg")}
-                                                    />
-                                                </div>
-                                            </Col>
-                                            <Col md="7" xs="7">
-                                                DJ Khaled <br/>
-                                                <span className="text-muted">
-                            <small>Offline</small>
-                          </span>
-                                            </Col>
-                                            <Col className="text-right" md="3" xs="3">
-                                                <Button
-                                                    className="btn-round btn-icon"
-                                                    color="success"
-                                                    outline
-                                                    size="sm"
-                                                >
-                                                    <i className="fa fa-envelope"/>
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </li>
-                                    <li>
-                                        <Row>
-                                            <Col md="2" xs="2">
-                                                <div className="avatar">
-                                                    <img
-                                                        alt="..."
-                                                        className="img-circle img-no-padding img-responsive"
-                                                        // src={require("assets/img/faces/joe-gardner-2.jpg")}
-                                                    />
-                                                </div>
-                                            </Col>
-                                            <Col md="7" xs="7">
-                                                Creative Tim <br/>
-                                                <span className="text-success">
-                            <small>Available</small>
-                          </span>
-                                            </Col>
-                                            <Col className="text-right" md="3" xs="3">
-                                                <Button
-                                                    className="btn-round btn-icon"
-                                                    color="success"
-                                                    outline
-                                                    size="sm"
-                                                >
-                                                    <i className="fa fa-envelope"/>
-                                                </Button>
+                                            <Col md="12" xs="2">
+                                                <ListItem button onClick={handleClick}>
+                                                    <ListItemIcon>
+                                                        <PersonAddIcon/>
+                                                    </ListItemIcon>
+                                                    <ListItemText primary="Add friend"/>
+                                                    <PopoverMenu
+                                                        title={"Users you may know"}
+                                                        anchorEl={anchorEl}
+                                                        open={open}
+                                                        onClose={handleClose}
+                                                    >
+                                                        <Friends onClick={(e) => sendFriendRequest(e.currentTarget.attributes[4].value)}/>
+                                                    </PopoverMenu>
+                                                </ListItem>
                                             </Col>
                                         </Row>
                                     </li>
@@ -300,6 +285,7 @@ function User() {
                                             </Col>
                                         </Row>
                                     </li>
+
                                 </ul>
                             </CardBody>
                         </Card>
@@ -349,7 +335,6 @@ function User() {
                                             <FormGroup>
                                                 <label>First Name</label>
                                                 <Input
-                                                    defaultValue="Chet"
                                                     placeholder="Company"
                                                     type="text"
                                                     value={userLoggedIn?.firstName}
@@ -425,7 +410,10 @@ function User() {
                                                 className="btn-round"
                                                 color="primary"
                                                 type="submit"
-                                                onClick={() => updateUserDetails({user: userLoggedIn, imageUrl: imageUrl}, userLoggedIn?.id)}
+                                                onClick={() => updateUserDetails({
+                                                    user: userLoggedIn,
+                                                    imageUrl: imageUrl
+                                                }, userLoggedIn?.id)}
                                             >
                                                 Update Profile
                                             </Button>
@@ -441,4 +429,4 @@ function User() {
     );
 };
 
-export default User;
+export default ProfilePage;
