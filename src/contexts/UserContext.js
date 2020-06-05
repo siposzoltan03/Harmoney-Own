@@ -7,6 +7,7 @@ const loginUrl = Globals.fetchUrl + "/api/auth";
 const logoutUrl = Globals.fetchUrl + "/api/auth/logout";
 const currentUserUrl = Globals.fetchUrl + "/api/users/me";
 const updateUserUrl = Globals.fetchUrl + "/api/auth/update";
+const allUserUrl = Globals.fetchUrl + "/api/auth/all_user";
 
 export const UserContext = React.createContext(undefined, undefined);
 
@@ -14,12 +15,14 @@ export const UserProvider = (props) => {
     // const [users, setUsers] = useState([]);
     const [jwtToken, setJwtToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState(null);
+    const [allUser, setAllUser] = useState([]);
 
     useEffect(() => {
         if (user == null && jwtToken != null) {
             (async () => {
                 let currentUser = await getCurrentUser(jwtToken);
                 setUser(currentUser);
+                setAllUser(await getAllUser());
             })();
         }
     }, [user, setUser, jwtToken]);
@@ -84,6 +87,15 @@ export const UserProvider = (props) => {
             })
     }
 
+    async function getAllUser() {
+        return await Axios.get(allUserUrl, {headers:{'Content-Type': 'application/json',
+                'x-auth-token': jwtToken}})
+            // .then(res => console.log(res))
+            .then(res => {
+                return res.data;
+            });
+    }
+
     const updateUser = async (data, id) => {
         return await Axios.put(updateUserUrl + `/${id}`, data, {
             headers: {
@@ -95,7 +107,7 @@ export const UserProvider = (props) => {
     };
 
     return (
-        <UserContext.Provider value={{ user : [user, setUser ], jwt: [jwtToken, setJwtToken], registration: postRegistration, login: postLogin, logout: postLogout, updateUser: updateUser}}>
+        <UserContext.Provider value={{ user : [user, setUser ], jwt: [jwtToken, setJwtToken], allUser: [allUser, setAllUser], registration: postRegistration, login: postLogin, logout: postLogout, updateUser: updateUser, getAllUser: getAllUser}}>
             {props.children}
         </UserContext.Provider>
     )
