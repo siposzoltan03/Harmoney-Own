@@ -28,7 +28,7 @@ export function User() {
     if (userLoggedIn) {
         return (
             <div>
-                <Link to={`/user/${userLoggedIn.firstName + userLoggedIn.lastName + userLoggedIn._id}`}>
+                <Link to={`/user/${userLoggedIn._id}`}>
                     <ListItem button>
                         <ListItemIcon>
                             <Avatar alt={userLoggedIn.firstName} src={userLoggedIn?.profileImage !== '' ? userLoggedIn?.profileImage : DefaultAvatar}/>
