@@ -19,6 +19,8 @@ import PopoverMenu from "../PopoverMenu/PopoverMenu"
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {FriendRequestContext} from "../../contexts/FriendRequestContext";
+import FriendRequestNotification from "../FriendRequestNotification/FriendRequestNotification";
 // import Popover from "react-popover/source";
 
 
@@ -34,10 +36,17 @@ const NavbarCommands = () => {
     const [anchorElMessages, setAnchorElMessages] = useState(null);
     const [openNotifications, setOpenNotifications] = useState(false);
     const [openMessages, setOpenMessages] = useState(false);
+    const appContext = useContext(FriendRequestContext);
+    const notifications = appContext.notifications[0];
+    const [notificationCount, setNotificationCount] = appContext.notificationCount;
+    const setNotificationsSeen = appContext.setNotificationsSeen;
+    const deleteNotification = appContext.deleteNotification;
 
-    const handleClickNotifications = (event) => {
+    const handleClickNotifications = async (event) => {
         setAnchorElNotifications(event.currentTarget);
         setOpenNotifications(!openNotifications);
+        setNotificationCount(0);
+        await setNotificationsSeen();
 
     };
 
@@ -57,7 +66,7 @@ const NavbarCommands = () => {
     return (
         <div>
             <Link to={'/dashboard'}>
-                <ListItem button onClick={console.log('Dashboard')}>
+                <ListItem button>
                     <ListItemIcon>
                         <DashboardIcon/>
                     </ListItemIcon>
@@ -95,8 +104,8 @@ const NavbarCommands = () => {
                              anchorEl={anchorElMessages}
                              title={"Messages"}
                 >
-                    {['Teszt', 'Teszt2'].map(element =>
-                        <Typography className={classes.typography}>
+                    {['Teszt', 'Teszt2'].map((element, index) =>
+                        <Typography className={classes.typography} key={index}>
                             {element}
                         </Typography>
                     )}
@@ -107,7 +116,7 @@ const NavbarCommands = () => {
                 // aria-describedby={id}
                       onClick={handleClickNotifications}>
                 <ListItemIcon>
-                    <Badge badgeContent={2} color={"secondary"}>
+                    <Badge badgeContent={notificationCount} color={"secondary"}>
                         <NotificationImportantIcon/>
                     </Badge>
                 </ListItemIcon>
@@ -118,10 +127,18 @@ const NavbarCommands = () => {
                              anchorEl={anchorElNotifications}
                              title={"Notifications"}
                 >
-                    {['Teszt', 'Teszt2'].map(element =>
-                        <Typography className={classes.typography}>
-                            {element}
-                        </Typography>
+                    {notifications?.map(notification =>
+                        // <Typography className={classes.typography} key={notifications._id}>
+                        //     {notifications.firstName}
+                        // </Typography>
+                        <FriendRequestNotification
+                            id={notification.user._id}
+                            key={notification.user._id}
+                            imageUrl={notification.user?.profileImage}
+                            firstName={notification.user.firstName}
+                            lastName={notification.user.lastName}
+                            background={notification.seen ? 'white' : 'grey'}
+                        />
                     )}
 
                 </PopoverMenu>
