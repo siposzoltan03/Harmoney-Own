@@ -3,6 +3,7 @@ import "./App.css";
 import {ModalVisibilityContextProvider} from "../../contexts/ModalVisibilityContext";
 import {TransactionProvider} from "../../contexts/TransactionContext";
 import {UserProvider} from "../../contexts/UserContext";
+import {FriendRequestProvider} from "../../contexts/FriendRequestContext";
 import Content from "../Content/Content";
 import "react-notifications-component/dist/theme.css";
 import "animate.css";
@@ -24,40 +25,42 @@ function App() {
         <Router>
             <UserProvider>
                 <TransactionProvider>
-                    <Switch>
-                        <Route path={`/transactions`}>
-                            <TransactionProvider>
-                                <ModalVisibilityContextProvider>
-                                    <Navbar title="Transactions">
-                                        <Content/>
+                    <FriendRequestProvider>
+                        <Switch>
+                            <Route path={`/transactions`}>
+                                <TransactionProvider>
+                                    <ModalVisibilityContextProvider>
+                                        <Navbar title="Transactions">
+                                            <Content/>
+                                        </Navbar>
+                                    </ModalVisibilityContextProvider>
+                                </TransactionProvider>
+                            </Route>
+                            <Route path={`/user`}>
+                                <TransactionProvider>
+                                    <ModalVisibilityContextProvider>
+                                        <Navbar title={"Users"}>
+                                            <ProfilePage/>
+                                        </Navbar>
+                                    </ModalVisibilityContextProvider>
+                                    {/*<UserPage/>*/}
+                                </TransactionProvider>
+                            </Route>
+                            <Route path='/dashboard'>
+                                <TransactionProvider>
+                                    <Navbar title={"Dashboard"}>
+                                        <Dashboard/>
                                     </Navbar>
-                                </ModalVisibilityContextProvider>
-                            </TransactionProvider>
-                        </Route>
-                        <Route path={`/user`}>
-                            <TransactionProvider>
-                                <ModalVisibilityContextProvider>
-                                    <Navbar title={"Users"}>
-                                        <ProfilePage/>
-                                    </Navbar>
-                                </ModalVisibilityContextProvider>
-                                {/*<UserPage/>*/}
-                            </TransactionProvider>
-                        </Route>
-                        <Route path='/dashboard'>
-                            <TransactionProvider>
-                                <Navbar title={"Dashboard"}>
-                                    <Dashboard/>
-                                </Navbar>
-                            </TransactionProvider>
-                        </Route>
-                        <Route path={'/registration'}>
-                            <SignUpPage/>
-                        </Route>
-                        <Route path={'/'}>
-                            <SignInPage/>
-                        </Route>
-                    </Switch>
+                                </TransactionProvider>
+                            </Route>
+                            <Route path={'/registration'}>
+                                <SignUpPage/>
+                            </Route>
+                            <Route path={'/'}>
+                                <SignInPage/>
+                            </Route>
+                        </Switch>
+                    </FriendRequestProvider>
                 </TransactionProvider>
             </UserProvider>
         </Router>
