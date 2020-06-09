@@ -251,12 +251,13 @@ function ProfilePage() {
                                                         open={open}
                                                         onClose={handleClose}
                                                     >
-                                                        <Friends onClick={(e) => sendFriendRequest(e.currentTarget.attributes[4].value)}/>
+                                                        <Friends/>
                                                     </PopoverMenu>
                                                 </ListItem>
                                             </Col>
                                         </Row>
                                     </li>
+                                    {friends?.map(friend =>
                                     <li>
                                         <Row>
                                             <Col md="2" xs="2">
@@ -283,7 +284,7 @@ function ProfilePage() {
                                             </Col>
                                         </Row>
                                     </li>
-
+                                    )}
                                 </ul>
                             </CardBody>
                         </Card>
