@@ -27,6 +27,7 @@ import FriendRequestNotification from "../FriendRequestNotification/FriendReques
 const useStyles = makeStyles((theme) => ({
     typography: {
         padding: theme.spacing(2),
+        fontFamily: 'Montserrat'
     },
 }));
 
