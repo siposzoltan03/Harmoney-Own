@@ -17,20 +17,23 @@ function Friends(props){
     // const getAllUser = appContext.getAllUser;
     const Users = allUser[0];
 
-    return(
+    return (
         <div>
             {Users?.map(user =>
-                <Link to={`/user/${user._id}`} key={user._id}>
-                    <ListItem style={{display: props.show}}>
-                        <ListItemIcon>
-                            <Avatar alt={user.firstName} src={user?.profileImage !== '' ? user?.profileImage : DefaultAvatar}/>
-                        </ListItemIcon>
-                        <ListItemText primary={user.firstName}/>
-                        <ListItemIcon>
-                            <AddCircleOutlineIcon onClick={props.onClick} id={user._id}/>
-                        </ListItemIcon>
-                    </ListItem>
-                </Link>
+
+                <ListItem style={{display: props.show, justifyContent: 'space-between'}}>
+                    <ListItemIcon>
+                        <Avatar alt={user.firstName}
+                                src={user?.profileImage !== '' ? user?.profileImage : DefaultAvatar}/>
+                    </ListItemIcon>
+                    <Link to={`/user/${user._id}`} key={user._id}>
+                        <ListItemText primary={`${user.firstName} ${user.lastName}`} />
+                    </Link>
+                    <ListItemIcon>
+                        <div style={{cursor: "pointer"}} className="fab fa-creative-commons-sampling-plus fa-3x"
+                             onClick={() => sendFriendRequest(user._id)}/>
+                    </ListItemIcon>
+                </ListItem>
             )}
         </div>
     )
