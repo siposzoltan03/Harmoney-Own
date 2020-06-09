@@ -117,7 +117,8 @@ function ProfilePage() {
     const userLoggedIn = user[0];
     const updateUserDetails = updateUser;
 
-    const {sendFriendRequest} = useContext(FriendRequestContext);
+    const appContext = useContext(FriendRequestContext);
+    const friends = appContext.friends[0];
     // const [profileImageUploaded, setProfileImageUploaded] = useState(false);
     const [imageUrl, setImageUrl] = useState("");
     // userLoggedIn.imageUrl = imageUrl;
