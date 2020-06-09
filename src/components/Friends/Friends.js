@@ -8,10 +8,12 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import {FriendRequestContext} from "../../contexts/FriendRequestContext";
 
 
-
-function Friends(props){
+function Friends(props) {
+    const appContext = useContext(FriendRequestContext);
+    const sendFriendRequest = appContext.sendFriendRequest;
     const {allUser} = useContext(UserContext);
     const [friends, setFriends] = useState([]);
     // const getAllUser = appContext.getAllUser;
