@@ -15,7 +15,7 @@ import DefaultAvatar from "../../assets/img/avatar.jpg";
 
 const useStyles = makeStyles((theme) => ({
     typography: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
     },
     root: props => ({
         display: 'flex',
