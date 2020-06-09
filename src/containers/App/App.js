@@ -18,51 +18,68 @@ import Navbar from "../../components/Navbar/Navbar"
 import SignInPage from "../../containers/SignInPage";
 import SignUpPage from "../../containers/SignUpPage";
 import ProfilePage from "../../containers/ProfilePage"
+import {MuiThemeProvider} from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
+
+const THEME = createMuiTheme({
+    typography: {
+        "fontFamily": `"Montserrat", sans-serif`,
+        // "fontSize": 14,
+        // "fontWeightLight": 300,
+        // "fontWeightRegular": 400,
+        // "fontWeightMedium": 500
+    },
+    root:{
+        textDecoration: null
+    }
+});
 
 function App() {
     return (
         <Router>
-            <UserProvider>
-                <TransactionProvider>
-                    <FriendRequestProvider>
-                        <Switch>
-                            <Route path={`/transactions`}>
-                                <TransactionProvider>
-                                    <ModalVisibilityContextProvider>
-                                        <Navbar title="Transactions">
-                                            <Content/>
+            <MuiThemeProvider theme={THEME}>
+                <UserProvider>
+                    <TransactionProvider>
+                        <FriendRequestProvider>
+                            <Switch>
+                                <Route path={`/transactions`}>
+                                    <TransactionProvider>
+                                        <ModalVisibilityContextProvider>
+                                            <Navbar title="Transactions">
+                                                <Content/>
+                                            </Navbar>
+                                        </ModalVisibilityContextProvider>
+                                    </TransactionProvider>
+                                </Route>
+                                <Route path={`/user`}>
+                                    <TransactionProvider>
+                                        <ModalVisibilityContextProvider>
+                                            <Navbar title={"Users"}>
+                                                <ProfilePage/>
+                                            </Navbar>
+                                        </ModalVisibilityContextProvider>
+                                        {/*<UserPage/>*/}
+                                    </TransactionProvider>
+                                </Route>
+                                <Route path='/dashboard'>
+                                    <TransactionProvider>
+                                        <Navbar title={"Dashboard"}>
+                                            <Dashboard/>
                                         </Navbar>
-                                    </ModalVisibilityContextProvider>
-                                </TransactionProvider>
-                            </Route>
-                            <Route path={`/user`}>
-                                <TransactionProvider>
-                                    <ModalVisibilityContextProvider>
-                                        <Navbar title={"Users"}>
-                                            <ProfilePage/>
-                                        </Navbar>
-                                    </ModalVisibilityContextProvider>
-                                    {/*<UserPage/>*/}
-                                </TransactionProvider>
-                            </Route>
-                            <Route path='/dashboard'>
-                                <TransactionProvider>
-                                    <Navbar title={"Dashboard"}>
-                                        <Dashboard/>
-                                    </Navbar>
-                                </TransactionProvider>
-                            </Route>
-                            <Route path={'/registration'}>
-                                <SignUpPage/>
-                            </Route>
-                            <Route path={'/'}>
-                                <SignInPage/>
-                            </Route>
-                        </Switch>
-                    </FriendRequestProvider>
-                </TransactionProvider>
-            </UserProvider>
+                                    </TransactionProvider>
+                                </Route>
+                                <Route path={'/registration'}>
+                                    <SignUpPage/>
+                                </Route>
+                                <Route path={'/'}>
+                                    <SignInPage/>
+                                </Route>
+                            </Switch>
+                        </FriendRequestProvider>
+                    </TransactionProvider>
+                </UserProvider>
+            </MuiThemeProvider>
         </Router>
     );
 }
