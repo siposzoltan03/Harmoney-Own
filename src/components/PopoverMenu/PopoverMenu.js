@@ -7,7 +7,10 @@ import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
     typography: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
+        fontSize: 20,
+        width: 300,
+        fontFamily: 'Montserrat'
     },
 }));
 
@@ -27,7 +30,7 @@ const PopoverMenu = (props) => {
                 horizontal: 'left',
             }}
             open={props.open}>
-            <Typography variant="h6" className={classes.typography}>
+            <Typography variant="h5" className={classes.typography}>
                 {props.title}
             </Typography>
             <Divider/>

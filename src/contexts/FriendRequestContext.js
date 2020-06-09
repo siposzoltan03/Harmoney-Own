@@ -8,6 +8,7 @@ const getNotificationsUrl = Globals.fetchUrl + '/api/friendRequests';
 const setNotificationsSeenUrl = Globals.fetchUrl + '/api/friendRequests/seen';
 const deleteNotificationUrl = Globals.fetchUrl + '/api/friendRequests';
 const addFriendUrl = Globals.fetchUrl + '/api/friendRequests';
+const getFriendsUrl = Globals.fetchUrl + '/api/friendRequests/getFriends';
 
 export const FriendRequestContext = React.createContext(undefined, undefined);
 
@@ -15,12 +16,14 @@ export const FriendRequestProvider = (props) => {
     const [jwtToken, setJwtToken] = useState(localStorage.getItem("token"));
     const [notifications, setNotifications] = useState([]);
     const [notificationCount, setNotificationCount] = useState(0);
+    const [friends, setFriends] = useState([]);
 
     useEffect(() => {
         (async () => {
             const notifications = await getUserNotifications();
             setNotifications(notifications.usersByNotifications);
-            setNotificationCount(notifications.count)
+            setNotificationCount(notifications.count);
+            setFriends(await getFriends());
         })()
     }, []);
 
@@ -76,11 +79,23 @@ export const FriendRequestProvider = (props) => {
         return await Axios.patch(addFriendUrl + `/${id}`, {}, {headers:{
                 'x-auth-token': jwtToken,
                 'Content-Type': 'application/json'
-            }})
+            }
+        })
             .then(res => {
                 return res;
             })
     }
+
+    async function getFriends() {
+        return await Axios.get(getFriendsUrl, {
+            headers: {
+                'x-auth-token': jwtToken,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {return res.data});
+    }
+
 
     return (
         <FriendRequestContext.Provider
@@ -91,9 +106,10 @@ export const FriendRequestProvider = (props) => {
                 getUserNotifications: getUserNotifications,
                 setNotificationsSeen: setNotificationsSeen,
                 deleteNotification: deleteNotification,
-                addFriend: addFriend
+                addFriend: addFriend,
+                friends: [friends, setFriends]
             }}>
             {props.children}
         </FriendRequestContext.Provider>
     );
-}
+};
