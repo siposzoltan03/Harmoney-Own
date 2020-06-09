@@ -52,6 +52,7 @@ import User from "../components/User/User";
 import Friends from "../components/Friends/Friends";
 import PopoverMenu from "../components/PopoverMenu/PopoverMenu";
 import {FriendRequestContext} from "../contexts/FriendRequestContext";
+import {Avatar} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     // root: {
@@ -259,19 +260,16 @@ function ProfilePage() {
                                     <li>
                                         <Row>
                                             <Col md="2" xs="2">
-                                                <div className="avatar">
-                                                    <img
-                                                        alt="..."
-                                                        className="img-circle img-no-padding img-responsive"
-                                                        // src={require("assets/img/faces/clem-onojeghuo-2.jpg")}
-                                                    />
-                                                </div>
+                                                <Avatar
+                                                    alt={friend.id?.firstName}
+                                                src={friend?.friend.id.profileImage !== "" ? friend?.id.profileImage : DefaultAvatar}
+                                                />
                                             </Col>
                                             <Col className="col-ms-7" xs="7">
-                                                Flume <br/>
-                                                <span className="text-danger">
-                            <small>Busy</small>
-                          </span>
+                                                {friend.friend.id.firstName} {friend?.friend.id.lastName} <br/>
+                                                <span className={friend?.friend.confirmed ? "text-success" : "text-danger"}>
+                                                    <small>{friend?.friend.confirmed ? "confirmed" : "pending"}</small>
+                                                </span>
                                             </Col>
                                             <Col className="text-right" md="3" xs="3">
                                                 <Button
