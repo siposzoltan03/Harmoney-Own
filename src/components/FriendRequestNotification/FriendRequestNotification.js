@@ -10,6 +10,7 @@ import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
 import {FriendRequestContext} from "../../contexts/FriendRequestContext";
 import Divider from "@material-ui/core/Divider";
+import DefaultAvatar from "../../assets/img/avatar.jpg";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +47,7 @@ function FriendRequestNotification(props) {
     return (
         <div>
             <div className={classes.root} id={props.id}>
-                <Avatar alt={props.firstName} src={props.imageUrl}/>
+                <Avatar alt={props.firstName} src={props?.profileImage !== '' ? props?.profileImage : DefaultAvatar}/>
                 <Typography className={classes.typography}>
                     You have a friend request from <br/>{props.firstName} {props.lastName}
                 </Typography>
