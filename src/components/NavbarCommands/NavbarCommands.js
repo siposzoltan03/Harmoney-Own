@@ -64,6 +64,33 @@ const NavbarCommands = () => {
         setAnchorElMessages(null);
     };
 
+    function getPopoverMenu() {
+
+        if (notifications.count === 0 || notifications.length === 0)
+            return (
+                <Typography className={classes.typography} key={notifications?._id}>
+                    You don't have notifications
+                </Typography>
+            );
+        else {
+            return (
+                notifications?.map(notification =>
+
+                    <FriendRequestNotification
+                        id={notification?.user._id}
+                        key={notification?.user._id}
+                        imageUrl={notification?.user?.profileImage}
+                        firstName={notification?.user.firstName}
+                        lastName={notification?.user.lastName}
+                        background={notification?.seen ? 'white' : 'grey'}
+                    />
+                )
+            )
+        }
+
+
+    }
+
     return (
         <div>
             <Link to={'/dashboard'}>
@@ -128,19 +155,7 @@ const NavbarCommands = () => {
                              anchorEl={anchorElNotifications}
                              title={"Notifications"}
                 >
-                    {notifications?.map(notification =>
-                        // <Typography className={classes.typography} key={notifications._id}>
-                        //     {notifications.firstName}
-                        // </Typography>
-                        <FriendRequestNotification
-                            id={notification.user._id}
-                            key={notification.user._id}
-                            imageUrl={notification.user?.profileImage}
-                            firstName={notification.user.firstName}
-                            lastName={notification.user.lastName}
-                            background={notification.seen ? 'white' : 'grey'}
-                        />
-                    )}
+                    {getPopoverMenu()}
 
                 </PopoverMenu>
                 {/*<Popover body={['valami']}/>*/}
