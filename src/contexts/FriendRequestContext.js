@@ -69,14 +69,15 @@ export const FriendRequestProvider = (props) => {
                 'Content-Type': 'application/json'
             },
         }).then(async res => {
-            if(res.status === 200) {
+            if (res.status === 200) {
                 setNotifications(await getUserNotifications());
             }
         })
     }
 
     async function addFriend(id) {
-        return await Axios.patch(addFriendUrl + `/${id}`, {}, {headers:{
+        return await Axios.patch(addFriendUrl + `/${id}`, {}, {
+            headers: {
                 'x-auth-token': jwtToken,
                 'Content-Type': 'application/json'
             }
