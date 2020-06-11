@@ -264,13 +264,13 @@ function ProfilePage() {
                                             <Col md="2" xs="2">
                                                 <Avatar
                                                     alt={friend.id?.firstName}
-                                                src={friend?.friend.id.profileImage !== "" ? friend?.id.profileImage : DefaultAvatar}
+                                                src={friend.id?.profileImage !== "" ? friend.id?.profileImage : DefaultAvatar}
                                                 />
                                             </Col>
                                             <Col className="col-ms-7" xs="7">
-                                                {friend.friend.id.firstName} {friend?.friend.id.lastName} <br/>
-                                                <span className={friend?.friend.confirmed ? "text-success" : "text-danger"}>
-                                                    <small>{friend?.friend.confirmed ? "confirmed" : "pending"}</small>
+                                                {friend.id?.firstName} {friend.id?.lastName} <br/>
+                                                <span className={friend?.confirmed ? "text-success" : "text-danger"}>
+                                                    <small>{friend?.confirmed ? "confirmed" : "pending"}</small>
                                                 </span>
                                             </Col>
                                             <Col className="text-right" md="3" xs="3">
