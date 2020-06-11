@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Axios from "axios";
 import Globals from "../utils/globals";
 import {func} from "prop-types";
+import {useSnackbar} from "notistack";
 
 const sendFriendRequestUrl = Globals.fetchUrl + '/api/friendRequests/add';
 const getNotificationsUrl = Globals.fetchUrl + '/api/friendRequests';
@@ -17,6 +18,8 @@ export const FriendRequestProvider = (props) => {
     const [notifications, setNotifications] = useState([]);
     const [notificationCount, setNotificationCount] = useState(0);
     const [friends, setFriends] = useState([]);
+    const { enqueueSnackbar } = useSnackbar();
+
 
     useEffect(() => {
         (async () => {
@@ -34,8 +37,13 @@ export const FriendRequestProvider = (props) => {
                 'Content-Type': 'application/json'
             }
         }).then(res => {
+            enqueueSnackbar('Request sent', {variant: 'success'});
             return res.data;
-        });
+        })
+            .catch(err => {
+                console.log(err);
+                enqueueSnackbar('Operation failed', {variant: 'error'});
+            });
     }
 
     async function getUserNotifications() {
@@ -83,6 +91,7 @@ export const FriendRequestProvider = (props) => {
             }
         })
             .then(res => {
+                enqueueSnackbar('Friend request accepted', {variant: 'success'});
                 return res;
             })
     }

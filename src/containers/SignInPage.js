@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {UserContext} from "../contexts/UserContext";
 import {userToJsonLogin} from "../utils/createjson";
 import SingInImage from "../assets/img/signinimage.jpg"
+import { useSnackbar } from 'notistack';
 
 
 function Copyright() {
@@ -63,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInPage() {
     const classes = useStyles();
+    const { enqueueSnackbar } = useSnackbar();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -76,13 +78,14 @@ export default function SignInPage() {
     const postLogin = userContext.login;
     const history = useHistory();
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (variant) => {
         const jsonData = userToJsonLogin(email, password);
         let loginFailed = await postLogin(jsonData);
         if (loginFailed) {
             history.push('/');
             setError(true);
             setErrorText("Invalid email or password");
+            enqueueSnackbar('Login failed', {variant})
         } else {
             history.push('/dashboard');
         }
@@ -141,7 +144,7 @@ export default function SignInPage() {
                             label="Remember me"
                         />
                         <Button
-                            onClick={() => handleSubmit()}
+                            onClick={() => handleSubmit('error')}
                             fullWidth
                             variant="contained"
                             color="primary"

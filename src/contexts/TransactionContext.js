@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState} from "react";
 import Axios from "axios";
 import Globals from "../utils/globals";
 import {UserContext} from "./UserContext";
+import {useSnackbar} from "notistack";
 
 const url = Globals.fetchUrl + "/api/transactions/";
 
@@ -20,6 +21,8 @@ export const TransactionProvider = (props) => {
     const { user, jwt} = useContext(UserContext);
     const userLoggedIn = user[0];
     const jwtToken = jwt[0];
+    const { enqueueSnackbar } = useSnackbar();
+
 
 
     const fetchTransactions = () => {
@@ -45,12 +48,15 @@ export const TransactionProvider = (props) => {
                 const transaction = resp.data;
                 if (transaction._id && transaction.title && transaction.dueDate && transaction.amount) {
                     setTransactions([...transactions, resp.data]);
+                    enqueueSnackbar('Transaction added successfully', {variant: 'success'});
                     return false;
                 }
+                enqueueSnackbar('Operation failed', {variant: 'error'});
                 return true;
             })
             .catch(e => {
                 console.log('Error:', e);
+                enqueueSnackbar('Operation failed', {variant: 'error'});
                 return true;
             })
     };
@@ -66,12 +72,15 @@ export const TransactionProvider = (props) => {
                 const transaction = resp.data;
                 if (transaction._id && transaction.title && transaction.dueDate && transaction.amount) {
                     fetchTransactions();
+                    enqueueSnackbar('Transaction updated successfully', {variant: 'success'});
                     return false;
                 }
+                enqueueSnackbar('Operation failed', {variant: 'error'});
                 return true;
             })
             .catch(e => {
                 console.log('Error:', e);
+                enqueueSnackbar('Operation failed', {variant: 'error'});
                 return true;
             })
     };
@@ -90,12 +99,15 @@ export const TransactionProvider = (props) => {
                 const transaction = resp.data;
                 if (transaction._id && transaction.title && transaction.dueDate && transaction.amount) {
                     fetchTransactions();
+                    enqueueSnackbar('Transaction deleted successfully', {variant: 'success'});
                     return false;
                 }
+                enqueueSnackbar('Operation failed', {variant: 'error'});
                 return true;
             })
             .catch(e => {
                 console.log('Error:', e);
+                enqueueSnackbar('Operation failed', {variant: 'error'});
                 return true;
             })
     };
