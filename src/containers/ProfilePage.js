@@ -148,12 +148,9 @@ function ProfilePage() {
         },
         (error, result) => {
             if (result.event === 'success') {
-                console.log(result.info.url);
                 setImageUrl(result.info.url);
-                console.log(imageUrl);
                 userLoggedIn.imageUrl = result.info.url;
             }
-            console.log(result.event);
         });
 
 
